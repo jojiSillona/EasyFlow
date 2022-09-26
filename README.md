@@ -4,59 +4,34 @@ EasyFlow is an interactive College Schedule Planner that allows you to plan your
 
 ## Features
 
-Yeah-yeah
-Baby, baby, you're my sun and moon
-Girl, you're everything between
-A lot of pretty faces could waste my time
-But you're my dream girl
-You make flowers bloom
-Girl, you make the stars collide
-And I don't know what I did to get lucky like this
-But it sure feels fine
-'Cause you give me love and affection
-I give you all my protection
-And I'm tryna stay by your side 'til the day I die
-And you give me all of your loving
-And I give you all of my trust
-I know you'll never betray me or leave my side, oh my
-Baby, baby, you're my sun and moon
-Girl, you're everything between
-A lot of pretty faces could waste my time
-But you're my dream girl
-You make flowers bloom (girl you make the flowers bloom)
-Girl, you make the stars collide (don't you know you make the stars collide)
-And I don't know what I did to get lucky like this
-But it sure feels fine
-'Cause I see your face when I'm sleeping
-I wake up grateful to breathe in
-The air you float through
-I wrote you a lullaby
-A song to sing on your pillow
-Swift as a swing on a willow
-My sweetest words are mere birds
-In your perfect sky, oh my
-Baby, baby, you're my sun and moon
-Girl, you're everything between
-A lot of pretty faces could waste my time
-But you're my dream girl
-You make flowers bloom (girl you make the flowers bloom)
-Girl, you make the stars collide (don't you know you make the stars collide)
-And I don't know what I did to get lucky like this
-But it sure feels fine (it sure feels fine)
-'Cause baby, baby, you're my sun and moon
-Girl, you're everything between
-A lot of pretty faces could waste my time
-But you're my dream girl
-You make flowers bloom (girl you make the flowers bloom)
-Girl, you make the stars collide (don't you know you make the stars collide)
-And I don't know what I did to get lucky like this
-But it sure feels fine, oh my, oh my
-Oh my
-Oh my, oh my, yeah
-Oh my, oh my
-Baby, baby, you're mine
+We have thought of many features to include in this project
+* An interactive drag-and-drop college flowchart
+* User account system
+* Sharing of flowcharts
+* Customizable schedules from premade flowcharts provided by either EasyFlow or other users
+
+And many more to be added!
+
+### INITIAL DEVELOPMENT (09/26/2022)
+
+<pre>
+We have just started working with the project!
+
+Mainly we have worked with the following pages:
+</pre>
+* Landing Page - Where first-time users get directed when opening the site
+* Register Page
+* Homepage - Where concurrent users get directed when opening the site
+* View/Make a Flowchart
+* My Profile
+* User Settings
+* Search Friends
+
 
 ## Collaborators
-Kaye
-Eugene
-Czeska
+
+<pre>
+shkayee
+jojiSillona
+czeska120
+</pre>
