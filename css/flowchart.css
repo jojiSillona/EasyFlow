@@ -1,0 +1,98 @@
+@import "compass/css3";
+@import url("https://fonts.googleapis.com/css?family=Montserrat+Alternates:400,700");
+@import url('http://fonts.cdnfonts.com/css/liberation-sans');
+
+body{
+    margin: 0px;
+    display: flex;
+}
+
+.logo{
+    height: 27px;
+    object-fit: cover;
+    width: 152px;
+    margin: 21px;
+}
+
+section{
+    height: 1000px;
+    width: 800px;
+    margin: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.flowchart-info{
+    margin-block-start: 100px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ay{
+    margin:0px;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-flowchart{
+    display: flex;
+}
+
+.term{
+    width: 150px;
+    height: 90%;
+    padding: 20px;
+    /*margin: 10px;*/
+    background: #fafafa;
+}
+
+h1{
+    font-size: 72px;
+    font-family: 'Liberation Sans';
+    font-weight: 600;
+    text-align: left;
+    margin-left: 20px;
+    margin-block-start: 0px;
+    margin-block-end: 0;
+}
+
+h4{
+    font-family: 'Liberation Sans';
+    font-weight: 300;
+    text-align: left;
+    margin-left:20px;
+    margin-block-start: 0;
+}
+
+h2{
+    font-family: 'Liberation Sans';
+    font-weight: 600;
+    text-align: center;
+    margin-block-start: 0;
+}
+
+p{
+    font-family: 'Liberation Sans';
+    font-weight: 400;
+    font-size: 10pt;
+    text-align: center;
+    background: #a3d977;
+    padding: 10px;
+    border-radius: 5px;
+    color: #1a1a1a;
+    outline: 2px solid black;
+
+    transition: box-shadow .2s;
+    transition: all .2s ease-in-out;
+}
+
+p:hover{
+    box-shadow: 0 0 8px black;
+    transform: scale(1.03);
+}
+
+p:active{
+    box-shadow: 0 0 10px black;
+    transform: scale(1.1) rotate(2deg);
+}
