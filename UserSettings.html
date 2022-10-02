@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/b4e98bb39f.js" crossorigin="anonymous"></script>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-    <link rel="stylesheet" type="text/css" href="css/Style.css">   
+    <link rel="stylesheet" type="text/css" href="css/Style.css">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 
     <meta charset="UTF-8">
     <title>User Settings</title>
@@ -71,17 +70,13 @@
                             <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
                         </a>
                         <button class="btn btn" type="button" style="background:#3551a3; font-size:11px;">
-                            <i class="fa fa-fw fa-camera"></i>
-                            <span>Change Photo</span>
+                            <i class="fa fa-fw fa-camera" style="color:white;"></i>
+                            <span style="color:white;">Change Photo</span>
                         </button>
 
                         <h1 class="pt-sm-2 pb-1 mb-0 text-nowrap">Camila Smith</h1>
 
                     </div>
-                    <ul class="nav nav-pills nav-stacked" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-                        <li><a href="Userprofile.html"> <i class="fa fa-user"></i> Profile</a></li>
-                        <li class="active"><a href="#"> <i class="fa fa-edit"></i> User Setting</a></li>
-                    </ul>
                 </div>
             </div>
 
@@ -92,15 +87,15 @@
                             </div>
                         <div class="panel-body bio-graph-info">
                             <div class="row">
-                                <div class="bio-row">
+                                <div class="bio-row" style="margin-left:10px;">
                                     <label>Last Name</label>
                                     <input class="form-control" type="text" name="name" placeholder="Last Name" value="Smith">
                                 </div>
-                                <div class="bio-row">
+                                <div class="bio-row" style="margin-left:10px;">
                                     <label>First Name</label>
                                     <input class="form-control" type="text" name="name" placeholder="First Name" value="Camila">
                                 </div>
-                                <div class="bio-row">
+                                <div class="bio-row" style="margin-left:10px;">
                                     <div class="col mb-3">
                                         <div class="form-group">
                                             <label>My Bio</label>
@@ -108,12 +103,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="bio-row form-group small text-muted">
+                                <div class="bio-row form-group small text-muted" style="margin-left:10px;">
                                     All of the fields on this page are optional and can be deleted at any time, and by filling them out, you're giving us consent to share this data wherever your user profile appears.
                                 </div>
-                                <div class="bio-row">
-                                    <button type="button" class="btn btn-primary">Update Profile</button>
-                                    <button type="reset" class="btn btn-light">Reset Changes</button>
+                                <div class="bio-row" style="margin-left:10px;">
+                                    <button type="button" class="btn btn-primary" style="background:#3551a3;">Update Profile</button>
+                                    <button type="reset" class="btn btn-light" style="background:#f1f2f7">Reset Changes</button>
                                 </div>
 
                                 </div>
@@ -121,29 +116,31 @@
                     </div>
 
 
+                    <div class="profile-info col-md-16">
                     <div class="bio-graph-heading">
                         Account Settings
                     </div>
 
                     <div class="panel-body bio-graph-info" style="background:white;">
                         <div class="row">
-                            <div class="bio-row">
+                            <div class="bio-row" style="margin-left:10px;">
                                 <label>Username</label>
                                 <input class="form-control" type="text" name="username" placeholder="username" value="username123">
                             </div>
-                            <div class="bio-row form-group small text-muted">
+                            <div class="bio-row form-group small text-muted" style="margin-left:10px;">
                                 After changing your username, your old username becomes available for anyone else to claim.
                             </div>
 
-                            <div class="bio-row">
+                            <div class="bio-row" style="margin-left:10px;">
                             <label>Email</label>
                             <input class="form-control" type="text" placeholder="user@example.com">
                             </div>
-                            <div class="bio-row">
-                                <button type="button" class="btn btn-primary">Save Changes</button>
+                            <div class="bio-row" style="margin-left:10px;">
+                                <button type="button" class="btn btn-primary"  style="background:#3551a3;">Save Changes</button>
                             </div>
 
                         </div>
+                    </div>
                     </div>
 
 
@@ -154,24 +151,25 @@
 
                         <div class="panel-body bio-graph-info" style="background:white;">
                            <div class="row">
-                            <div class="bio-row">
+                            <div class="bio-row" style="margin-left:10px;">
                                 <label>Current Password</label>
                                 <input class="form-control" type="password" placeholder="••••••">
                             </div>
 
-                            <div class="bio-row">
+                            <div class="bio-row" style="margin-left:10px;">
                                 <label>New Password</label>
                                 <input class="form-control" type="password" placeholder="••••••">
                             </div>
 
-                            <div class="bio-row">
+                            <div class="bio-row" style="margin-left:10px;">
                                 <label>Confirm <span class="d-none d-xl-inline">Password</span></label>
                                 <input class="form-control" type="password" placeholder="••••••"></div>
                             </div>
 
-                        <div class="bio-row" style="margin-left:720px">
-                            <button type="button" class="btn btn-primary">Confirm</button>
+                        <div class="bio-row" style="margin-left:5px">
+                            <button type="button" class="btn btn-primary" style="background:#3551a3;" >Confirm</button>
                         </div>
+                            <br>
                         </div>
                     </div>
 
@@ -183,7 +181,7 @@
 
                         <div class="panel-body bio-graph-info" style="background:white;">
                             <div class="row">
-                                <div class="bio-row">
+                                <div class="bio-row" style="margin-left:10px;">
                                     <label>Account</label>
                                     <p class="text-muted font-size-sm">Make your account private</p>
                                     <label class="switch">
@@ -191,7 +189,7 @@
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
-                                <div class="bio-row">
+                                <div class="bio-row" style="margin-left:10px;">
                                     <label>Flowchart</label>
                                     <p class="text-muted font-size-sm">Make your projects private</p>
                                     <label class="switch">
