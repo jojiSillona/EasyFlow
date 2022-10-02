@@ -2,6 +2,8 @@
 
 body{
     margin: 0px;
+    width: 100%;
+    height: 100%;
 }
 
 .logo{
@@ -11,69 +13,46 @@ body{
     margin: 21px;
 }
 
-.landing-page{
-    align-items: flex-start;
-    background-color: white;
-    border: 1px none;
+.header{
+    background-color: #fafafa;
+    box-shadow: 0, 0, 5px black;
+    outline: 2px solid rgba(0, 0, 0, 0.1);
     display: flex;
-    flex-direction: column;
-    height: 900px;
-    padding: 21px;
-    width: 1440px;
+    align-items: center;
+    font-family: 'Montserrat Alternates';
+    font-weight: 300;
+    overflow: hidden;
 }
 
-.flex-col{
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    margin-left: 50%;
-    margin-top: 180px;
-    min-height: 210px;
-    width: 702px;
+.img-container{
+    margin: auto;
 }
 
-.main{
-    letter-spacing: 0;
-    min-height: 106px;
-    width: 702px;
+
+.button-side{
+    font-family: 'Montserrat Alternates';
+    font-weight: 300;
+    width: 50vw;
 }
 
-h1{
-    color: black;
-    font-family: Montserrat Alternates;
-    font-size: 30px;
-    font-weight: 400;
-    font-style: normal;
+h2{
+    margin-block-start: 0;
+    margin-block-end: 0;
+    font-size: 40px;
 }
 
-.bold{
-    font-weight: 700;
-}
-
-.button-main{
-    align-items: flex-start;
-    background-color: #3551a3;
-    border: 1px none;
-    border-radius: 20px;
-    display: flex;
-    margin-top: 5px;
-    min-width: 150px;
-}
-
-.button-text{
+p{
+    background: #3551a3;
     color: white;
-    font-family: Montserrat Alternates;
-    font-size: 18px;
-    height: 50px;
-    letter-spacing: 0;
-    margin-top: -1px;
+    border-radius: 10px;
     text-align: center;
-    width: 160px;
+    padding: 10px;
+    width: 130px;
 }
 
-.vert-align-text-mid{
+.introduction{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    height: 700px;
+    width: 100%;
 }
-

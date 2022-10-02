@@ -3,6 +3,8 @@
 @import url('http://fonts.cdnfonts.com/css/liberation-sans');
 
 body{
+    height: 100%;
+    width: 100%;
     margin: 0px;
     display: flex;
 }
@@ -15,11 +17,10 @@ body{
 }
 
 section{
-    height: 1000px;
-    width: 800px;
+    /*width: 800px;*/
     margin: 20px;
     display: flex;
-    justify-content: space-around;
+    /*justify-content: space-around;*/
 }
 
 .flowchart-info{
@@ -27,6 +28,7 @@ section{
     padding: 5px;
     display: flex;
     flex-direction: column;
+    color: #fafafa;
 }
 
 .ay{
@@ -35,16 +37,24 @@ section{
     flex-direction: column;
 }
 
+.main-window{
+    background: rgb(53,81,161);
+    background: linear-gradient(90deg, rgba(53,81,161,1) 0%, rgba(56,138,226,1) 59%, rgba(0,174,249,1) 100%);
+    height: 100vh;
+    width: 100vw;
+    overflow: auto;
+}
+
 .main-flowchart{
+    height: 100%;
+    width: 100%;
     display: flex;
 }
 
 .term{
-    width: 150px;
-    height: 90%;
+    width: 100px;
     padding: 20px;
-    /*margin: 10px;*/
-    background: #fafafa;
+    background: rgba(250, 250, 250, 0.2);
 }
 
 h1{
@@ -68,8 +78,21 @@ h4{
 h2{
     font-family: 'Liberation Sans';
     font-weight: 600;
+    font-size: 25px;
+    color: #fafafa;
     text-align: center;
     margin-block-start: 0;
+    margin-block-end: 10px;
+}
+
+h3{
+    font-family: 'Liberation Sans';
+    font-weight: 600;
+    font-size: 15px;
+    color: #fafafa;
+    text-align: center;
+    margin-block-start: 0;
+    margin-block-end: 10px;
 }
 
 p{
