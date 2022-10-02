@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/b4e98bb39f.js" crossorigin="anonymous"></script>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="css/Style.css">   
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+    <title>User Settings</title>
+
+
+
+</head>
+<body>
+<!--Main Navigation-->
+<header>
+    <!-- Sidebar -->
+        <nav id="sidebarMenu" class="d-lg-block sidebar bg-white" style="position: fixed; width:fit-content;"><!--CZESCAKE-->
+            <!-- Brand -->
+            <a class="navbar-brand" href="#">
+                <img src="LOGO.png" height="35em" alt="EasyFlow Logo"
+                loading="lazy" style="margin-left: 15px;"/>
+            </a>
+            <div class="position-sticky">
+                <div class="list-group list-group-flush mx-3 mt-4">
+                    <a href="Homepage.html" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                        <i class="fa-solid fa-house"></i><span><b> Homepage</b></span>
+                    </a>
+                    <a href="flowchart.html" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                        <i class="fa-solid fa-diagram-project"></i><span><b> Flowcharts</b></span>
+                    </a>
+                    <a href="Userprofile.html" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                        <i class="fa-regular fa-address-card"></i><span><b> Profile</b></span>
+                    </a>
+                    <a href="UserSettings.html" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                        <i class="fa-solid fa-gear"></i></i><span><b> Settings</b></span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+     
+        <!-- Navbar -->
+      </header>
+
+      <main>
+        <!-- Searchbar -->
+        <nav class="navbar navbar-expand-lg bg-light">
+          <div class="navbarcol">
+              <form method="POST" class="d-flex" role="search" action="searchF.html">
+                  <input type="text" placeholder="Search.." name="search2">
+                  <button type="submit"><i class="fa fa-search"></i></button>
+              </form>
+          </div>
+      </nav>
+
+<div>
+    <div class="container bootstrap snippets bootdey">
+        <div class="row">
+            <div class="profile-nav col-md-3">
+                <div class="panel">
+                    <div class="user-heading round">
+                        <a href="#">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
+                        </a>
+                        <button class="btn btn" type="button" style="background:#3551a3; font-size:11px;">
+                            <i class="fa fa-fw fa-camera"></i>
+                            <span>Change Photo</span>
+                        </button>
+
+                        <h1 class="pt-sm-2 pb-1 mb-0 text-nowrap">Camila Smith</h1>
+
+                    </div>
+                    <ul class="nav nav-pills nav-stacked" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                        <li><a href="Userprofile.html"> <i class="fa fa-user"></i> Profile</a></li>
+                        <li class="active"><a href="#"> <i class="fa fa-edit"></i> User Setting</a></li>
+                    </ul>
+                </div>
+            </div>
+
+                <div class="profile-info col-md-9">
+                    <div class="panel">
+                        <div class="bio-graph-heading">
+                                Profile Setting
+                            </div>
+                        <div class="panel-body bio-graph-info">
+                            <div class="row">
+                                <div class="bio-row">
+                                    <label>Last Name</label>
+                                    <input class="form-control" type="text" name="name" placeholder="Last Name" value="Smith">
+                                </div>
+                                <div class="bio-row">
+                                    <label>First Name</label>
+                                    <input class="form-control" type="text" name="name" placeholder="First Name" value="Camila">
+                                </div>
+                                <div class="bio-row">
+                                    <div class="col mb-3">
+                                        <div class="form-group">
+                                            <label>My Bio</label>
+                                            <textarea class="form-control" rows="5" placeholder="Write Something about You..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bio-row form-group small text-muted">
+                                    All of the fields on this page are optional and can be deleted at any time, and by filling them out, you're giving us consent to share this data wherever your user profile appears.
+                                </div>
+                                <div class="bio-row">
+                                    <button type="button" class="btn btn-primary">Update Profile</button>
+                                    <button type="reset" class="btn btn-light">Reset Changes</button>
+                                </div>
+
+                                </div>
+                            </div>
+                    </div>
+
+
+                    <div class="bio-graph-heading">
+                        Account Settings
+                    </div>
+
+                    <div class="panel-body bio-graph-info" style="background:white;">
+                        <div class="row">
+                            <div class="bio-row">
+                                <label>Username</label>
+                                <input class="form-control" type="text" name="username" placeholder="username" value="username123">
+                            </div>
+                            <div class="bio-row form-group small text-muted">
+                                After changing your username, your old username becomes available for anyone else to claim.
+                            </div>
+
+                            <div class="bio-row">
+                            <label>Email</label>
+                            <input class="form-control" type="text" placeholder="user@example.com">
+                            </div>
+                            <div class="bio-row">
+                                <button type="button" class="btn btn-primary">Save Changes</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="profile-info col-md-16">
+                     <div class="bio-graph-heading">
+                        Security Settings
+                     </div>
+
+                        <div class="panel-body bio-graph-info" style="background:white;">
+                           <div class="row">
+                            <div class="bio-row">
+                                <label>Current Password</label>
+                                <input class="form-control" type="password" placeholder="••••••">
+                            </div>
+
+                            <div class="bio-row">
+                                <label>New Password</label>
+                                <input class="form-control" type="password" placeholder="••••••">
+                            </div>
+
+                            <div class="bio-row">
+                                <label>Confirm <span class="d-none d-xl-inline">Password</span></label>
+                                <input class="form-control" type="password" placeholder="••••••"></div>
+                            </div>
+
+                        <div class="bio-row" style="margin-left:720px">
+                            <button type="button" class="btn btn-primary">Confirm</button>
+                        </div>
+                        </div>
+                    </div>
+
+
+                    <div class="profile-info col-md-16">
+                        <div class="bio-graph-heading">
+                            Privacy Settings
+                        </div>
+
+                        <div class="panel-body bio-graph-info" style="background:white;">
+                            <div class="row">
+                                <div class="bio-row">
+                                    <label>Account</label>
+                                    <p class="text-muted font-size-sm">Make your account private</p>
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                                <div class="bio-row">
+                                    <label>Flowchart</label>
+                                    <p class="text-muted font-size-sm">Make your projects private</p>
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        <br>
+        </div>
+    </div>
+
+      </main>
+
+</body>
+</html>
