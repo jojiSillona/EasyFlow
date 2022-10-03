@@ -41,7 +41,7 @@ section{
     background: rgb(53,81,161);
     background: linear-gradient(90deg, rgba(53,81,161,1) 0%, rgba(56,138,226,1) 59%, rgba(0,174,249,1) 100%);
    /*  height: 100vh; */
-    width: 77vw;
+    width: 100vw;
     overflow: auto;
 }
 
@@ -52,7 +52,7 @@ section{
 }
 
 .term{
-    width: 100px;
+    width: 130px;
     padding: 20px;
     background: rgba(250, 250, 250, 0.2);
 }
