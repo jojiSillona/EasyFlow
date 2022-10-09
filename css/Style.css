@@ -9,6 +9,12 @@ body {
   -moz-font-smoothing: antialiased;
 }
 
+main{
+  /*width: calc(100vw - 214.31px);*/
+  margin-left: auto;
+  margin-right: 0px;
+}
+
 @media (min-width: 991.98px) {
   main {
     padding-left: 215px;
