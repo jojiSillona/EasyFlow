@@ -197,6 +197,66 @@ main{
   font-family:'Montserrat';
 }
 
+.card-group{
+  max-width:80em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.friend-list{
+  height:fit-content;
+  width:auto;
+  margin-left: 2em;
+  margin-right: 2em;
+  margin-bottom: 2em;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); 
+}
+
+.content {
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.friend-icon{
+  border-radius:50%;
+  width: 5em;
+  height: 5em;
+  object-fit:cover;
+  border:#3551a3 2px solid;
+}
+
+ .friend-button{
+  padding:1em;
+}
+
+.friend-txt{
+  padding:1em;
+  font-weight: bold;
+  font-size: large;
+  flex-grow: 1;
+}
+
+.friend-subtxt{
+  font-weight:lighter;
+  font-size:small;
+}
+
+.friend-icon:hover{
+  border:#ffffff 2px solid;
+}
+
+ .friend-button:hover{
+  color:white;
+}
+
+.list-group-item:hover{
+  background-color:#b8b8b8;
+  color:white;
+}
+
 .top-container{
   display: flex;
   align-items: center;
@@ -316,34 +376,33 @@ form.example::after {
     @media (max-width: 991.98px) {
     .sidebar {
     width: 100%;
-    }
-    }
-    .sidebar .active {
-    border-radius: 5px;
-    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
-    }
-    
-    .sidebar-sticky {
-    position: relative;
-    top: 0;
-    height: calc(100vh - 48px);
-    padding-top: 0.5rem;
-    overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    }
+  }
+}
+.sidebar .active {
+  border-radius: 5px;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+}
 
-    .navbarcol {
-        margin: 5px;
-        padding: 5px;
-        background-color: #fff;
-        margin-left: auto; 
-        margin-right: 0;
-        text-align: left;
-    }
-    
-    .navbar {
-        
-        margin-left: 0;
-        margin-right: 0;
-        font-size: larger;
-    }
+.sidebar-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh - 48px);
+  padding-top: 0.5rem;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+.navbarcol {
+  margin: 5px;
+  padding: 5px;
+  background-color: rgb(255, 255, 255);
+  margin-left: auto; 
+  margin-right: 0;
+  text-align: left;
+}
+
+.navbar {
+  margin-left: 0;
+  margin-right: 0;
+  font-size: larger;
+}
