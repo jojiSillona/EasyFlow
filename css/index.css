@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat+Alternates:400,700");
 
+html{
+    scroll-behavior: smooth;
+}
+
 body{
     margin: 0px;
     width: 100%;
@@ -85,4 +89,13 @@ p{
     color: black;
     margin-left: auto;
     margin-right: auto;
+}
+
+.log-link{
+    text-decoration: none;
+    color:black;
+}
+
+.log-link:hover{
+    color:#3551a3;
 }
