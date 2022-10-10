@@ -71,53 +71,17 @@
                             <div class="term">Term 3</div>
                         </div>
                     </div>
-                    <!--
-                    <section>
-                        <div class="ay">
-                            <h2>AY 2020-2021</h2>
-                            <div class="main-flowchart">
-                                <div class="term">
-                                    <h3>Term 1</h3>
-                                    <p draggable="true">CCPROG1</p>
-                                    <p draggable="true">CCICOMP</p>
-                                    <p draggable="true">MTH101A</p>
-                                    <p draggable="true">GEPCOMM</p>
-                                    <p draggable="true">NSTP101</p>
-                                </div>
-                                <div class="term">
-                                    <h3>Term 2</h3>
-                                    <p draggable="true">CCPROG2</p>
-                                    <p draggable="true">CCDSTRU</p>
-                                    <p draggable="true">CSMATH1</p>
-                                    <p draggable="true">GEFTWEL</p>
-                                    <p draggable="true">GEMATMW</p>
-                                    <p draggable="true">GELECSP</p>
-                                    <p draggable="true">NSTP-01</p>
-                                    <p draggable="true">LASARE1</p>
-                                </div>
-                                <div class="term">
-                                    <h3>Term 3</h3>
-                                    <p draggable="true">CCPROG3</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ay">
-                            <h2>AY 2021-2022</h2>
-                            <div class="main-flowchart">
-                                <div class="term">
-                                    <h3>Term 4</h3>
-                                </div>
-                                <div class="term">
-                                    <h3>Term 5</h3>
-                                </div>
-                                <div class="term">
-                                    <h3>Term 6</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    -->
                     <div id="canvas">
+                        <svg id="svg-canvas">
+                            <!--
+                                Please take note of the formulas:
+                                xSENDER (X axis of sender node): starts at 110px, increment by 110px
+                                xRECEIVER (x axis of receiver node): starts at 130px, increment by 110px;
+
+                                ySENDER/yRECEIVER (y axis of sender/receiver node): starts at 40px, increment by 60px
+                            --> 
+                            <path d="M 110,220 C 170,220 170,280 240,280" stroke="black" fill="transparent">
+                        </svg>
                         <div class="subject">CCPROG1</div>
                         <div class="subject" style="position: relative; left: 110px; top: -60px;">CCPROG2</div>
                         <div class="subject" style="position: relative; left: 220px; top: -120px;">CCPROG3</div>
@@ -127,6 +91,7 @@
                         <div class="subject" style="position: relative; left: 0px; top: -180px;">MTH101A</div>
                         <div class="subject" style="position: relative; left: 110px; top: -240px;">CSMATH1</div>
                         <div class="subject" style="position: relative; left: 220px; top: -240px;">CSMATH2</div>
+                        
                     </div>
                     <script
                     src="https://code.jquery.com/jquery-3.6.1.js"
