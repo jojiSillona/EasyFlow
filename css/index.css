@@ -25,7 +25,14 @@ body{
 }
 
 .img-container{
-    margin: auto;
+    width: 50vw;
+}
+
+.easyboi{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
 }
 
 
@@ -53,6 +60,29 @@ p{
 .introduction{
     display: flex;
     align-items: center;
-    height: 700px;
+    height: 500px;
     width: 100%;
+}
+
+.feature{
+    margin-block-end: 50px;
+    font-family: 'Montserrat Alternates';
+    text-align: center;
+}
+
+.start-planning{
+    background-color: #3551a3;
+    color: #fafafa;
+    text-align: center;
+    font-family: 'Montserrat Alternates';
+
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+.sign-up-free{
+    background-color: #fafafa;
+    color: black;
+    margin-left: auto;
+    margin-right: auto;
 }
