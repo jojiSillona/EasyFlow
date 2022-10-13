@@ -173,7 +173,7 @@ main{
   margin-left: 2em;
   margin-right: 2em;
   margin-bottom: 2em;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); 
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .content {
@@ -225,11 +225,11 @@ main{
   align-items: center;
 }
 
-.card:hover { 
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); 
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
-.control-width { 
+.control-width {
   width: 80%; margin-left:200px;
 }
 
@@ -323,7 +323,7 @@ form.example::after {
     .slider.round:before {
       border-radius: 50%;
     }
-    
+
     /* Sidebar */
     .sidebar {
     position: absolute;
@@ -335,7 +335,7 @@ form.example::after {
     width: 200px;
     z-index: 600;
     }
-    
+
     @media (max-width: 991.98px) {
     .sidebar {
     width: 100%;
@@ -359,7 +359,7 @@ form.example::after {
   margin: 5px;
   padding: 5px;
   background-color: rgb(255, 255, 255);
-  margin-left: auto; 
+  margin-left: auto;
   margin-right: 0;
   text-align: left;
 }
