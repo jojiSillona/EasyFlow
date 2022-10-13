@@ -26,6 +26,7 @@ body{
 #canvas{
     position: absolute;
     width: calc(100% - 214.31px);
+    height: 1000px;
     top: 357.8px;
     left: 214.31px;
     z-index: 0;
@@ -35,11 +36,19 @@ body{
     background: linear-gradient(90deg, rgba(53,81,161,1) 0%, rgba(56,138,226,1) 59%, rgba(0,174,249,1) 100%);*/
 }
 
+#svg-canvas{
+    width: calc(100% - 214.31px);
+    height: 1000px;
+}
+
 .subject{
     width: 90px;
     height: 40px;
     margin: 20px;
-    font-family: 'Liberation Sans';
+
+    position: absolute;
+
+    font-family: 'Montserrat';
     font-weight: 400;
     font-size: 10pt;
     text-align: center;
@@ -78,7 +87,7 @@ body{
     flex-direction: column;
 
     text-align: center;
-    font-family: 'Liberation Sans';
+    font-family: 'Montserrat';
     font-weight: 600;
     font-size: 25px;
     color: #fafafa;
@@ -87,7 +96,7 @@ body{
 .term{
 
     width: 110px;
-    font-family: 'Liberation Sans';
+    font-family: 'Montserrat';
     font-weight: 600;
     font-size: 15px;
 }
@@ -102,7 +111,7 @@ body{
 
 h1{
     font-size: 72px;
-    font-family: 'Liberation Sans';
+    font-family: 'Montserrat';
     font-weight: 600;
     text-align: left;
     margin-left: 20px;
@@ -111,7 +120,7 @@ h1{
 }
 
 h4{
-    font-family: 'Liberation Sans';
+    font-family: 'Montserrat';
     font-weight: 300;
     text-align: left;
     margin-left:20px;
@@ -119,7 +128,7 @@ h4{
 }
 
 h2{
-    font-family: 'Liberation Sans';
+    font-family: 'Montserrat';
     font-weight: 600;
     font-size: 25px;
     color: #fafafa;
@@ -129,7 +138,7 @@ h2{
 }
 
 h3{
-    font-family: 'Liberation Sans';
+    font-family: 'Montserrat';
     font-weight: 600;
     font-size: 15px;
     color: #fafafa;
@@ -139,7 +148,7 @@ h3{
 }
 
 p{
-    font-family: 'Liberation Sans';
+    font-family: 'Montserrat';
     font-weight: 400;
     font-size: 10pt;
     text-align: center;
