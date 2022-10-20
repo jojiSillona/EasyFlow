@@ -52,17 +52,23 @@
             </header>
             <main>
                 <div class="main-window">
-                        <!-- Searchbar -->
-                        <nav class="navbar navbar-expand-lg bg-light">
-                            <div class="navbarcol">
-                                <form method="POST" class="d-flex" role="search" action="searchResult.html">
-                                    <input type="text" placeholder="Search.." name="search2">
-                                    <button type="submit"><i class="fa fa-search"></i></button>
-                                </form>
-                            </div>
-                        </nav>
+                    <!-- Searchbar -->
+                    <nav class="navbar navbar-expand-lg bg-light">
+                        <div class="navbarcol">
+                            <form method="POST" class="d-flex" role="search" action="searchResult.html">
+                                <input type="text" placeholder="Search.." name="search2">
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                    </nav>
+                    <div class="editing-flag">
+                        You are editing this flowchart.
+                    </div>
                     <div class="flowchart-info">
-                        <h1>Flowchart Name</h1>
+                        <div class="flowchart-name">
+                            <h1>Flowchart Name</h1>
+                            <img class="edit-flowchart-name" src="images/edit-icon.png" alt="edit">
+                        </div>
                         <h4>By Flowchart Creator Name</h4>
                     </div>
                     <div class="ay">
@@ -73,52 +79,6 @@
                             <div class="term">Term 3</div>
                         </div>
                     </div>
-                    <!--
-                    <section>
-                        <div class="ay">
-                            <h2>AY 2020-2021</h2>
-                            <div class="main-flowchart">
-                                <div class="term">
-                                    <h3>Term 1</h3>
-                                    <p draggable="true">CCPROG1</p>
-                                    <p draggable="true">CCICOMP</p>
-                                    <p draggable="true">MTH101A</p>
-                                    <p draggable="true">GEPCOMM</p>
-                                    <p draggable="true">NSTP101</p>
-                                </div>
-                                <div class="term">
-                                    <h3>Term 2</h3>
-                                    <p draggable="true">CCPROG2</p>
-                                    <p draggable="true">CCDSTRU</p>
-                                    <p draggable="true">CSMATH1</p>
-                                    <p draggable="true">GEFTWEL</p>
-                                    <p draggable="true">GEMATMW</p>
-                                    <p draggable="true">GELECSP</p>
-                                    <p draggable="true">NSTP-01</p>
-                                    <p draggable="true">LASARE1</p>
-                                </div>
-                                <div class="term">
-                                    <h3>Term 3</h3>
-                                    <p draggable="true">CCPROG3</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ay">
-                            <h2>AY 2021-2022</h2>
-                            <div class="main-flowchart">
-                                <div class="term">
-                                    <h3>Term 4</h3>
-                                </div>
-                                <div class="term">
-                                    <h3>Term 5</h3>
-                                </div>
-                                <div class="term">
-                                    <h3>Term 6</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    -->
                     <div id="canvas">
                         <div class="subject" >Subject A</div>
                         <div class="subject" style="left: 110px; top: 0px;">Subject B</div>

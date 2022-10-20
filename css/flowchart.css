@@ -23,6 +23,18 @@ body{
     justify-content: space-around;
 }*/
 
+.editing-flag{
+    position: absolute;
+
+    background-color: rgb(255, 228, 77);
+    width: calc(100% - 214.31px);
+    text-align: center;
+
+    padding: 15px;
+
+    font-weight: 700;
+}
+
 #canvas{
     position: absolute;
     width: calc(100% - 214.31px);
@@ -78,6 +90,15 @@ body{
     display: flex;
     flex-direction: column;
     color: #fafafa;
+}
+
+.flowchart-name{
+    display: flex;
+}
+
+.edit-flowchart-name{
+    width: 30px;
+    height: 30px;
 }
 
 .ay{
