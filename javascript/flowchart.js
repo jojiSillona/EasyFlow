@@ -1,5 +1,8 @@
-$(".subject").draggable({
-    containment: $("#canvas"),
-    cursor: "grabbing",
-    grid: [110, 60]
-});
+window.onload = function() {
+    $(".subject").draggable({
+        containment: $("#canvas"),
+        cursor: "grabbing",
+        grid: [110, 60]
+    });
+}
+
