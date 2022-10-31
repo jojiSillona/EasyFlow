@@ -1,0 +1,33 @@
+
+    <!-- Sidebar -->
+        <nav id="sidebarMenu" class="d-lg-block sidebar bg-white" style="position: fixed; width:fit-content;"><!--CZESCAKE-->
+            <!-- Brand -->
+            <a class="navbar-brand" href="#">
+                <img src="images/LOGO.png" height="35em" alt="EasyFlow Logo"
+                loading="lazy" style="margin-left: 15px;"/>
+            </a>
+            <div class="position-sticky">
+                <div class="list-group list-group-flush mx-3 mt-4">
+                    <a href="/home" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                        <i class="fa-solid fa-house"></i><span><b> Homepage</b></span>
+                    </a>
+                   <a href="/viewflowcharts" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                        <i class="fa-solid fa-diagram-project"></i><span><b> View Flowcharts</b></span>
+                   
+                    <a href="/myprofile" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                        <i class="fa-regular fa-address-card"></i><span><b> Profile</b></span>
+                    
+                    <a href="/mysettings" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                        <i class="fa-solid fa-gear"></i></i><span><b> Settings</b></span>
+                   
+                    <a href="/" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                    <i class="fa-solid fa-right-from-bracket fa-rotate-180"></i><b> Logout</b></a>
+                </div>
+                <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+                <script type="text/javascript">
+                    $("a").click(function(){
+                        $(this).addClass('active').siblings().removeClass('active')
+                    });
+                </script>
+            </div>
+        </nav>

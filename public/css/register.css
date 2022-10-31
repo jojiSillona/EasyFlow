@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat+Alternates:400,700");
+
+body{
+    margin: 0px;
+}
+
+.register {
+    align-items: flex-start;
+    background-color: rgb(225, 225, 225);
+    border: 1px none;
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.card-group{
+    background-color: #fff;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 33px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 2rem !important;
+    margin-top: 1em;
+    margin-left:2em;
+    margin-bottom:1em;
+  }
+
+.blue-bg {
+    align-items: center;
+    background-color: #3551a3;
+    display: flex;
+    flex-direction: column;
+    min-height: 900px;
+    padding: 21px;
+    width: 400px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.logo {
+    align-self: flex-start;
+    margin-left: 1em;
+    margin-top: 1em;
+    object-fit: cover;
+    width: 300px;
+}
+
+h1 {
+    color: white;
+    font-family: "Montserrat Alternates";
+    font-size: 60px;
+    font-weight: 400;
+    margin-top: 1em;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.flex-col{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-left: 2em;
+    margin-right:2em;
+    margin-top: 8em;
+    min-height: 551px;
+    width: fit-content;
+}
+
+.row{
+    padding-bottom: 2em;
+}
+
+.register-text{
+    color: black;
+    font-family: "Montserrat Alternates";
+    font-size:xx-large;
+    margin-top: 0;
+    margin-bottom: 2em;
+    margin-left: 0;
+    margin-right: auto;
+    font-weight: 700;
+    letter-spacing: 0;
+}
+
+.input-text{
+    color:black;
+    font-family: "Montserrat Alternates";
+    font-size: large;
+    font-weight: 400;
+
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none; 
+}

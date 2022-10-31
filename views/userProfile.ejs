@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head'); -%>
+    <title>User Profile</title>
+</head>
+<body>
+<header>
+    <%- include('partials/sidebar'); -%>
+</header>
+<main>
+    <%- include('partials/searchbar'); -%>
+    <!-- User's Display Picture -->
+    <div class="container bootstrap snippets bootdey">
+        <div class="row">
+            <div class="profile-nav col-md-3">
+                <div class="panel">
+                    <div class="user-heading round">
+                        <a href="#">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
+                        </a>
+                        <h1>Camila Smith</h1>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User's Information -->
+            <div class="profile-info col-md-9">
+                <div class="panel">
+                    <div class="bio-graph-heading">
+                        User's Information
+                    </div>
+                    <div class="panel-body bio-graph-info">
+                        <br>
+                        <div class="row">
+
+                            <div class="bio-row" style="margin-left:10px">
+                                <p><span>First Name </span>: Camila</p>
+                            </div>
+                            <div class="bio-row" style="margin-left:10px">
+                                <p><span>Last Name </span>: Smith</p>
+                            </div>
+                            <div class="bio-row" style="margin-left:10px">
+                                <p><span>Email </span>: jsmith@flatlab.com</p>
+                            </div>
+                            <div class="bio-row" style="margin-left:10px">
+                                <p><span>Username </span>: jsmith123</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <br>
+                    <!-- Bio -->
+                    <div class="bio-graph-heading">
+                        Bio
+                    </div>
+                    <div class="bio-graph-bio">
+                        Hi! Welcome to my page!
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div style="margin-left:100px" class="bio-flow-heading">
+            Your Flow Chart
+        </div>
+        <div class="control-width">
+            <!-- Sample 1 -->
+            <a href="Usersflowchart1.html">
+                <div class="card">
+                    <img src="images/flowchart.png" alt="flowchart pic" class="box-img" style=" width: 135px;
+       height: 150px; border-radius: 25px;">
+                    <h5>Term 1 Flow Chart</h5>
+                </div>
+            </a>
+
+            <!-- Sample 2 -->
+            <a href="Usersflowchart2.html">
+                <div class="card">
+                    <img src="images/flowchart.png" alt="flowchart pic" class="box-img" style=" width: 135px;
+       height: 150px; border-radius: 25px;">
+                    <h5>Term 2 Flow Chart</h5>
+                </div>
+            </a>
+
+            <!-- Sample 3 -->
+            <a href="Usersflowchart3.html">
+                <div class="card">
+                    <img src="images/flowchart.png" alt="flowchart pic" class="box-img" style=" width: 135px;
+       height: 150px; border-radius: 25px;">
+                    <h5>Term 3 Flow Chart</h5>
+                </div>
+            </a>
+
+            <!-- Sample 4 -->
+            <a href="Usersflowchart4.html">
+                <div class="card">
+                    <img src="images/flowchart.png" alt="flowchart pic" class="box-img" style=" width: 135px;
+       height: 150px; border-radius: 25px;">
+                    <h5>BSIS Flow Chart</h5>
+                </div>
+            </a>
+
+            <!-- Sample 5 -->
+            <a href="Usersflowchart5.html">
+                <div class="card">
+                    <img src="images/flowchart.png" alt="flowchart pic" class="box-img" style=" width: 135px;
+       height: 150px; border-radius: 25px;">
+                    <h5>BSCS Flow Chart</h5>
+                </div>
+            </a>
+        </div>
+    </div>
+</main>
+<%- include('partials/footer'); -%>
+</body>
+</html>
