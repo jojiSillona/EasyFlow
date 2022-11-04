@@ -40,28 +40,37 @@
                                 <input class="form-control form-control-sm" type="text" placeholder="Enter Academic Year...">
                             </div>
                             <div class="term-header">
-                                <div class="term-txt">Term 1
+                                <div class="term">Term 1
                                     <div class="term">
                                     <% courses.forEach(function(course){ %>
                                         <div class="subject-txt" ><%= course.code %></div>
                                     <% }); %>
                                     </div>
                                 </div>
-                                <div class="term-txt">Term 2
+                                <div class="term">Term 2
                                     <div class="term">
                                     </div>
                                 </div>
-                                <div class="term-txt">Term 3</div>
+                                <div class="term">Term 3</div>
                             </div>
                         </div>
                         <div id="canvas">
                             <!-- Please add the subjects here. -->
                             <div class="subject">TEST</div>
-                            <div class="subject" style="top: 60px;">FLOWCHA</div>
+                            <div class="subject" style="top: 60px;">FLOW</div>
                             <svg id="svg-canvas">
                                 <!-- Leave this blank -->
                             </svg>
+                            <!-- <script type="text/javascript" src="/javascript/flowchart.js"></script> -->
                         </div>
+                        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+                            <script>
+                                $(".subject").draggable({
+                                    containment: $("#canvas"),
+                                    cursor: "grabbing",
+                                    grid: [110, 60]
+                                });
+                            </script>
                     </div>
                 </div>
                  <!-- Modals -->
