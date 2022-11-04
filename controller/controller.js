@@ -26,7 +26,7 @@ const controller = {
             email: req.body.email,
             password: req.body.password
         });
-    
+
         acc.save(function(err){
             if(err){
                 console.log(err);
@@ -36,19 +36,6 @@ const controller = {
                     account: acc
                 });
                 console.log("Account added.");
-            }
-        });
-    },
-
-    showRegistration: function(req,res){
-        Account.find({}, function(err,rows){
-            if(err){
-                console.log(err);
-            }
-            else{
-                res.render(('registration'), {
-                    account: rows
-                });
             }
         });
     },
@@ -109,7 +96,20 @@ const controller = {
     },
 
     searchResults: function(req,res){
-        res.render('searchResults');
+        Account.find({
+            $or: [{'fullName.firstName' : {$regex: new RegExp(req.body.query, 'i')}},
+                  {'fullName.lastName' : {$regex: new RegExp(req.body.query, 'i')}}]
+          }, function(err,query)
+          {
+            if(err){
+                console.log(err);
+            } else {
+                res.render('searchResults',{
+                    accounts: query
+                });
+            }
+          });
+        
     }
 }
 

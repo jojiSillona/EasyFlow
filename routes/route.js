@@ -9,7 +9,6 @@ app.get("/", controller.getIndex);
 app.get("/login", controller.getLogin);
 app.get("/register", controller.getRegister);
 app.post("/registration", controller.saveRegistration);
-app.get("/registerSuccess/:userId", controller.showRegistration);
 app.get("/viewflowcharts", controller.viewFlowcharts);
 app.get("/editflowchart", controller.editFlowchart);
 app.get("/createflowchart", controller.createFlowchart);
