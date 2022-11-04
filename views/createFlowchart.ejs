@@ -42,9 +42,6 @@
                             <div class="term-header">
                                 <div class="term">Term 1
                                     <div class="term">
-                                    <% courses.forEach(function(course){ %>
-                                        <div class="subject-txt" ><%= course.code %></div>
-                                    <% }); %>
                                     </div>
                                 </div>
                                 <div class="term">Term 2
@@ -56,8 +53,9 @@
                         </div>
                         <div id="canvas">
                             <!-- Please add the subjects here. -->
-                            <div class="subject">TEST</div>
-                            <div class="subject" style="top: 60px;">FLOW</div>
+                            <% courses.forEach(function(course){ %>
+                                <div class="subject"><%= course.code %></div>
+                            <% }); %>
                             <svg id="svg-canvas">
                                 <!-- Leave this blank -->
                             </svg>
