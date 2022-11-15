@@ -44,24 +44,6 @@
                                 <div class="term">Term 2</div>
                                 <div class="term">Term 3</div>
                             </div>
-                            <div id="canvas">
-                                <!-- Please add the subjects here. -->
-                                <% courses.forEach(function(course){ %>
-                                    <div class="subject"><%= course.code %></div>
-                                <% }); %>
-                                <svg id="svg-canvas">
-                                    <!-- Leave this blank -->
-                                </svg>
-                                <!-- <script type="text/javascript" src="/javascript/flowchart.js"></script> -->
-                            </div>
-                            <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
-                            <script>
-                                $(".subject").draggable({
-                                    containment: $("#canvas"),
-                                    cursor: "grabbing",
-                                    grid: [110, 60]
-                                });
-                            </script>
                         </div>
                         <div id="ay-adder">
                             <button id="add-sy" onclick="addSY()">+</button>
@@ -70,6 +52,7 @@
                                     console.log("Adding SY");
 
                                     const flowchartTable = document.getElementById("flowchart-table");
+                                    const mainCanvas = document.getElementById('canvas')
 
                                     //MAIN PARENT
                                     var newSY = document.createElement('div');
@@ -101,9 +84,30 @@
                                     termHeader.appendChild(term1)
                                     termHeader.appendChild(term2)
                                     termHeader.appendChild(term3)
+
+                                    mainCanvas.style.width = parseInt(mainCanvas.style.width) + 330 + "px";
+                                    
                                 }
                             </script>
                         </div>
+                        <div id="canvas" style="width: 330px;">
+                            <!-- Please add the subjects here. -->
+                            <% courses.forEach(function(course){ %>
+                                <div class="subject"><%= course.code %></div>
+                            <% }); %>
+                            <svg id="svg-canvas">
+                                <!-- Leave this blank -->
+                            </svg>
+                            <!-- <script type="text/javascript" src="/javascript/flowchart.js"></script> -->
+                        </div>
+                        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+                        <script>
+                            $(".subject").draggable({
+                                containment: $("#canvas"),
+                                cursor: "grabbing",
+                                grid: [110, 60]
+                            })
+                        </script>
                     </div>
                 </div>
                  <!-- Modals -->
