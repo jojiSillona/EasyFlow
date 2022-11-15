@@ -78,7 +78,7 @@ const controller = {
         });
     },
 
-    getProfile: function(req,res){
+    getMyProfile: function(req,res){
         res.render('userProfile');
     },
 

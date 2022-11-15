@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+// include Flowcharts
 
 const nameSchema = mongoose.Schema({
     firstName: String,
@@ -11,7 +12,9 @@ const accountSchema = mongoose.Schema({
     userName: String,
     email: String,
     password: String,
-    friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Account' }]  
+    friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Account' }],
+    // pending friend requests?
+    flowcharts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Flowchart' }]
 },{ versionKey: false });
 
 module.exports = mongoose.model('Account', accountSchema);

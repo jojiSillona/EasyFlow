@@ -13,7 +13,7 @@ app.get("/viewflowcharts", controller.viewFlowcharts);
 app.get("/editflowchart", controller.editFlowchart);
 app.get("/createflowchart", controller.createFlowchart);
 app.post("/addCourse", controller.addCourse);
-app.get("/myprofile", controller.getProfile);
+app.get("/myprofile", controller.getMyProfile);
 app.get("/mysettings", controller.getSettings);
 app.get("/home", controller.getHome);
 app.get("/invitefriends", controller.inviteFriends);
