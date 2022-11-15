@@ -61,8 +61,7 @@ body{
 }
 
 #svg-canvas{
-    width: calc(100% - 214.31px);
-    height: 500px;
+    width: 330px;
 }
 
 .subject{
@@ -88,16 +87,6 @@ body{
 
 }
 
-/*.subject:hover{
-    box-shadow: 0 0 8px black;
-    transform: scale(1.03);
-}
-
-.subject:active{
-    box-shadow: 0 0 10px black;
-    transform: scale(1.1) rotate(2deg);
-}*/
-
 .flowchart-info{
     margin-block-start: 10px;
     padding: 5px;
@@ -106,20 +95,23 @@ body{
     color: #fafafa;
 }
 
-.flowchart-table{
-    background: rgba(182, 182, 182, 0.6);
-    border-radius: 11px;
+#flowchart-table{
+    /* background: rgba(182, 182, 182, 0.6);
+    border-radius: 11px; */
     width: 350px;
     min-height: 60vh;
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
+    
     /* margin: 20px auto 20px auto; */
 }
 
-.ay{
+.ay, #add-sy{
+    background: rgba(182, 182, 182, 0.6);
+    color: white;
+    border-radius: 11px;
     width: 330px;
-    margin-left:10px;
-    margin-top:10px;
+    padding: 10px;
     z-index:1;
     display: flex;
     flex-direction: column;
@@ -129,7 +121,15 @@ body{
     font-family: 'Montserrat';
     font-weight: 600;
     font-size: 25px;
-    color: #fafafa;
+}
+
+#add-sy{
+    width: 90px;
+    height: 100%;
+
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .term{
