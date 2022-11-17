@@ -10,6 +10,7 @@ app.get("/login", controller.getLogin);
 app.get("/register", controller.getRegister);
 app.post("/registration", controller.saveRegistration);
 app.get("/viewflowcharts", controller.viewFlowcharts);
+app.post("/saveflowchart",controller.saveFlowchart);
 app.get("/editflowchart", controller.editFlowchart);
 app.get("/createflowchart", controller.createFlowchart);
 app.post("/addCourse", controller.addCourse);
