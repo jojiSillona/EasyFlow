@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const Account = require("../models/accountModel.js");
 const Course = require("../models/courseModel.js");
+const Flowchart = require("../models/flowchartModel.js");
 
 const controller = {
     getIndex: function(req,res){
@@ -41,7 +42,38 @@ const controller = {
     },
 
     viewFlowcharts: function(req,res){
-        res.render('viewFlowcharts');
+        Flowchart.find({
+            $or: [{'title' : {$regex: new RegExp(req.body.query, 'i')}}]
+          }, function(err,query)
+          {
+            if(err){
+                console.log(err);
+            } else {
+                res.render('viewFlowcharts',{
+                    flow: query
+                });
+            }
+          });
+        
+    },
+
+    saveFlowchart:function(req,res){
+        const flow = new Flowchart({
+            title: req.body.title,
+            department: req.body.department,
+            acadYears: req.body.acadYears
+        });
+
+        flow.save(function(err){
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.redirect("/viewflowcharts");
+        
+                console.log("Flowchart added.");
+            }
+        });
     },
 
     editFlowchart: function(req,res){
