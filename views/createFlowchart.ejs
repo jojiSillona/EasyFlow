@@ -105,7 +105,17 @@
                             $(".subject").draggable({
                                 containment: $("#canvas"),
                                 cursor: "grabbing",
-                                grid: [110, 60]
+                                grid: [110, 60],
+                                stop: function(e, ui){
+                                    console.log("Dragging stopped!");
+                                    var leftSize = this.style.left;
+                                    var topSize = this.style.top;
+
+                                    console.log("LEFT: " + leftSize + ", TOP: " + topSize);
+                                    console.log("NEW STYLE: LEFT: " + Math.round(parseInt(leftSize, 10) / 10) * 10 + " TOP: " + Math.round(parseInt(topSize, 10) / 10) * 10)
+                                    this.style.left = Math.round(parseInt(leftSize, 10) / 10) * 10 + "px";
+                                    this.style.top = Math.round(parseInt(topSize, 10) / 10) * 10 + "px";
+                                }
                             })
                         </script>
                     </div>

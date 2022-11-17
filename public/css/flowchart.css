@@ -49,8 +49,7 @@ body{
 
 #canvas{
     position: absolute;
-    padding: 5px;
-    border: 5px;
+    /* padding: 10px; */
     /* width: 330px; */
     height: 100%;
     top: 357.8px;
@@ -69,7 +68,7 @@ body{
 .subject{
     width: 90px;
     height: 40px;
-    margin: 5px;
+    margin: 10px;
     /* z-index: 5; */
 
     position: absolute;
@@ -97,8 +96,6 @@ body{
 }
 
 #flowchart-table{
-    /* background: rgba(182, 182, 182, 0.6);
-    border-radius: 11px; */
     width: 330px;
     min-height: 60vh;
     display: flex;
