@@ -19,21 +19,26 @@
                               Actions
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
-                              <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#addCourse" >Add Course</button>
-                              <div class="dropdown-divider"></div>
-                              <button type="button" class="btn btn-primary dropdown-item">Save Changes</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flowchart-info">
-                        <div class="col-sm-10">
-                        <input class="form-control form-control-lg" type="text" placeholder="Enter Flowchart Name...">
-                        </div><br>
-                        <div class="col-sm-8">
-                        <input class="form-control" type="text" placeholder="Enter College Department...">
-                        </div>
-                    </div>
-                    
+                             
+                                <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#addCourse" >Add Course</button>
+                                <div class="dropdown-divider"></div>
+                                <form action="/saveflowchart" method="post">
+                                <button type="submit" class="btn btn-primary dropdown-item">Save Changes</button>
+                              </div>
+                          </div>
+                      </div>
+              
+                      
+                      <div class="flowchart-info">
+                          <div class="col-sm-10">
+                          <input class="form-control form-control-lg" type="text" placeholder="Enter Flowchart Name..." name="title">
+                          </div><br>
+                          <div class="col-sm-8">
+                          <input class="form-control" type="text" placeholder="Enter College Department..." name="department">
+                          </div>
+                      </div>
+                  </form>
+
                     <div id="flowchart-table">
                         <div class="ay">
                             <div class="col-sm-8">
