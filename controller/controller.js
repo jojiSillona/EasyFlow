@@ -75,7 +75,18 @@ const controller = {
             }
         });
     },
-
+    deleteFlowchart: function(req,res){
+        const item=req.body.delete
+       item.delete(function(err){
+            if(err){
+                console.log(err)
+            }else{
+                res.redirect('/viewflowcharts')
+            }
+        });
+    
+           
+    },
     editFlowchart: function(req,res){
         res.render('editFlowchart');
     },
@@ -111,11 +122,32 @@ const controller = {
     },
 
     getMyProfile: function(req,res){
-        res.render('userProfile');
+       Account.findOne({}).sort({_id:-1}).exec(function(err,results){
+        if(err){
+            console.log(err);
+        } else {
+            res.render('userProfile',{
+                accounts: results
+            });
+        }
+       });
+
+    },
+
+    getUser: function(req,res){	
+        
     },
 
     getSettings: function(req,res){
-        res.render('userSettings');
+        Account.findOne({}).sort({_id:-1}).exec(function(err,results){
+            if(err){
+                console.log(err);
+            } else {
+                res.render('userSettings',{
+                    accounts: results
+                });
+            }
+           });
     },
 
     getHome: function(req,res){
