@@ -134,10 +134,6 @@ const controller = {
 
     },
 
-    getUser: function(req,res){	
-        
-    },
-
     getSettings: function(req,res){
         Account.findOne({}).sort({_id:-1}).exec(function(err,results){
             if(err){
