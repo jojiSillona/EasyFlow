@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const Account = require("../models/accountModel.js");
 const Course = require("../models/courseModel.js");
 const Flowchart = require("../models/flowchartModel.js");
+const { db } = require("../models/accountModel.js");
 
 const controller = {
     getIndex: function(req,res){
@@ -216,6 +217,7 @@ const controller = {
             }
         })
     },
+
 
     getMyProfile: function(req,res){
        Account.findOne({}).sort({_id:-1}).exec(function(err,results){
