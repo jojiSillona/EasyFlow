@@ -64,6 +64,7 @@ const controller = {
     addCourse: function(req,res){
         const course = new Course({
             code: req.body.code
+            position: req.body.
         });
     
         course.save(function(err){
