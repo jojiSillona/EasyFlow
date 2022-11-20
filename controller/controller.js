@@ -216,7 +216,6 @@ const controller = {
             }
         })
     },
->>>>>>> Stashed changes
 
     getMyProfile: function(req,res){
        Account.findOne({}).sort({_id:-1}).exec(function(err,results){
