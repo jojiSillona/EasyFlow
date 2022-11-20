@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const Account = require("../models/accountModel.js");
 const Course = require("../models/courseModel.js");
+const Flowchart = require("../models/flowchartModel.js");
 
 const controller = {
     getIndex: function(req,res){
@@ -41,9 +42,52 @@ const controller = {
     },
 
     viewFlowcharts: function(req,res){
-        res.render('viewFlowcharts');
+        Flowchart.find({
+            $or: [{'title' : {$regex: new RegExp(req.body.query, 'i')}}]
+          }, function(err,query)
+          {
+            if(err){
+                console.log(err);
+            } else {
+                res.render('viewFlowcharts',{
+                    flow: query
+                });
+            }
+          });
+        
     },
 
+    saveFlowchart:function(req,res){
+        const flow = new Flowchart({
+            title: req.body.title,
+            department: req.body.department,
+            acadYears: req.body.acadYears
+        });
+
+        flow.save(function(err){
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.redirect("/viewflowcharts");
+        
+                console.log("Flowchart added.");
+            }
+        });
+    },
+    deleteFlowchart: function(req,res){
+        flowchartData= Flowchart.findByIdAndDelete(req.params.id);
+        flowchartData.exec(function(err){
+          if (err){
+            console.log(err);
+          }
+          else{
+               res.redirect('/viewflowcharts')
+               console.log ("record was deleted");
+            }
+        });
+           
+    },
     editFlowchart: function(req,res){
         res.render('editFlowchart');
     },
@@ -80,11 +124,28 @@ const controller = {
     },
 
     getMyProfile: function(req,res){
-        res.render('userProfile');
+       Account.findOne({}).sort({_id:-1}).exec(function(err,results){
+        if(err){
+            console.log(err);
+        } else {
+            res.render('userProfile',{
+                accounts: results
+            });
+        }
+       });
+
     },
 
     getSettings: function(req,res){
-        res.render('userSettings');
+        Account.findOne({}).sort({_id:-1}).exec(function(err,results){
+            if(err){
+                console.log(err);
+            } else {
+                res.render('userSettings',{
+                    accounts: results
+                });
+            }
+           });
     },
 
     getHome: function(req,res){

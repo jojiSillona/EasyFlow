@@ -17,14 +17,14 @@
                 <div class="panel">
                     <div class="user-heading round">
                         <a href="#">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
+                            <img style="object-fit:cover;" src="images/user.png" alt="">
                         </a>
                         <button class="btn btn" type="button" style="background:#3551a3; font-size:11px;">
                             <i class="fa fa-fw fa-camera" style="color:white;"></i>
                             <span style="color:white;">Change Photo</span>
                         </button>
 
-                        <h1 class="pt-sm-2 pb-1 mb-0 text-nowrap">Camila Smith</h1>
+                        <h1 class="pt-sm-2 pb-1 mb-0 text-nowrap"> <%= accounts.fullName.firstName %> <%= accounts.fullName.lastName %></h1>
 
                     </div>
                 </div>
@@ -40,11 +40,11 @@
                                 <div class="bio-row" style="margin-left:10px;">
                                     <br>
                                     <label>Last Name</label>
-                                    <input class="form-control" type="text" name="name" placeholder="Last Name" value="Smith">
+                                    <input class="form-control" type="text" name="name" placeholder="Last Name" value= <%= accounts.fullName.lastName %>>
                                 </div>
                                 <div class="bio-row" style="margin-left:10px;">
                                     <label>First Name</label>
-                                    <input class="form-control" type="text" name="name" placeholder="First Name" value="Camila">
+                                    <input class="form-control" type="text" name="name" placeholder="First Name" value= <%= accounts.fullName.firstName %>>
                                 </div>
                                 <div class="bio-row" style="margin-left:10px;">
                                     <div class="col mb-3">
@@ -77,7 +77,7 @@
                             <div class="bio-row" style="margin-left:10px;">
                                 <br>
                                 <label>Username</label>
-                                <input class="form-control" type="text" name="username" placeholder="username" value="username123">
+                                <input class="form-control" type="text" name="username" placeholder="username" value=<%= accounts.userName %>>
                             </div>
                             <div class="bio-row form-group small text-muted" style="margin-left:10px;">
                                 After changing your username, your old username becomes available for anyone else to claim.
@@ -85,7 +85,7 @@
 
                             <div class="bio-row" style="margin-left:10px;">
                             <label>Email</label>
-                            <input class="form-control" type="text" placeholder="user@example.com">
+                            <input class="form-control" type="text" placeholder="user@example.com" value=<%= accounts.email %>>
                             </div>
                             <div class="bio-row" style="margin-left:10px;">
                                 <button type="button" class="btn btn-primary"  style="background:#3551a3;">Save Changes</button>
@@ -106,7 +106,7 @@
                             <div class="bio-row" style="margin-left:10px;">
                                 <br>
                                 <label>Current Password</label>
-                                <input class="form-control" type="password" placeholder="••••••">
+                                <input class="form-control" type="password" placeholder="password" value=<%= accounts.password %>>
                             </div>
 
                             <div class="bio-row" style="margin-left:10px;">

@@ -15,80 +15,32 @@
             <div style="margin: left 10px;" class="bio-flow-heading">
                 Your Flow Charts
             </div>
-            <div class="control-width">
+            
+            <div class="control-width row">
             <!-- Sample 1 -->
-                <a href="Usersflowchart1.html">
+           
+                <% flow.forEach(function(flow){ %>
+                <!--< href="Usersflowchart1.html">-->
                     <div class="card">
                         <img src="images/flowchart.png" alt="flowchart pic" class="box-img" style=" width: 135px;
                         height: 150px; border-radius: 25px;">
-                        <h5 >Term 1 Flow Chart</h5>
+                        <h5 ><%= flow.title %></h5>
                         <a href ="/editflowchart" data-toggle="tooltip" title="Edit flowchart">
                             <i class="far fa-edit fa-xl" style="margin-left:85px;"></i>
                         </a>
-                        <a href ="#" data-toggle="tooltip" title="Delete flowchart">
+                        <a href ="/delete/<%=flow.id%>" data-toggle="tooltip" title="Delete flowchart">
                             <i class="far fa-trash-alt fa-xl" style="margin-left:5px;"></i>
                         </a>
                     </div>
-                </a>
                 
-    
-            <!-- Sample 2 -->
-                <a href="Usersflowchart2.html">
-                    <div class="card">
-                        <img src="images/flowchart.png" alt="flowchart pic" class="box-img" style=" width: 135px;height: 150px; border-radius: 25px;">
-                        <h5>Term 2 Flow Chart</h5>
-                        <a href ="#" data-toggle="tooltip" title="Edit flowchart">
-                            <i class="far fa-edit fa-xl" style="margin-left:85px;"></i>
-                        </a>
-                        <a href ="#" data-toggle="tooltip" title="Delete flowchart">
-                            <i class="far fa-trash-alt fa-xl" style="margin-left:5px;"></i>
-                        </a>
-                    </div>
-                </a>
-    
-            <!-- Sample 3 -->
-                <a href="Usersflowchart3.html">
-                    <div class="card">
-                        <img src="images/flowchart.png" alt="flowchart pic" class="box-img" style=" width: 135px;height: 150px; border-radius: 25px;">
-                        <h5>Term 3 Flow Chart</h5>
-                        <a href ="#" data-toggle="tooltip" title="Edit flowchart">
-                            <i class="far fa-edit fa-xl" style="margin-left:85px;"></i>
-                        </a>
-                        <a href ="#" data-toggle="tooltip" title="Delete flowchart">
-                            <i class="far fa-trash-alt fa-xl" style="margin-left:5px;"></i>
-                        </a>
-                    </div>
-                </a>
-    
-            <!-- Sample 4 -->
-                <a href="Usersflowchart4.html">
-                    <div class="card">
-                        <img src="images/flowchart.png" alt="flowchart pic" class="box-img" style=" width: 135px;height: 150px; border-radius: 25px;">
-                        <h5>BSIS Flow Chart</h5>
-                        <a href ="#" data-toggle="tooltip" title="Edit flowchart">
-                            <i class="far fa-edit fa-xl" style="margin-left:85px;"></i>
-                        </a>
-                        <a href ="#" data-toggle="tooltip" title="Delete flowchart">
-                            <i class="far fa-trash-alt fa-xl" style="margin-left:5px;"></i>
-                        </a>
-                    </div>
-                </a>
-    
-            <!-- Sample 5 -->
-                <a href="Usersflowchart5.html">
-                    <div class="card" data-toggle="tooltip" title="Edit flowchart">
-                        <img src="images/flowchart.png" alt="flowchart pic" class="box-img" style=" width: 135px;height: 150px; border-radius: 25px;">
-                        <h5>BSCS Flow Chart</h5>
-                        <a href ="#">
-                            <i class="far fa-edit fa-xl" style="margin-left:85px;"></i>
-                        </a>
-                        <a href ="#" data-toggle="tooltip" title="Delete flowchart">
-                            <i class="far fa-trash-alt fa-xl"style="margin-left:5px;"></i>
-                        </a>
-                    </div>
-                </a>
+               <!--</a>--> 
+               <% }); %>
+            
+
+            <div class="column">
                 
-             <!-- Create Flowchart -->
+
+               <!-- Create Flowchart -->
              <a href="/createflowchart">
                 <div class="card">
                     <img src="images/create.webp" alt="create pic" class="box-img" style=" width: 140px;
@@ -99,6 +51,7 @@
             </a>
             </div>
         </div>
+    </div>
         </main>
     </body>
     <%- include('partials/footer'); -%>
