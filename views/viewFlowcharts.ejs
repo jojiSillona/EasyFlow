@@ -18,6 +18,7 @@
             
             <div class="control-width row">
             <!-- Sample 1 -->
+           
                 <% flow.forEach(function(flow){ %>
                 <!--< href="Usersflowchart1.html">-->
                     <div class="card">
@@ -27,13 +28,18 @@
                         <a href ="/editflowchart" data-toggle="tooltip" title="Edit flowchart">
                             <i class="far fa-edit fa-xl" style="margin-left:85px;"></i>
                         </a>
-                        <a href ="#" data-toggle="tooltip" title="Delete flowchart">
+                        <a href ="/delete/<%=flow.id%>" data-toggle="tooltip" title="Delete flowchart">
                             <i class="far fa-trash-alt fa-xl" style="margin-left:5px;"></i>
                         </a>
                     </div>
                 
                <!--</a>--> 
                <% }); %>
+            
+
+            <div class="column">
+                
+
                <!-- Create Flowchart -->
              <a href="/createflowchart">
                 <div class="card">
@@ -45,6 +51,7 @@
             </a>
             </div>
         </div>
+    </div>
         </main>
     </body>
     <%- include('partials/footer'); -%>

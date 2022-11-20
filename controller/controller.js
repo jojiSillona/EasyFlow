@@ -76,15 +76,16 @@ const controller = {
         });
     },
     deleteFlowchart: function(req,res){
-        const item=req.body.delete
-       item.delete(function(err){
-            if(err){
-                console.log(err)
-            }else{
-                res.redirect('/viewflowcharts')
+        flowchartData= Flowchart.findByIdAndDelete(req.params.id);
+        flowchartData.exec(function(err){
+          if (err){
+            console.log(err);
+          }
+          else{
+               res.redirect('/viewflowcharts')
+               console.log ("record was deleted");
             }
         });
-    
            
     },
     editFlowchart: function(req,res){
@@ -120,6 +121,9 @@ const controller = {
             }
         });
     },
+
+    // editCourse: function(req, res){
+    // },
 
     getMyProfile: function(req,res){
        Account.findOne({}).sort({_id:-1}).exec(function(err,results){
