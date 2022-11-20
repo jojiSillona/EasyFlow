@@ -108,7 +108,6 @@ const controller = {
     addCourse: function(req,res){
         const course = new Course({
             code: req.body.code
-            position: req.body.
         });
     
         course.save(function(err){
@@ -122,6 +121,9 @@ const controller = {
             }
         });
     },
+
+    // editCourse: function(req, res){
+    // },
 
     getMyProfile: function(req,res){
        Account.findOne({}).sort({_id:-1}).exec(function(err,results){
