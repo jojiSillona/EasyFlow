@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const Account = require("../models/accountModel.js");
 const Course = require("../models/courseModel.js");
 const Flowchart = require("../models/flowchartModel.js");
+const { db } = require("../models/accountModel.js");
 
 const controller = {
     getIndex: function(req,res){
@@ -123,6 +124,7 @@ const controller = {
     },
 
     // editCourse: function(req, res){
+    //     Courses.find({code: })
     // },
 
     getMyProfile: function(req,res){
