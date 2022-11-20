@@ -61,8 +61,7 @@ const controller = {
     saveFlowchart:function(req,res){
         const flow = new Flowchart({
             title: req.body.title,
-            department: req.body.department,
-            acadYears: req.body.acadYears
+            department: req.body.department
         });
 
         flow.save(function(err){
@@ -107,8 +106,27 @@ const controller = {
     },
 
     addCourse: function(req,res){
+        var statusString;
+        let statusId = Number(req.body.status);
+        switch(statusId){
+            case 1:  statusString = "Not Yet Taken";
+            break;
+            case 2:  statusString = "Currently Taking";
+            break;
+            case 3:  statusString = "Passed";
+            break;
+            case 4:  statusString = "Failed";
+            break;
+            case 5:  statusString = "Dropped";
+            break;
+            default: statusString = "Not Yet Taken";
+        }
         const course = new Course({
-            code: req.body.code
+            code: req.body.code,
+            professor: req.body.prof,
+            units: req.body.units,
+            status: statusString,
+            style: req.body.style
         });
     
         course.save(function(err){
@@ -123,9 +141,83 @@ const controller = {
         });
     },
 
-    // editCourse: function(req, res){
-    //     Courses.find({code: })
-    // },
+    editCourse: function(req,res){
+        const courseId = req.params.courseId;
+        Course.find({_id: courseId},function(err,result)
+        {
+        if(err){
+            console.log(err);
+        } else {
+            res.render('editCourse',{
+                course : result[0]
+            });
+            
+            // res.redirect({
+            //     course : query[0]
+            // }, "/createflowchart");
+        }
+        });
+
+        Course.find({}, function(err,rows){
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.render(('createFlowchart'), {
+                    courses: rows
+                });
+            }
+        });
+    },
+
+    updateChosen: function(req,res){
+        const courseId = req.body.codeId;
+        const query = {_id : courseId};
+        const code = req.body.code;
+        const prof = req.body.prof;
+        const units = req.body.units;
+        const style = req.body.style;
+        var statusString;
+        let statusId = Number(req.body.status);
+        switch(statusId){
+            case 1:  statusString = "Not Yet Taken";
+            break;
+            case 2:  statusString = "Currently Taking";
+            break;
+            case 3:  statusString = "Passed";
+            break;
+            case 4:  statusString = "Failed";
+            break;
+            case 5:  statusString = "Dropped";
+            break;
+            default: statusString = "Not Yet Taken";
+        }
+
+        
+        Course.updateOne(query, { code:code, professor:prof, units:units, status:statusString, style:style},
+            function(err,result){
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.redirect("/createflowchart"); //will change later into current view flowchart id
+                console.log("Course modified.");
+            }
+            });
+    },
+
+    deleteCourse: function(req,res){
+        const courseId = req.params.courseId;
+        Course.findByIdAndRemove(courseId, function(err){
+            if(err){
+                console.log(err);
+            }else{
+                res.redirect('/createflowchart'); 
+                console.log("Course deleted.");
+            }
+        })
+    },
+
 
     getMyProfile: function(req,res){
        Account.findOne({}).sort({_id:-1}).exec(function(err,results){

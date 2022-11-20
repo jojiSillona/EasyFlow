@@ -20,5 +20,8 @@ app.get("/mysettings", controller.getSettings);
 app.get("/home", controller.getHome);
 app.get("/invitefriends", controller.inviteFriends);
 app.post("/searchresults", controller.searchResults);
+app.get("/editCourse/:courseId", controller.editCourse);
+app.post("/updateChosen", controller.updateChosen);
+app.get("/deleteCourse/:courseId", controller.deleteCourse);
 
 module.exports = app;

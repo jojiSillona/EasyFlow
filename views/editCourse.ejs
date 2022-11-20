@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head'); -%>
+    <!-- <link rel="stylesheet" type="text/css" href="/css/flowchart.css"> -->
+    <link rel="stylesheet" type="text/css" href="/css/Style.css">
+    <title>Create Flowchart</title>
+</head>
+    <body>
+        <!-- <header>
+            <%- include('partials/sidebar'); -%>
+        </header> -->
+            <main>
+                <div class="main-window">
+                    <%- include('partials/searchbar'); -%>
+                    <div class="card-group">
+                        <div class="card">
+                        <div class="flex-col">
+                            <h2> Editing Course <b><%= course.code %></b></h2>
+                            <hr/>
+                            <form action="/updateChosen" method="post">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <div class="input-text"><label for="code">Course Code</label></div>
+                                        <input type="hidden" value="<%= course.id %>" aria-required="true" name="codeId">
+                                        <input type="text" class="form-control" value="<%= course.code %>" aria-required="true" name="code">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <div class="input-text"><label for="prof">Professor</label></div>
+                                        <input type="text" class="form-control" value="<%= course.professor %>" aria-required="true" name="prof">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <div class="input-text"><label for="units">Units</label></div>
+                                        <input id="new-unit-id" class="form-control form-control-sm" type="number" value="<%= course.units %>" name="units" min="0" max="3">                          
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <div class="input-text"><label for="status">Status</label></div>
+                                    <select class="form-select form-select-sm" aria-label="Status selection" name="status">
+                                        <option selected><%= course.status %></option>
+                                        <option value="1">Not Yet Taken</option>
+                                        <option value="2">Currently Taking</option>
+                                        <option value="3">Passed</option>
+                                        <option value="4">Failed</option>
+                                        <option value="5">Dropped</option>
+                                    </select> 
+                                    </div>
+                                </div>
+                            </div>
+                            <hr/>
+                            <input type="submit" class="btn btn-success" value="Save"></input>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                 
+        </main>
+        <%- include('partials/footer'); -%>
+    </body>
+</html>
