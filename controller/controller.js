@@ -189,26 +189,41 @@ const controller = {
 // Course Functions
     addCourse: function(req,res){
         var statusString;
+        var statusStyle;
         let statusId = Number(req.body.status);
         switch(statusId){
-            case 1:  statusString = "Not Yet Taken";
+            case 1:  
+                statusString = "Not Yet Taken";
+                statusStyle = "#FFFFFF"
             break;
-            case 2:  statusString = "Currently Taking";
+            case 2:  
+                statusString = "Currently Taking";
+                statusStyle = "#83BBE5"
             break;
-            case 3:  statusString = "Passed";
+            case 3:  
+                statusString = "Passed";
+                statusStyle = "#A3D977"
             break;
-            case 4:  statusString = "Failed";
+            case 4:  
+                statusString = "Failed";
+                statusStyle = "#FF6565"
             break;
-            case 5:  statusString = "Dropped";
+            case 5:  
+                statusString = "Dropped";
+                statusStyle = "#FF6565"
             break;
-            default: statusString = "Not Yet Taken";
+            default: 
+                statusString = "Not Yet Taken";
+                statusStyle = "#fff"
         }
         const course = new Course({
             code: req.body.code,
             professor: req.body.prof,
             units: req.body.units,
             status: statusString,
-            style: req.body.style
+            style: statusStyle,
+            leftPosition: 0,
+            topPosition: 0
         });
     
         course.save(function(err){

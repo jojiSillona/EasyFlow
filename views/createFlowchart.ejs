@@ -118,7 +118,8 @@
                     <div id="canvas" style="width: 330px;">
                         <!-- Please add the subjects here. -->
                         <% courses.forEach(function(course){ %>
-                            <div class="subject"><%= course.code %></div>
+                            <!-- PLEASE READ!!!!! DISREGARD SQUIGLY ERROR-->
+                            <div class="subject" style='background: <%= course.style %>;'><%= course.code %></div>
                         <% }); %>
                         <svg id="svg-canvas">
                             <!-- Leave this blank -->
@@ -131,11 +132,13 @@
                             cursor: "grabbing",
                             grid: [110, 60],
                             stop: function(e, ui){
-                                var leftSize = this.style.left;
-                                var topSize = this.style.top;
+                                var leftSize = Math.round(parseInt(this.style.left, 10) / 10) * 10 + "px";
+                                var topSize = Math.round(parseInt(this.style.top, 10) / 10) * 10 + "px";
 
-                                this.style.left = Math.round(parseInt(leftSize, 10) / 10) * 10 + "px";
-                                this.style.top = Math.round(parseInt(topSize, 10) / 10) * 10 + "px";
+                                this.style.left = leftSize;
+                                this.style.top = topSize;
+                                
+                                //TODO: SAVE POSITION TO DB
                             }
                         })
                     </script>
