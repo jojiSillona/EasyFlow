@@ -1,11 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const Account = require("../models/accountModel.js");
-const Course = require("../models/courseModel.js");
 const Flowchart = require("../models/flowchartModel.js");
+const AY = require("../models/ayModel.js");
+const Course = require("../models/courseModel.js");
 const { db } = require("../models/accountModel.js");
 
 const controller = {
+// Registration and Login
     getIndex: function(req,res){
         res.render('index');
     },
@@ -41,7 +43,47 @@ const controller = {
             }
         });
     },
+    
+    getHome: function(req,res){
+        res.render('homepage');
+    },
 
+// Account Functions
+    getMyProfile: function(req,res){
+        const accountId = req.params.accountId;
+        // add query filters in {} to remove own + to determine if friend
+        // _id: {$ne : accountId} 
+        Account.find({}, function(err,results){
+        if(err){
+            console.log(err);
+        } else {
+            Account.findOne({}).sort({_id:-1}).exec(function(err,query){
+                if(err){
+                    console.log(err);
+                } else {
+                        res.render('userProfile',{
+                        accounts: results,
+                        account: query
+                    });
+                }
+            });
+        }
+    });
+    },
+
+    getSettings: function(req,res){
+        Account.findOne({}).sort({_id:-1}).exec(function(err,results){
+            if(err){
+                console.log(err);
+            } else {
+                res.render('userSettings',{
+                    accounts: results
+                });
+            }
+        });
+    },
+
+// Flowchart Functions
     viewFlowcharts: function(req,res){
         Flowchart.find({
             $or: [{'title' : {$regex: new RegExp(req.body.query, 'i')}}]
@@ -60,8 +102,14 @@ const controller = {
 
     saveFlowchart:function(req,res){
         const flow = new Flowchart({
+            // accountId: req.body.accId, wala pa session mamaya na iimplement
             title: req.body.title,
-            department: req.body.department
+            department: req.body.department,
+            acadYears: []
+            //  accountId: { type: mongoose.Schema.Types.ObjectId, ref: 'Account' },
+    // title: String,
+    // department: String,
+    // acadYears: [{ type: mongoose.Schema.Types.ObjectId, ref: 'AY' }]
         });
 
         flow.save(function(err){
@@ -69,25 +117,15 @@ const controller = {
                 console.log(err);
             }
             else{
+                //save ay, save course?
+                //populate
                 res.redirect("/viewflowcharts");
         
                 console.log("Flowchart added.");
             }
         });
     },
-    deleteFlowchart: function(req,res){
-        flowchartData= Flowchart.findByIdAndDelete(req.params.id);
-        flowchartData.exec(function(err){
-          if (err){
-            console.log(err);
-          }
-          else{
-               res.redirect('/viewflowcharts')
-               console.log ("record was deleted");
-            }
-        });
-           
-    },
+
     editFlowchart: function(req,res){
         res.render('editFlowchart');
     },
@@ -105,6 +143,50 @@ const controller = {
         });
     },
 
+    deleteFlowchart: function(req,res){
+        flowchartData= Flowchart.findByIdAndDelete(req.params.id);
+        flowchartData.exec(function(err){
+          if (err){
+            console.log(err);
+          }
+          else{
+               res.redirect('/viewflowcharts')
+               console.log ("record was deleted");
+            }
+        });
+           
+    },
+
+// AcadYear Functions
+    addAY: function(req,res){
+
+            console.log("Adding SY");
+            
+            const ay = new AY({
+                academicYear:{
+                    start: req.body.start,
+                    end: req.body.end
+                }
+                // accountId: { type: mongoose.Schema.Types.ObjectId, ref: 'Account' },
+                // flowchartId: { type: mongoose.Schema.Types.ObjectId, ref: 'Flowchart' },
+                // academicYear: {start: Number, end: Number},
+                // termOne: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }],
+                // termTwo: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }],
+                // termThree: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }],
+            });
+        
+            ay.save(function(err){
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    res.redirect("/createflowchart");
+                    console.log("AY added.");
+                }
+            });
+    },
+
+// Course Functions
     addCourse: function(req,res){
         var statusString;
         let statusId = Number(req.body.status);
@@ -134,7 +216,8 @@ const controller = {
                 console.log(err);
             }
             else{
-                
+
+                // Course.populate(course, {path:""})
                 res.redirect("/createflowchart");
                 console.log("Course added.");
             }
@@ -218,39 +301,46 @@ const controller = {
         })
     },
 
-
-    getMyProfile: function(req,res){
-       Account.findOne({}).sort({_id:-1}).exec(function(err,results){
+// Other Profile Functions
+    getFriendProfile: function(req,res){
+        const accountId = req.params.accountId;
+        Account.find({_id: accountId},function(err,result)
+        {
         if(err){
             console.log(err);
         } else {
-            res.render('userProfile',{
-                accounts: results
+            res.render('friendProfile',{
+                account : result[0]
             });
         }
-       });
-
+        });
     },
 
-    getSettings: function(req,res){
-        Account.findOne({}).sort({_id:-1}).exec(function(err,results){
+    getOtherProfile: function(req,res){
+        const accountId = req.params.accountId;
+        Account.find({_id: accountId},function(err,result)
+        {
+        if(err){
+            console.log(err);
+        } else {
+            res.render('otherProfile',{
+                account : result[0]
+            });
+        }
+        });
+    },
+
+    inviteFriends: function(req,res){
+        Account.find({}, function(err,results)
+          {
             if(err){
                 console.log(err);
             } else {
-                res.render('userSettings',{
+                res.render('inviteFriends',{
                     accounts: results
                 });
             }
-           });
-    },
-
-    getHome: function(req,res){
-        res.render('homepage');
-    },
-
-    //to update to a different .ejs later
-    inviteFriends: function(req,res){
-        res.render('searchResults');
+          });
     },
 
     searchResults: function(req,res){
@@ -267,7 +357,6 @@ const controller = {
                 });
             }
           });
-        
     }
 }
 

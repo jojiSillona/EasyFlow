@@ -5,23 +5,37 @@ const path = require("path");
 const controller = require(path.join(__dirname, "..", "controller", "controller.js"));
 const app = express();
 
+// Registration and Login
 app.get("/", controller.getIndex);
 app.get("/login", controller.getLogin);
 app.get("/register", controller.getRegister);
 app.post("/registration", controller.saveRegistration);
+app.get("/home", controller.getHome);
+
+// Account Features
+app.get("/myprofile", controller.getMyProfile);
+app.get("/mysettings", controller.getSettings);
+
+// Flowchart Features
 app.get("/viewflowcharts", controller.viewFlowcharts);
 app.post("/saveflowchart",controller.saveFlowchart);
 app.get("/editflowchart", controller.editFlowchart);
 app.get("/createflowchart", controller.createFlowchart);
 app.get('/delete/:id', controller.deleteFlowchart);
+
+// AcadYear Features
+app.post("/addAY", controller.addAY);
+
+// Course Features
 app.post("/addCourse", controller.addCourse);
-app.get("/myprofile", controller.getMyProfile);
-app.get("/mysettings", controller.getSettings);
-app.get("/home", controller.getHome);
-app.get("/invitefriends", controller.inviteFriends);
-app.post("/searchresults", controller.searchResults);
 app.get("/editCourse/:courseId", controller.editCourse);
 app.post("/updateChosen", controller.updateChosen);
 app.get("/deleteCourse/:courseId", controller.deleteCourse);
+
+// Other Profile Features
+app.get("/friendprofile/:accountId", controller.getFriendProfile);
+app.get("/otherprofile/:accountId", controller.getOtherProfile);
+app.get("/invitefriends", controller.inviteFriends);
+app.post("/searchresults", controller.searchResults);
 
 module.exports = app;
