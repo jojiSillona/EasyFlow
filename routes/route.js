@@ -16,6 +16,8 @@ app.get("/createflowchart", controller.createFlowchart);
 app.get('/delete/:id', controller.deleteFlowchart);
 app.post("/addCourse", controller.addCourse);
 app.get("/myprofile", controller.getMyProfile);
+app.get("/friendprofile/:accountId", controller.getFriendProfile);
+app.get("/otherprofile/:accountId", controller.getOtherProfile);
 app.get("/mysettings", controller.getSettings);
 app.get("/home", controller.getHome);
 app.get("/invitefriends", controller.inviteFriends);
@@ -23,5 +25,6 @@ app.post("/searchresults", controller.searchResults);
 app.get("/editCourse/:courseId", controller.editCourse);
 app.post("/updateChosen", controller.updateChosen);
 app.get("/deleteCourse/:courseId", controller.deleteCourse);
+app.post("/addAY", controller.addAY);
 
 module.exports = app;

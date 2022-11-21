@@ -14,7 +14,11 @@ const accountSchema = mongoose.Schema({
     password: String,
     friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Account' }],
     // pending friend requests?
-    flowcharts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Flowchart' }]
+    flowcharts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Flowchart' }],
+    biography: {
+        type: String,
+        default: "This user hasn't set a biography yet."
+    }
 },{ versionKey: false });
 
 module.exports = mongoose.model('Account', accountSchema);

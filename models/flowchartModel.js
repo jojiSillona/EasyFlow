@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 // include AY
 
 const flowchartSchema = mongoose.Schema({
+    accountId: { type: mongoose.Schema.Types.ObjectId, ref: 'Account' },
     title: String,
     department: String,
     acadYears: [{ type: mongoose.Schema.Types.ObjectId, ref: 'AY' }]

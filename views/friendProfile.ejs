@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head'); -%>
+  <link rel="stylesheet" type="text/css" href="css/friendsProfile.css">
+  <meta charset="UTF-8">
+  <title>Friends Profile</title>
+</head>
+<body>
+<!--Main Navigation-->
+<header>
+  <%- include('partials/sidebar'); -%>
+</header>
+<main>
+  <!-- Searchbar -->
+  <%- include('partials/searchbar'); -%>
+
+  <!-- User's Display Picture -->
+  <div class="container bootstrap snippets bootdey">
+    <div class="row">
+      <div class="profile-nav col-md-3">
+        <div class="panel">
+          <div class="user-heading round">
+            <a href="#">
+              <img src="/images/user-circle.png" class="friend-icon" alt="display picture">
+            </a>
+            <h1><%= account.fullName.firstName %> <%= account.fullName.lastName %></h1>
+          </div>
+        </div>
+      </div>
+
+      <!-- User's Information -->
+      <div class="profile-info col-md-9">
+        <div class="panel">
+          <div class="bio-graph-heading">
+            User's Information
+          </div>
+          <div class="panel-body bio-graph-info">
+            <br>
+            <div class="row">
+
+              <div class="bio-row" style="margin-left:10px">
+                <p><span>First Name </span>: <%= account.fullName.firstName %></p>
+              </div>
+              <div class="bio-row" style="margin-left:10px">
+                <p><span>Last Name </span>:  <%= account.fullName.lastName %></p>
+              </div>
+              <div class="bio-row" style="margin-left:10px">
+                <p><span>Email </span>: <%= account.email %></p>
+              </div>
+              <div class="bio-row" style="margin-left:10px">
+                <p><span>Username </span>: <%= account.userName %></p>
+              </div>
+
+            </div>
+          </div>
+          <br>
+          <!-- Bio -->
+          <div class="bio-graph-heading">
+            Bio
+          </div>
+          <div class="bio-graph-bio">
+            <%= account.biography %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div style="margin-left:200px" class="bio-flow-heading">
+      Activity
+    </div>
+    <div class="control-width">
+      <!-- UPDATE TO CONNECT TO DB LATER -->
+      <!-- Sample 1 -->
+      <a href="#">
+        <div class="card" style="margin-left:110px">
+          <img src="/images/flowchart.png" alt="flowchart pic" class="box-img" style=" width: 135px;
+          height: 150px; border-radius: 25px;">
+          <h5>Term 1 Flow Chart</h5>
+        </div>
+      </a>
+    </div>
+  </div>
+
+
+
+
+</main>
+
+
+</body>
+</html>

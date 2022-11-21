@@ -19,11 +19,10 @@
                         <a href="#">
                             <img style="object-fit:cover;" src="images/user.png" alt="">
                         </a>
-                        <h1><%= accounts.fullName.firstName %> <%= accounts.fullName.lastName %></h1>
+                        <h1><%= account.fullName.firstName %> <%= account.fullName.lastName %></h1>
                     </div>
                 </div>
             </div>
-           
             <!-- User's Information -->
             <div class="profile-info col-md-9">
                 <div class="panel">
@@ -33,84 +32,73 @@
                     <div class="panel-body bio-graph-info">
                         <br>
                         <div class="row">
-
                             <div class="bio-row" style="margin-left:10px">
-                                <p><span>First Name </span>: <%= accounts.fullName.firstName %></p>
+                                <p><span>First Name </span>: <%= account.fullName.firstName %></p>
                             </div>
                             <div class="bio-row" style="margin-left:10px">
-                                <p><span>Last Name </span>: <%= accounts.fullName.lastName %></p>
+                                <p><span>Last Name </span>: <%= account.fullName.lastName %></p>
                             </div>
                             <div class="bio-row" style="margin-left:10px">
-                                <p><span>Email </span>: <%= accounts.email %></p>
+                                <p><span>Email </span>: <%= account.email %></p>
                             </div>
                             <div class="bio-row" style="margin-left:10px">
-                                <p><span>Username </span>: <%= accounts.userName %></p>
+                                <p><span>Username </span>: <%= account.userName %></p>
                             </div>
-
                         </div>
                     </div>
-        
-
                     <br>
                     <!-- Bio -->
                     <div class="bio-graph-heading">
                         Bio
                     </div>
                     <div class="bio-graph-bio">
-                        Hi! Welcome to my page!
+                        <%= account.biography %>
                     </div>
                 </div>
             </div>
         </div>
         <br>
-        <div style="margin-left:100px" class="bio-flow-heading">
-            Your Flow Chart
+        <div style="margin-left:200px" class="bio-flow-heading">
+            Your Flowcharts
         </div>
         <div class="control-width">
+            <!-- UPDATE LATER; MUST BE CONNECTED TO DB -->
             <!-- Sample 1 -->
             <a href="Usersflowchart1.html">
-                <div class="card">
+                <div class="card" style="margin-left:110px">
                     <img src="images/flowchart.png" alt="flowchart pic" class="box-img" style=" width: 135px;
-       height: 150px; border-radius: 25px;">
+                    height: 150px; border-radius: 25px;">
                     <h5>Term 1 Flow Chart</h5>
                 </div>
             </a>
-
-            <!-- Sample 2 -->
-            <a href="Usersflowchart2.html">
-                <div class="card">
-                    <img src="images/flowchart.png" alt="flowchart pic" class="box-img" style=" width: 135px;
-       height: 150px; border-radius: 25px;">
-                    <h5>Term 2 Flow Chart</h5>
+            <!-- flowchart.populate? -->
+        </div>
+        <div class="row">
+            <!-- Friend Results -->
+            <div class="profile-info col-md-15">
+                <div class="panel" style="padding-bottom:3em;margin-left:300px">
+                    <div class="bio-graph-heading">
+                        Your Friends
+                    </div>
+                    <div class="panel-body bio-graph-info">
+                        <ul class="list-group list-group-flush">
+                            <% accounts.forEach(function(account){ %>
+                            <!-- <a  href="FriendsProfile1.html" style="text-decoration: none;"> -->
+                            <li class="list-group-item content">
+                                <div >
+                                    <img src="images/user-circle.png" class="friend-icon" alt="FriendResult1">
+                                </div>
+                                <div class="friend-txt"><%= account.fullName.firstName %> <%= account.fullName.lastName %>
+                                    <div class="friend-subtxt"><%= account.userName %></div>
+                                </div>
+                                <div class="friend-button"> <a href="friendprofile/<%= account.id %>" type="button" class="btn btn-primary btn-sm">View Profile</a></div>
+                            </li>
+                            <!-- </a> -->
+                            <% }); %>
+                        </ul>
+                    </div>
                 </div>
-            </a>
-
-            <!-- Sample 3 -->
-            <a href="Usersflowchart3.html">
-                <div class="card">
-                    <img src="images/flowchart.png" alt="flowchart pic" class="box-img" style=" width: 135px;
-       height: 150px; border-radius: 25px;">
-                    <h5>Term 3 Flow Chart</h5>
-                </div>
-            </a>
-
-            <!-- Sample 4 -->
-            <a href="Usersflowchart4.html">
-                <div class="card">
-                    <img src="images/flowchart.png" alt="flowchart pic" class="box-img" style=" width: 135px;
-       height: 150px; border-radius: 25px;">
-                    <h5>BSIS Flow Chart</h5>
-                </div>
-            </a>
-
-            <!-- Sample 5 -->
-            <a href="Usersflowchart5.html">
-                <div class="card">
-                    <img src="images/flowchart.png" alt="flowchart pic" class="box-img" style=" width: 135px;
-       height: 150px; border-radius: 25px;">
-                    <h5>BSCS Flow Chart</h5>
-                </div>
-            </a>
+            </div>
         </div>
     </div>
 </main>
