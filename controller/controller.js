@@ -268,6 +268,24 @@ const controller = {
         });
     },
 
+    savePosition: function(req, res){
+        const left = req.body.leftSize;
+        const top = req.body.topSize;
+        const code = req.body.targetSubject;
+        Course.findOneAndUpdate(
+            {"code": code},
+            {"leftPosition": left},
+            {"topPosition": top},
+            function(err){
+                if(err){
+                    console.log(err);
+                } else {
+                    console.log("Position Saved!")
+                }
+            }
+        )
+    },
+
     updateChosen: function(req,res){
         const courseId = req.body.codeId;
         const query = {_id : courseId};
