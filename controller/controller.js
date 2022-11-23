@@ -538,7 +538,7 @@ Course.create({
 
 //<<< SAMPLE DATA 4 >>>
 Course.create({ 
-    code: "GEDANCE",
+    code: "ITISDEV",
     professor: "Alain Encarnacion",
     units: "3",
     status: "Not Yet Taken",
