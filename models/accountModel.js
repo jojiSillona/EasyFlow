@@ -12,7 +12,6 @@ const accountSchema = mongoose.Schema({
     userName: String,
     email: String,
     password: String,
-    friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Account' }],
     // pending friend requests?
     flowcharts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Flowchart' }],
     biography: {

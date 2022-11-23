@@ -3,14 +3,34 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const path = require("path");
 const app = express();
+const session = require('express-session');
+const mongoDBSession = require('connect-mongodb-session')(session); 
 
-mongoose.connect("mongodb://127.0.0.1:27017/test",{useNewUrlParser:true});
+mongoose.connect("mongodb://127.0.0.1:27017/easyFlow",{useNewUrlParser:true});
 
 app.set("view engine","ejs");
 app.use(express.static(path.join(__dirname, ".", "public")));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
+
+const store = new mongoDBSession({
+    uri: "mongodb://127.0.0.1:27017/easyFlow",
+    collection: "SESSIONS-IN_USE"
+})
+
+app.use(session({
+    secret: "MCO2CCAPDEV",
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+})
+);
+
+app.use(function(req,res,next){ 
+res.locals.session = req.session;
+next();
+});
 
 const route = require("./routes/route.js");
 app.use('/', route);

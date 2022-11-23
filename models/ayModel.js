@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 // include Courses
 
 const aySchema = mongoose.Schema({
-    accountId: { type: mongoose.Schema.Types.ObjectId, ref: 'Account' },
-    flowchartId: { type: mongoose.Schema.Types.ObjectId, ref: 'Flowchart' },
+    flowchartId: String,
+    ayId: String, 
     academicYear: {start: Number, end: Number},
-    termOne: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }],
-    termTwo: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }],
-    termThree: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }],
+    termOne: [{courseId: String}],
+    termTwo: [{courseId: String}],
+    termThree: [{courseId: String}]
 
 },{ versionKey: false });
 

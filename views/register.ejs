@@ -19,7 +19,8 @@
                     <div class="register-text">
                         Register here.
                     </div>
-                    <form action="/registration" method="post">
+                    <form action="/register" method="post">
+                    <%= registerError%>
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
@@ -37,9 +38,9 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <div class="input-text"><label for="uName">Username</label></div>
+                                <div class="input-text" id="uName"><label for="uName">Username</label></div>
                                 <input type="text" class="form-control" placeholder="Username" aria-required="true" name="userName">
-                                <small id="emailHelp" class="form-text text-muted">Must be unique; This is how people will find you.</small>
+                                <small id="userHelp" class="form-text text-muted">Must be unique; This is how people will find you.</small>
                             </div>
                         </div>
                         <div class="col">
@@ -60,7 +61,7 @@
                         </div>
                         <div class="col-6">
                             <div class="input-text"><label for="inputPassword" aria-required="true">Confirm Password</label></div>
-                            <input type="password" id="inputPassword" class="form-control" aria-describedby="passwordHelpBlock">    
+                            <input type="password" id="inputPassword" class="form-control" aria-describedby="passwordHelpBlock" name="password2">    
                         </div>
                     </div>
                     <div class="row">

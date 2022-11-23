@@ -18,27 +18,28 @@
                 <div class="flex-col">
                     <div class="register-text">
                         Login here.
+                        <%=loginError%>
                     </div>
-                    <form>
-                    <div class="row">
-                        <div class="col-20">
-                            <div class="form-group">
-                                <div class="input-text"><label for="uName">Username</label></div>
-                                <input type="text" class="form-control" placeholder="Username" aria-required="true">
+                    <form action="/login" method="POST">
+                        <div class="row">
+                            <div class="col-20">
+                                <div class="form-group">
+                                    <div class="input-text"><label for="uName">Username</label></div>
+                                    <input type="text" class="form-control" placeholder="Username" aria-required="true" name="username">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-20">
-                            <div class="input-text"><label for="inputPassword" aria-required="true">Password</label></div>
-                            <input type="password" id="inputPassword" class="form-control" aria-describedby="passwordHelpBlock">
+                        <div class="row">
+                            <div class="col-20">
+                                <div class="input-text"><label for="inputPassword" aria-required="true">Password</label></div>
+                                <input type="password" id="inputPassword" class="form-control" aria-describedby="passwordHelpBlock" name="password">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                        <a href="/home" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Login</a>
+                        <div class="row">
+                            <div class="col">
+                            <input type="submit" class="btn btn-primary btn-lg active" value="Login">
+                            </div>
                         </div>
-                    </div>
                     </form>
                 </div>
             </div>
