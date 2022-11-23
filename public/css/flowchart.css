@@ -49,10 +49,8 @@ body{
 
 #canvas{
     position: absolute;
-    /* padding: 10px; */
-    /* width: 330px; */
     height: 100%;
-    top: 357.8px;
+    top: 330px;
     left: 214.31px;
     z-index: 100;
     overflow: hidden;
@@ -114,18 +112,24 @@ TAKEN: #A3D977
     background: rgba(182, 182, 182, 0.6);
     color: white;
     border-radius: 11px;
-    /* width: 350px; */
     padding: 10px none 10px none;
     z-index:1;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
+
+    /* padding-top: 20px; */
 
     text-align: center;
+    align-items: center;
     
     font-family: 'Montserrat';
     font-weight: 600;
     font-size: 25px;
+}
+
+.school-year{
+    padding: 10px none 10px none;
+    
 }
 
 #add-sy{
@@ -152,7 +156,6 @@ TAKEN: #A3D977
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding-top: 1em;
 }
 
 
