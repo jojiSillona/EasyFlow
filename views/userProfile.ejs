@@ -71,34 +71,6 @@
                     <h5>Term 1 Flow Chart</h5>
                 </div>
             </a>
-            <!-- flowchart.populate? -->
-        </div>
-        <div class="row">
-            <!-- Friend Results -->
-            <div class="profile-info col-md-15">
-                <div class="panel" style="padding-bottom:3em;margin-left:300px">
-                    <div class="bio-graph-heading">
-                        Your Friends
-                    </div>
-                    <div class="panel-body bio-graph-info">
-                        <ul class="list-group list-group-flush">
-                            <% accounts.forEach(function(account){ %>
-                            <!-- <a  href="FriendsProfile1.html" style="text-decoration: none;"> -->
-                            <li class="list-group-item content">
-                                <div >
-                                    <img src="images/user-circle.png" class="friend-icon" alt="FriendResult1">
-                                </div>
-                                <div class="friend-txt"><%= account.fullName.firstName %> <%= account.fullName.lastName %>
-                                    <div class="friend-subtxt"><%= account.userName %></div>
-                                </div>
-                                <div class="friend-button"> <a href="friendprofile/<%= account.id %>" type="button" class="btn btn-primary btn-sm">View Profile</a></div>
-                            </li>
-                            <!-- </a> -->
-                            <% }); %>
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </main>

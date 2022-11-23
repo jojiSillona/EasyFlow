@@ -8,6 +8,7 @@ const app = express();
 // Registration and Login
 app.get("/", controller.getIndex);
 app.get("/login", controller.getLogin);
+app.post("/login", controller.verifyLogin);
 app.get("/register", controller.getRegister);
 app.post("/registration", controller.saveRegistration);
 app.get("/home", controller.getHome);
@@ -15,6 +16,7 @@ app.get("/home", controller.getHome);
 // Account Features
 app.get("/myprofile", controller.getMyProfile);
 app.get("/mysettings", controller.getSettings);
+app.post("/saveSettings", controller.saveSettings);
 
 // Flowchart Features
 app.get("/viewflowcharts", controller.viewFlowcharts);
@@ -33,9 +35,8 @@ app.post("/updateChosen", controller.updateChosen);
 app.get("/deleteCourse/:courseId", controller.deleteCourse);
 
 // Other Profile Features
-app.get("/friendprofile/:accountId", controller.getFriendProfile);
 app.get("/otherprofile/:accountId", controller.getOtherProfile);
-app.get("/invitefriends", controller.inviteFriends);
+app.get("/viewUsers", controller.viewUsers);
 app.post("/searchresults", controller.searchResults);
-
+app.get("/logout", controller.logout);
 module.exports = app;

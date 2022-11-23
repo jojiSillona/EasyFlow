@@ -13,39 +13,108 @@ const controller = {
     },
 
     getLogin: function(req,res){
-        res.render('login');
+        console.log("getLogin");
+        res.render('login', {
+            loginError: ""
+        });
+    },
+
+    verifyLogin: function(req,res){
+        console.log("verifyLogin");
+        Account.findOne({userName: req.body.username, password: req.body.password }, function (err, search) {
+            if (err){
+                console.log(err)
+            }
+            else if (search == null){// no result = wrong login 
+                res.render('login', {loginError: "Wrong username/password"})
+                console.log("No Result");
+            } 
+            else{
+                req.session.isAuth = true;
+                console.log("homepage");
+                // set account deets here oki ?
+                // req.session.anyVarName = whatever u want
+                //ex. 
+                req.session.userObjectId = search.id;
+                req.session.userName = search.userName;
+                req.session.email = search.email;
+                res.redirect("/home");
+            }
+        });
     },
 
     getRegister: function(req,res){
-        res.render('register');
+        res.render('register',{
+            registerError: ""
+        });
     },
 
     saveRegistration: function(req,res){
-        const acc = new Account({
-            fullName: {
-                firstName: req.body.firstName,
-                lastName: req.body.lastName
-            },
-            userName: req.body.userName,
-            email: req.body.email,
-            password: req.body.password
-        });
+        var firstName = req.body.firstName;
+        var lastName = req.body.lastName;
+        var userName = req.body.userName;
+        var email= req.body.email;
+        var password = req.body.password;
+        var password2 = req.body.password2;
 
-        acc.save(function(err){
-            if(err){
-                console.log(err);
-            }
-            else{
-                res.render('registration', {
-                    account: acc
+        //Validation for password add later
+        if(password != password2){
+            res.render('register', {
+                registerError: "Passwords do not match."
+            });
+        } else{
+            //Check if username and email is already taken
+            Account.findOne({ userName: {"$regex": "^" + userName + "\\b", "$options": "i"}}, function (err, user) {
+                Account.findOne({ email: {"$regex": "^" + email + "\\b", "$options": "i"}}, function (err, mail) {
+                    if (user || mail) {
+                        res.render('register', {
+                            registerError: "Username/email already exists in database."
+                        });
+                        console.log("Same user/email.");
+                    }else {
+                        const acc = new Account({
+                            fullName: {
+                                firstName: firstName,
+                                lastName: lastName
+                            },
+                            userName: userName,
+                            email: email,
+                            password: password
+                        });
+                        acc.save(function(err){
+                            if(err){
+                                console.log(err);
+                            }
+                            else{
+                                res.render('registration', {
+                                    account: acc
+                                });
+                                console.log("Account added.");
+                            }
+                        });
+                        res.redirect('/home');
+                    }
                 });
-                console.log("Account added.");
-            }
-        });
+            });
+        }
     },
-    
+
     getHome: function(req,res){
-        res.render('homepage');
+        if (req.session.isAuth) {
+            Account.findOne({id: req.session.id, userName : req.session.userName }, function (err, search) {
+                if (err){
+                    console.log(err)
+                }
+                else{
+                    console.log("homepage");
+                    res.render('homepage', {profile:search});
+                }
+            });
+            
+        }
+        else {
+            res.render('login', {loginError: "Please Login First"});
+        }
     },
 
 // Account Functions
@@ -53,7 +122,7 @@ const controller = {
         const accountId = req.params.accountId;
         // add query filters in {} to remove own + to determine if friend
         // _id: {$ne : accountId} 
-        Account.find({}, function(err,results){
+        Account.find({_id: {$ne : accountId} }, function(err,results){
         if(err){
             console.log(err);
         } else {
@@ -62,11 +131,13 @@ const controller = {
                     console.log(err);
                 } else {
                         res.render('userProfile',{
-                        accounts: results,
+                        accounts : results,
                         account: query
                     });
+                    
                 }
             });
+            console.log(accountId);
         }
     });
     },
@@ -81,6 +152,36 @@ const controller = {
                 });
             }
         });
+    },
+
+    saveSettings: function(req,res){
+        const lastName = req.body.lastName;
+        const firstName = req.body.firstName;
+        const bio = req.body.bio;
+        const username = req.body.username;
+        const email = req.body.email;
+        const password = req.body.password;
+
+        Account.findByIdAndUpdate(req.session.userObjectId, 
+            { 
+                fullName:{
+                    lastName: lastName,
+                    firstName: firstName,
+                }, 
+                biography: bio,
+                userName: username,
+                email: email,
+                password: password 
+            },                
+            function (err, docs) {
+                if (err){
+                    console.log(err)
+                }
+                else{
+                    console.log("Updated User : ", docs);
+                }
+        });
+        res.redirect('/myprofile');
     },
 
 // Flowchart Functions
@@ -131,6 +232,7 @@ const controller = {
     },
 
     createFlowchart: function(req,res){
+        // dito magmmake ng new Flowchart dapat?
         Course.find({}, function(err,rows){
             if(err){
                 console.log(err);
@@ -330,13 +432,13 @@ const controller = {
         });
     },
 
-    inviteFriends: function(req,res){
-        Account.find({}, function(err,results)
+    viewUsers: function(req,res){
+        Account.find({"_id": {$ne: req.session.userObjectId}}, function(err,results)
           {
             if(err){
                 console.log(err);
             } else {
-                res.render('inviteFriends',{
+                res.render('viewUsers',{
                     accounts: results
                 });
             }
@@ -357,7 +459,12 @@ const controller = {
                 });
             }
           });
-    }
+    }, 
+
+    logout: function(req,res){
+        req.session.destroy();
+        res.redirect("/");
+    }, 
 }
 
 module.exports = controller;
