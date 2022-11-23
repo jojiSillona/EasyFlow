@@ -269,18 +269,18 @@ const controller = {
     },
 
     savePosition: function(req, res){
-        const left = req.body.leftSize;
-        const top = req.body.topSize;
-        const code = req.body.targetSubject;
+        const params = req.body.params
+        const left = params.left;
+        const top = params.top;
+        const code = params.code;
         Course.findOneAndUpdate(
             {"code": code},
-            {"leftPosition": left},
-            {"topPosition": top},
+            {$set: {"leftPosition": left, "topPosition": top}},
             function(err){
                 if(err){
                     console.log(err);
                 } else {
-                    console.log("Position Saved!")
+                    console.log("Position Saved! LEFT:" + left + ", TOP: " + top + ", CODE:"+ code)
                 }
             }
         )

@@ -20,6 +20,7 @@ app.get("/mysettings", controller.getSettings);
 app.get("/viewflowcharts", controller.viewFlowcharts);
 app.post("/saveflowchart",controller.saveFlowchart);
 app.get("/editflowchart", controller.editFlowchart);
+app.post("/savePosition", controller.savePosition);
 app.get("/createflowchart", controller.createFlowchart);
 app.get('/delete/:id', controller.deleteFlowchart);
 

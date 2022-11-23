@@ -119,7 +119,7 @@
                         <!-- Please add the subjects here. -->
                         <% courses.forEach(function(course){ %>
                             <!-- PLEASE READ!!!!! DISREGARD SQUIGLY ERROR-->
-                            <div class="subject" style='background: <%= course.style %>;'><%= course.code %></div>
+                            <div class="subject" style='background: <%= course.style %>; left: <%= course.leftPosition %>px; top: <%= course.topPosition %>px'><%= course.code %></div>
                         <% }); %>
                         <svg id="svg-canvas">
                             <!-- Leave this blank -->
@@ -132,15 +132,29 @@
                             cursor: "grabbing",
                             grid: [110, 60],
                             stop: function(e, ui){
-                                var leftSize = Math.round(parseInt(this.style.left, 10) / 10) * 10 + "px";
-                                var topSize = Math.round(parseInt(this.style.top, 10) / 10) * 10 + "px";
+                                var leftSize = Math.round(parseInt(this.style.left, 10) / 10) * 10 ;
+                                var topSize = Math.round(parseInt(this.style.top, 10) / 10) * 10 ;
                                 var targetSubject = this.innerHTML;
 
-                                this.style.left = leftSize;
-                                this.style.top = topSize;
+                                var params = {
+                                    left: leftSize,
+                                    top: topSize,
+                                    code: targetSubject
+                                };
+
+                                console.log(params);
+
+                                this.style.left = leftSize + "px";
+                                this.style.top = topSize + "px";
                                 
                                 //TODO: SAVE POSITION TO DB
-
+                                fetch('/savePosition', {
+                                    method: 'POST',
+                                    body: JSON.stringify({params}),
+                                    headers: {'Content-Type': 'application/json'}
+                                }).then(response => response.text())
+                                .then(params => console.log(params))
+                                .catch(err => console.log(err))
                             }
                         })
                     </script>
