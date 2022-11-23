@@ -10,7 +10,7 @@ app.get("/", controller.getIndex);
 app.get("/login", controller.getLogin);
 app.post("/login", controller.verifyLogin);
 app.get("/register", controller.getRegister);
-app.post("/registration", controller.saveRegistration);
+app.post("/register", controller.saveRegistration);
 app.get("/home", controller.getHome);
 
 // Account Features

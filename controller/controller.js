@@ -86,13 +86,10 @@ const controller = {
                                 console.log(err);
                             }
                             else{
-                                res.render('registration', {
-                                    account: acc
-                                });
+                                res.redirect('/home');
                                 console.log("Account added.");
                             }
                         });
-                        res.redirect('/home');
                     }
                 });
             });

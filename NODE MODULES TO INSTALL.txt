@@ -1,0 +1,1 @@
+npm i connect-mongodb-session ejs express express-session express-validator mongoose nodemon

@@ -19,7 +19,7 @@
                     <div class="register-text">
                         Register here.
                     </div>
-                    <form action="/registration" method="post">
+                    <form action="/register" method="post">
                     <%= registerError%>
                     <div class="row">
                         <div class="col-6">
@@ -41,22 +41,6 @@
                                 <div class="input-text" id="uName"><label for="uName">Username</label></div>
                                 <input type="text" class="form-control" placeholder="Username" aria-required="true" name="userName">
                                 <small id="userHelp" class="form-text text-muted">Must be unique; This is how people will find you.</small>
-                                
-                                <!-- <script>
-                                    if(user == 1){
-                                        const uName = document.getElementById("uName");
-
-                                        var err = document.createElement("div");
-                                        err.className = "alert alert-danger";
-                                        err.id = "userError";
-                                        err.innerHTML = "Username is already taken.";
-
-                                        uName.insertAdjacentElement("afterend", err);
-                                       
-                                    } 
-                                </script> -->
-                                
-                               
                             </div>
                         </div>
                         <div class="col">
