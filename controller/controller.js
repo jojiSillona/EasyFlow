@@ -98,7 +98,7 @@ const controller = {
 
     getHome: function(req,res){
         if (req.session.isAuth) {
-            Account.findOne({id: req.session.id, userName : req.session.userName }, function (err, search) {
+            Account.findOne({_id: req.session.userObjectId, userName : req.session.userName }, function (err, search) {
                 if (err){
                     console.log(err)
                 }
@@ -116,38 +116,28 @@ const controller = {
 
 // Account Functions
     getMyProfile: function(req,res){
-        const accountId = req.params.accountId;
-        // add query filters in {} to remove own + to determine if friend
-        // _id: {$ne : accountId} 
-        Account.find({_id: {$ne : accountId} }, function(err,results){
-        if(err){
-            console.log(err);
-        } else {
-            Account.findOne({}).sort({_id:-1}).exec(function(err,query){
-                if(err){
-                    console.log(err);
-                } else {
-                        res.render('userProfile',{
-                        accounts : results,
-                        account: query
-                    });
-                    
-                }
-            });
-            console.log(accountId);
-        }
-    });
+        Account.findById({_id: req.session.userObjectId}, function(err,result)
+        {
+          if(err){
+              console.log(err);
+          } else {
+              res.render('userProfile',{
+                  account: result
+              });
+          }
+        });
     },
 
     getSettings: function(req,res){
-        Account.findOne({}).sort({_id:-1}).exec(function(err,results){
-            if(err){
-                console.log(err);
-            } else {
-                res.render('userSettings',{
-                    accounts: results
-                });
-            }
+        Account.findById({_id: req.session.userObjectId}, function(err,results)
+        {
+          if(err){
+              console.log(err);
+          } else {
+              res.render('userSettings',{
+                  accounts: results
+              });
+          }
         });
     },
 
@@ -401,20 +391,6 @@ const controller = {
     },
 
 // Other Profile Functions
-    getFriendProfile: function(req,res){
-        const accountId = req.params.accountId;
-        Account.find({_id: accountId},function(err,result)
-        {
-        if(err){
-            console.log(err);
-        } else {
-            res.render('friendProfile',{
-                account : result[0]
-            });
-        }
-        });
-    },
-
     getOtherProfile: function(req,res){
         const accountId = req.params.accountId;
         Account.find({_id: accountId},function(err,result)
