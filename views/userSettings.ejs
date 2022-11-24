@@ -19,10 +19,12 @@
                         <a href="#">
                             <img style="object-fit:cover;" src="images/user.png" alt="">
                         </a>
-                        <button class="btn btn" type="button" style="background:#3551a3; font-size:11px;">
-                            <i class="fa fa-fw fa-camera" style="color:white;"></i>
-                            <span style="color:white;">Change Photo</span>
-                        </button>
+                         <button class="btn btn" type="button" style="background:#3551a3; font-size:11px;">
+                               <i class="fa fa-fw fa-camera" style="color:white;"></i>
+                                <input type="file" name="myImage" id="actual-btn" hidden/>
+                                <label for="actual-btn" style="color: white;">Change Photo</label>
+                                <input type="submit" value="Save">
+                            </button>
 
                         <h1 class="pt-sm-2 pb-1 mb-0 text-nowrap"> <%= accounts.fullName.firstName %> <%= accounts.fullName.lastName %></h1>
 
