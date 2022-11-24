@@ -5,6 +5,9 @@ const courseSchema = mongoose.Schema({
     professor: String,
     units: Number,
     status: String,
+    style: String,
+    leftPosition: Number,
+    topPosition: Number,
 },{ versionKey: false });
 
 module.exports = mongoose.model('Course', courseSchema);

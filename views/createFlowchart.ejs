@@ -46,7 +46,7 @@
                     <div id="flowchart-table">
                         <div class="ay">
                             <div class="col-sm-8">
-                                <input id="ay-input" class="form-control form-control-sm" type="number" placeholder="Enter Academic Year...">
+                                <input id="ay-input" style="height:37.5px;" class="form-control form-control-sm" type="number" placeholder="Enter Starting Year..." name="startingYear">
                                 <script>
                                     var input = document.getElementById("ay-input")
                                     
@@ -55,12 +55,23 @@
                                 input.addEventListener("keypress", function(event){
                                     if(event.key === "Enter"){
                                         event.preventDefault();
+                                        var schoolYear = input.value;
                                         var finalAY = document.createElement('div');
+                                        finalAY.className = "school-year";
                                         finalAY.innerHTML = input.value + "-" + (parseInt(input.value) + 1);
 
                                         input.parentElement.appendChild(finalAY);
                                         input.type = "hidden";
+                                        document.getElementById("add-sy").disabled = false;
                                         console.log("Enter pressed");
+
+                                        fetch('/addAY', {
+                                            method: 'POST',
+                                            body: JSON.stringify({schoolYear}),
+                                            headers: {'Content-Type': 'application/json'}
+                                        }).then(response => response.text())
+                                        .then(schoolYear => console.log(schoolYear))
+                                        .catch(err => console.log(err))
                                     }
                                 })
                             </script>
@@ -72,7 +83,7 @@
                         </div>
                     </div>
                     <div id="ay-adder">
-                        <button id="add-sy" onclick="addSY()">+</button>
+                        <button id="add-sy" onclick="addSY()" disabled>+</button>
                         <script>
                             function addSY(){
                                 console.log("Adding SY");
@@ -88,9 +99,13 @@
                                 var inputSY = document.createElement('div')
                                 inputSY.className = 'col-sm-8'
 
-                                //MAIN CHILD: term headers
+                                //MAIN CHILDREN: term headers
                                 var termHeader = document.createElement('div')
                                 termHeader.className ='term-header'
+
+                                var finalAY = document.createElement('div')
+                                finalAY.className = "school-year"
+                                finalAY.innerHTML = "AY"
 
                                 //CHILD OF TERM HEADERS
                                 var term1 = document.createElement('div')
@@ -107,6 +122,7 @@
                                 flowchartTable.insertBefore(newSY, document.getElementById('ay-adder'))
                                 newSY.appendChild(inputSY)
                                 newSY.appendChild(termHeader)
+                                inputSY.appendChild(finalAY)
                                 termHeader.appendChild(term1)
                                 termHeader.appendChild(term2)
                                 termHeader.appendChild(term3)
@@ -118,7 +134,8 @@
                     <div id="canvas" style="width: 330px;">
                         <!-- Please add the subjects here. -->
                         <% courses.forEach(function(course){ %>
-                            <div class="subject"><%= course.code %></div>
+                            <!-- PLEASE READ!!!!! DISREGARD SQUIGLY ERROR-->
+                            <div class="subject" style='background: <%= course.style %>; left: <%= course.leftPosition %>px; top: <%= course.topPosition %>px'><%= course.code %></div>
                         <% }); %>
                         <svg id="svg-canvas">
                             <!-- Leave this blank -->
@@ -131,11 +148,29 @@
                             cursor: "grabbing",
                             grid: [110, 60],
                             stop: function(e, ui){
-                                var leftSize = this.style.left;
-                                var topSize = this.style.top;
+                                var leftSize = Math.round(parseInt(this.style.left, 10) / 10) * 10 ;
+                                var topSize = Math.round(parseInt(this.style.top, 10) / 10) * 10 ;
+                                var targetSubject = this.innerHTML;
 
-                                this.style.left = Math.round(parseInt(leftSize, 10) / 10) * 10 + "px";
-                                this.style.top = Math.round(parseInt(topSize, 10) / 10) * 10 + "px";
+                                var params = {
+                                    left: leftSize,
+                                    top: topSize,
+                                    code: targetSubject
+                                };
+
+                                console.log(params);
+
+                                this.style.left = leftSize + "px";
+                                this.style.top = topSize + "px";
+                                
+                                //TODO: SAVE POSITION TO DB
+                                fetch('/savePosition', {
+                                    method: 'POST',
+                                    body: JSON.stringify({params}),
+                                    headers: {'Content-Type': 'application/json'}
+                                }).then(response => response.text())
+                                .then(params => console.log(params))
+                                .catch(err => console.log(err))
                             }
                         })
                     </script>

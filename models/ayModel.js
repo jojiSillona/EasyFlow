@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const aySchema = mongoose.Schema({
     flowchartId: String,
     ayId: String, 
-    academicYear: {start: Number, end: Number},
+    startingYear: Number,
     termOne: [{courseId: String}],
     termTwo: [{courseId: String}],
     termThree: [{courseId: String}]

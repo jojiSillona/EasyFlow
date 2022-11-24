@@ -5,6 +5,8 @@ const Flowchart = require("../models/flowchartModel.js");
 const AY = require("../models/ayModel.js");
 const Course = require("../models/courseModel.js");
 const { db } = require("../models/accountModel.js");
+const { render } = require("ejs");
+const { reset } = require("nodemon");
 
 const controller = {
 // Registration and Login
@@ -220,6 +222,9 @@ const controller = {
 
     createFlowchart: function(req,res){
         // dito magmmake ng new Flowchart dapat?
+        
+        //OLD FUNCTION HERE
+
         Course.find({}, function(err,rows){
             if(err){
                 console.log(err);
@@ -252,10 +257,7 @@ const controller = {
             console.log("Adding SY");
             
             const ay = new AY({
-                academicYear:{
-                    start: req.body.start,
-                    end: req.body.end
-                }
+                startingYear: req.body.schoolYear
                 // accountId: { type: mongoose.Schema.Types.ObjectId, ref: 'Account' },
                 // flowchartId: { type: mongoose.Schema.Types.ObjectId, ref: 'Flowchart' },
                 // academicYear: {start: Number, end: Number},
@@ -278,26 +280,41 @@ const controller = {
 // Course Functions
     addCourse: function(req,res){
         var statusString;
+        var statusStyle;
         let statusId = Number(req.body.status);
         switch(statusId){
-            case 1:  statusString = "Not Yet Taken";
+            case 1:  
+                statusString = "Not Yet Taken";
+                statusStyle = "#FFFFFF"
             break;
-            case 2:  statusString = "Currently Taking";
+            case 2:  
+                statusString = "Currently Taking";
+                statusStyle = "#83BBE5"
             break;
-            case 3:  statusString = "Passed";
+            case 3:  
+                statusString = "Passed";
+                statusStyle = "#A3D977"
             break;
-            case 4:  statusString = "Failed";
+            case 4:  
+                statusString = "Failed";
+                statusStyle = "#FF6565"
             break;
-            case 5:  statusString = "Dropped";
+            case 5:  
+                statusString = "Dropped";
+                statusStyle = "#FF6565"
             break;
-            default: statusString = "Not Yet Taken";
+            default: 
+                statusString = "Not Yet Taken";
+                statusStyle = "#fff"
         }
         const course = new Course({
             code: req.body.code,
             professor: req.body.prof,
             units: req.body.units,
             status: statusString,
-            style: req.body.style
+            style: statusStyle,
+            leftPosition: 0,
+            topPosition: 0
         });
     
         course.save(function(err){
@@ -340,6 +357,24 @@ const controller = {
                 });
             }
         });
+    },
+
+    savePosition: function(req, res){
+        const params = req.body.params
+        const left = params.left;
+        const top = params.top;
+        const code = params.code;
+        Course.findOneAndUpdate(
+            {"code": code},
+            {$set: {"leftPosition": left, "topPosition": top}},
+            function(err){
+                if(err){
+                    console.log(err);
+                } else {
+                    console.log("Position Saved! LEFT:" + left + ", TOP: " + top + ", CODE:"+ code)
+                }
+            }
+        )
     },
 
     updateChosen: function(req,res){
@@ -445,188 +480,188 @@ module.exports = controller;
 //-------------- SAMPLE DATA ------------
 //-------------- SAMPLE DATA FOR ACCOUNT ------------------
 
-//<<< SAMPLE DATA 1 >>>
- Account.create({ fullName:{
-    firstName:"Ruby",
-    lastName:"Richards"
-},
-userName:"RichardsR9",
-email:"rubyrichards@gmail.com",
-password:"12345678",
-flowcharts:[],
-biography: "Welcome to my page"
-});
+// //<<< SAMPLE DATA 1 >>>
+//  Account.create({ fullName:{
+//     firstName:"Ruby",
+//     lastName:"Richards"
+// },
+// userName:"RichardsR9",
+// email:"rubyrichards@gmail.com",
+// password:"12345678",
+// flowcharts:[],
+// biography: "Welcome to my page"
+// });
 
 
-//<<< SAMPLE DATA 2 >>>
-Account.create({ fullName:{
-    firstName:"Tia",
-    lastName:"Burmen"
-},
-userName:"Tia55",
-email:"tiaburmen@gmail.com",
-password:"burmen098",
-flowcharts:[],
-biography: "“Happiness depends upon ourselves.” – Madelyn Teppner"
-});
+// //<<< SAMPLE DATA 2 >>>
+// Account.create({ fullName:{
+//     firstName:"Tia",
+//     lastName:"Burmen"
+// },
+// userName:"Tia55",
+// email:"tiaburmen@gmail.com",
+// password:"burmen098",
+// flowcharts:[],
+// biography: "“Happiness depends upon ourselves.” – Madelyn Teppner"
+// });
 
 
-//<<< SAMPLE DATA 3 >>>
-Account.create({ fullName:{
-    firstName:"George",
-    lastName:"Dwell"
-},
-userName:"GD246",
-email:"georgedwell@gmail.com",
-password:"george2468",
-flowcharts:[],
-biography: "“Be who you are and say what you feel, because those who mind don’t matter, and those who matter don’t mind.” ― Bernard M. Baruch"
+// //<<< SAMPLE DATA 3 >>>
+// Account.create({ fullName:{
+//     firstName:"George",
+//     lastName:"Dwell"
+// },
+// userName:"GD246",
+// email:"georgedwell@gmail.com",
+// password:"george2468",
+// flowcharts:[],
+// biography: "“Be who you are and say what you feel, because those who mind don’t matter, and those who matter don’t mind.” ― Bernard M. Baruch"
 
-});
-
-
-//<<< SAMPLE DATA 4 >>>
-Account.create({ fullName:{
-    firstName:"Dave",
-    lastName:"Duken"
-},
-userName:"Daveduken100",
-email:"daveduken@gmail.com",
-password:"daveduken77",
-flowcharts:[],
-biography: "“In the end, it’s not the years in your life that count. It’s the life in your years.” – Abraham Lincoln"
-});
+// });
 
 
-//<<< SAMPLE DATA 5 >>>
-Account.create({ fullName:{
-    firstName:"Camilla",
-    lastName:"Smith"
-},
-userName:"camillaS45",
-email:"camillasmith@gmail.com",
-password:"camilla99",
-flowcharts:[],
-biography: "“Just because you fail once, does not mean that you’re gonna fail at everything. Keep trying, hold on, and always, always, always believe in yourself because if you don’t, then who will?” – Marilyn Monroe"
-});
+// //<<< SAMPLE DATA 4 >>>
+// Account.create({ fullName:{
+//     firstName:"Dave",
+//     lastName:"Duken"
+// },
+// userName:"Daveduken100",
+// email:"daveduken@gmail.com",
+// password:"daveduken77",
+// flowcharts:[],
+// biography: "“In the end, it’s not the years in your life that count. It’s the life in your years.” – Abraham Lincoln"
+// });
 
 
-//-------------- SAMPLE DATA FOR COURSE ------------------
-//<<< SAMPLE DATA 1 >>>
-Course.create({ 
-    code: "CCAPDEV",
-    professor: "Mar Christian Herrera",
-    units: "3",
-    status: "Currently Taking",
-});
-
-//<<< SAMPLE DATA 2 >>>
-Course.create({ 
-    code: "GERIZAL",
-    professor: "Angelo Arriola",
-    units: "3",
-    status: "Currently Taking",
-});
-
-//<<< SAMPLE DATA 3 >>>
-Course.create({ 
-    code: "GEDANCE",
-    professor: "Jun Alave",
-    units: "3",
-    status: "Passed",
-});
-
-//<<< SAMPLE DATA 4 >>>
-Course.create({ 
-    code: "ITISDEV",
-    professor: "Alain Encarnacion",
-    units: "3",
-    status: "Not Yet Taken",
-});
-
-//<<< SAMPLE DATA 5 >>>
-Course.create({ 
-    code: "CCPROG2",
-    professor: "Shirley Chu",
-    units: "3",
-    status: "Failed",
-});
-
-//-------------- SAMPLE DATA FOR FLOWCHART ------------------
-//<<< SAMPLE DATA 1 >>>
-Flowchart.create({ 
-    title: "Term 1 Flowchart",
-    department: "Department of Engineering",
-    acadYears: []
-});
-
-//<<< SAMPLE DATA 2 >>>
-Flowchart.create({ 
-    title: "BSFin Flowchart",
-    department: "Department of Financial Management",
-    acadYears: []
-});
+// //<<< SAMPLE DATA 5 >>>
+// Account.create({ fullName:{
+//     firstName:"Camilla",
+//     lastName:"Smith"
+// },
+// userName:"camillaS45",
+// email:"camillasmith@gmail.com",
+// password:"camilla99",
+// flowcharts:[],
+// biography: "“Just because you fail once, does not mean that you’re gonna fail at everything. Keep trying, hold on, and always, always, always believe in yourself because if you don’t, then who will?” – Marilyn Monroe"
+// });
 
 
-//<<< SAMPLE DATA 3 >>>
-Flowchart.create({ 
-    title: "BSINSYS Flowchart",
-    department: "Information Technology Department",
-    acadYears: []
-});
+// //-------------- SAMPLE DATA FOR COURSE ------------------
+// //<<< SAMPLE DATA 1 >>>
+// Course.create({ 
+//     code: "CCAPDEV",
+//     professor: "Mar Christian Herrera",
+//     units: "3",
+//     status: "Currently Taking",
+// });
 
-//<<< SAMPLE DATA 4 >>>
-Flowchart.create({ 
-    title: "BSCS Flowchart",
-    department: "Software Technology Department",
-    acadYears:"2019-2020"
-});
+// //<<< SAMPLE DATA 2 >>>
+// Course.create({ 
+//     code: "GERIZAL",
+//     professor: "Angelo Arriola",
+//     units: "3",
+//     status: "Currently Taking",
+// });
 
-//<<< SAMPLE DATA 5 >>>
-Flowchart.create({ 
-    title: "BSIT Flowchart",
-    department: "Information Technology Department",
-    acadYears: []
-});
+// //<<< SAMPLE DATA 3 >>>
+// Course.create({ 
+//     code: "GEDANCE",
+//     professor: "Jun Alave",
+//     units: "3",
+//     status: "Passed",
+// });
 
-//-------------- SAMPLE DATA FOR AY ------------------
-//<<< SAMPLE DATA 1 >>>
-AY.create({ 
-    academicYear:{
-        start: 2022,
-        end: 2023
-    }
-});
+// //<<< SAMPLE DATA 4 >>>
+// Course.create({ 
+//     code: "GEDANCE",
+//     professor: "Alain Encarnacion",
+//     units: "3",
+//     status: "Not Yet Taken",
+// });
 
-//<<< SAMPLE DATA 2 >>>
-AY.create({ 
-    academicYear:{
-        start: 2022,
-        end: 2023
-    }
-});
+// //<<< SAMPLE DATA 5 >>>
+// Course.create({ 
+//     code: "CCPROG2",
+//     professor: "Shirley Chu",
+//     units: "3",
+//     status: "Failed",
+// });
 
-//<<< SAMPLE DATA 3 >>>
-AY.create({ 
-    academicYear:{
-        start: 2020,
-        end: 2021
-    }
-});
+// //-------------- SAMPLE DATA FOR FLOWCHART ------------------
+// //<<< SAMPLE DATA 1 >>>
+// Flowchart.create({ 
+//     title: "Term 1 Flowchart",
+//     department: "Department of Engineering",
+//     acadYears: []
+// });
 
-//<<< SAMPLE DATA 4 >>>
-AY.create({ 
-    academicYear:{
-        start: 2019,
-        end: 2020
-    }
-});
+// //<<< SAMPLE DATA 2 >>>
+// Flowchart.create({ 
+//     title: "BSFin Flowchart",
+//     department: "Department of Financial Management",
+//     acadYears: []
+// });
 
-//<<< SAMPLE DATA 5 >>>
-AY.create({ 
-    academicYear:{
-        start: 2021,
-        end: 2022
-    }
-});
+
+// //<<< SAMPLE DATA 3 >>>
+// Flowchart.create({ 
+//     title: "BSINSYS Flowchart",
+//     department: "Information Technology Department",
+//     acadYears: []
+// });
+
+// //<<< SAMPLE DATA 4 >>>
+// Flowchart.create({ 
+//     title: "BSCS Flowchart",
+//     department: "Software Technology Department",
+//     acadYears:"2019-2020"
+// });
+
+// //<<< SAMPLE DATA 5 >>>
+// Flowchart.create({ 
+//     title: "BSIT Flowchart",
+//     department: "Information Technology Department",
+//     acadYears: []
+// });
+
+// //-------------- SAMPLE DATA FOR AY ------------------
+// //<<< SAMPLE DATA 1 >>>
+// AY.create({ 
+//     academicYear:{
+//         start: 2022,
+//         end: 2023
+//     }
+// });
+
+// //<<< SAMPLE DATA 2 >>>
+// AY.create({ 
+//     academicYear:{
+//         start: 2022,
+//         end: 2023
+//     }
+// });
+
+// //<<< SAMPLE DATA 3 >>>
+// AY.create({ 
+//     academicYear:{
+//         start: 2020,
+//         end: 2021
+//     }
+// });
+
+// //<<< SAMPLE DATA 4 >>>
+// AY.create({ 
+//     academicYear:{
+//         start: 2019,
+//         end: 2020
+//     }
+// });
+
+// //<<< SAMPLE DATA 5 >>>
+// AY.create({ 
+//     academicYear:{
+//         start: 2021,
+//         end: 2022
+//     }
+// });
 
