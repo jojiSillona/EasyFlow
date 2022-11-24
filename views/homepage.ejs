@@ -24,7 +24,7 @@
                     </div>
             </div>
             </a>
-            <a href="/createflowchart">
+            <a type="button" data-toggle="modal" data-target="#createFlowchart">
             <div class="card">
                 <i class="fa-solid fa-diagram-predecessor fa-4x"></i>
                 <div class="card-body">
@@ -33,6 +33,42 @@
                 </div>
             </div>
             </a>
+            <div class="modal fade" id="createFlowchart" tabindex="-1" role="dialog" aria-labelledby="addCourseLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel"><b>Flowchart Details</b></h4>            
+                        </div>
+                        <form action="/createflowchart" method="post">
+                            <div class="modal-body">
+                                <div class="form-group row">
+                                    <label for="courseCode" class="col-sm-3 col-form-label"><b>Title</b></label>
+                                    <div class="col-sm-7">
+                                        <input id="new-course-id" class="form-control form-control-sm" type="text" placeholder="Enter flowchart name here..." name="flowchartName">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="profCode" class="col-sm-3 col-form-label"><b>College Dept.</b></label>
+                                    <div class="col-sm-7">
+                                        <input id="new-prof-id" class="form-control form-control-sm" type="text" placeholder="Enter college department here..." name="deptName">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="profCode" class="col-sm-3 col-form-label"><b>Starting A.Y.</b></label>
+                                    <div class="col-sm-7">
+                                        <input id="new-prof-id" class="form-control form-control-sm" type="text" placeholder="Enter first A.Y. of flowchart here..." name="startAY">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Create Flowchart</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <a href="/viewUsers">
             <div class="card">
                 <i class="fa-solid fa-user-group fa-4x"></i>

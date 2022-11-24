@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const Account = require("../models/accountModel.js");
 const Flowchart = require("../models/flowchartModel.js");
-const AY = require("../models/ayModel.js");
 const Course = require("../models/courseModel.js");
 const { db } = require("../models/accountModel.js");
 const { render } = require("ejs");
@@ -190,49 +189,87 @@ const controller = {
         
     },
 
-    saveFlowchart:function(req,res){
+
+    createFlowchart: function(req,res){
         const flow = new Flowchart({
-            // accountId: req.body.accId, wala pa session mamaya na iimplement
-            title: req.body.title,
-            department: req.body.department,
-            acadYears: []
-            //  accountId: { type: mongoose.Schema.Types.ObjectId, ref: 'Account' },
-    // title: String,
-    // department: String,
-    // acadYears: [{ type: mongoose.Schema.Types.ObjectId, ref: 'AY' }]
+            accountId: req.session.userObjectId,
+            title: req.body.flowchartName,
+            department: req.body.deptName,
+            startingYear: req.body.startAY
         });
 
         flow.save(function(err){
             if(err){
                 console.log(err);
             }
-            else{
-                //save ay, save course?
-                //populate
-                res.redirect("/viewflowcharts");
+            else{ //acc and flowchart id
+                Course.find({ accountId: {$in: req.session.userObjectId}}, function(err,rows){
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        res.render(('editFlowchart'), {
+                            courses: rows,
+                            flowchart: flow,
+                            
+                        });
+                    }
+                });
         
-                console.log("Flowchart added.");
+                console.log("Flowchart created.");
             }
         });
+
+       
     },
 
     editFlowchart: function(req,res){
-        res.render('editFlowchart');
+    //     Flowchart.find({ accountId: req.session.userObjectId })
+    // .then(data => {
+    //     console.log("Database Courses:")
+    //     console.log(data);
+
+    
+    // Course.find({accountId: req.session.userObjectId })
+    //     .then(data => {
+    //         console.log("Students in Database Courses:")
+    //         console.log(data);
+    //         res.render('createflowchart', (
+    //             courses: rows,
+    //             flowchart:flow
+    //         ))
+    //     })
+    //     .catch(error => {
+    //         console.log(error);
+    //     })
+    //     })
+    //     .catch(error => {
+    //         console.log(error);
+    //     })
+
+    Course.find({}, function(err,rows){
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.render(('createFlowchart'), {
+                courses: rows
+            });
+        }
+    });
     },
+    
+    saveFlowchart:function(req,res){
+       
 
-    createFlowchart: function(req,res){
-        // dito magmmake ng new Flowchart dapat?
-        
-        //OLD FUNCTION HERE
-
-        Course.find({}, function(err,rows){
+        flow.save(function(err){
             if(err){
                 console.log(err);
             }
             else{
-                res.render(('createFlowchart'), {
-                    courses: rows
-                });
+                res.redirect("/viewflowcharts");
+        
+                console.log("Flowchart added.");
             }
         });
     },
@@ -249,32 +286,6 @@ const controller = {
             }
         });
            
-    },
-
-// AcadYear Functions
-    addAY: function(req,res){
-
-            console.log("Adding SY");
-            
-            const ay = new AY({
-                startingYear: req.body.schoolYear
-                // accountId: { type: mongoose.Schema.Types.ObjectId, ref: 'Account' },
-                // flowchartId: { type: mongoose.Schema.Types.ObjectId, ref: 'Flowchart' },
-                // academicYear: {start: Number, end: Number},
-                // termOne: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }],
-                // termTwo: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }],
-                // termThree: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }],
-            });
-        
-            ay.save(function(err){
-                if(err){
-                    console.log(err);
-                }
-                else{
-                    res.redirect("/createflowchart");
-                    console.log("AY added.");
-                }
-            });
     },
 
 // Course Functions
@@ -308,6 +319,7 @@ const controller = {
                 statusStyle = "#fff"
         }
         const course = new Course({
+            accountId: req.session.userObjectId,
             code: req.body.code,
             professor: req.body.prof,
             units: req.body.units,
@@ -322,9 +334,8 @@ const controller = {
                 console.log(err);
             }
             else{
-
-                // Course.populate(course, {path:""})
-                res.redirect("/createflowchart");
+                // res.redirect("/createflowchart"); //redirect to flowchart id
+                res.redirect("/createflowchart"); 
                 console.log("Course added.");
             }
         });

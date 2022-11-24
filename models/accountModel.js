@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-// include Flowcharts
 
 const nameSchema = mongoose.Schema({
     firstName: String,
@@ -12,8 +11,7 @@ const accountSchema = mongoose.Schema({
     userName: String,
     email: String,
     password: String,
-    // pending friend requests?
-    flowcharts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Flowchart' }],
+    flowcharts: [{flowchartId: Number}],
     biography: {
         type: String,
         default: "This user hasn't set a biography yet."

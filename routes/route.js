@@ -20,20 +20,18 @@ app.post("/saveSettings", controller.saveSettings);
 
 // Flowchart Features
 app.get("/viewflowcharts", controller.viewFlowcharts);
-app.post("/saveflowchart",controller.saveFlowchart);
-app.get("/editflowchart", controller.editFlowchart);
-app.post("/savePosition", controller.savePosition);
-app.get("/createflowchart", controller.createFlowchart);
+// view one specific flowchart 
+app.get("/createflowchart", controller.editFlowchart); // shows actual
+app.post("/createflowchart", controller.createFlowchart); // modal
+app.post("/saveflowchart",controller.saveFlowchart); // associates courses with flowchart id
 app.get('/delete/:id', controller.deleteFlowchart);
-
-// AcadYear Features
-app.post("/addAY", controller.addAY);
 
 // Course Features
 app.post("/addCourse", controller.addCourse);
 app.get("/editCourse/:courseId", controller.editCourse);
 app.post("/updateChosen", controller.updateChosen);
 app.get("/deleteCourse/:courseId", controller.deleteCourse);
+app.post("/savePosition", controller.savePosition);
 
 // Other Profile Features
 app.get("/otherprofile/:accountId", controller.getOtherProfile);

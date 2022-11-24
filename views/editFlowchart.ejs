@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <%- include('partials/head'); -%>
-    <link rel="stylesheet" href="css/flowchart.css">
-    <title>Edit Flowchart</title>
+    <link rel="stylesheet" type="text/css" href="/css/flowchart.css">
+    <title>Create Flowchart</title>
 </head>
     <body>
         <header>
@@ -12,93 +13,319 @@
             <main>
                 <div class="main-window">
                     <%- include('partials/searchbar'); -%>
-                    <div class="editing-flag">
-                        You are editing this flowchart.
+                    <div class="creating-flag">
+                        You are creating a new flowchart.
                         <div class="dropdown">
-                            <button class="btn btn-warning dropdown-toggle btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Actions
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
-                              <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#addCourse" >Add Course</button>
-                              <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#deleteCourse" >Delete Course</button>   
+                                <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#addCourse" >Add Course</button>
+                                <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#editCourse" >Edit Course</button>
+                                <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#deleteCourse" >Delete Course</button>
+                                <div class="dropdown-divider"></div>
+                                
+                                <button type="submit" class="btn btn-primary dropdown-item">Save Changes</button>
                             </div>
                         </div>
                     </div>
-
+              
+                    <!-- <form action="/saveflowchart" method="post"></form>   -->
                     <div class="flowchart-info">
-                        <h1>BS CS-ST Term 1 Intake</h1>
-                        <h4>By Software Technology Department</h4>
+                        <h1><%= flowchart.title %></h1>
+                        <h4><%= flowchart.department %></h4>
                     </div>
-                    
-                    <div class="flowchart-table">
+                    <div id="flowchart-table">
                         <div class="ay">
-                            AY 2020 - 2021
-                            <div class="term-header">
-                                <div class="term-txt">Term 1
-                                    <div class="term">
-                                        <div class="subject-txt" >Subject A</div>
-                                        <div class="subject-txt" >Subject B</div>
-                                        <div class="subject-txt" >Subject C</div>
-                                    </div>
-                                </div>
-                                <div class="term-txt">Term 2
-                                    <div class="term">
-                                        <div class="subject-txt" >Subject D</div>
-                                        <div class="subject-txt" >Subject E</div>
-                                    </div>
-                                </div>
-                                <div class="term-txt">Term 3</div>
-                            </div>
+                            <div class="col-sm-8">
+                                <h5><%= flowchart.startingYear %></h5>
+                                <script>
+                                    var input = document.getElementById("ay-input")
+                                    
+
+
+                                input.addEventListener("keypress", function(event){
+                                    if(event.key === "Enter"){
+                                        event.preventDefault();
+                                        var schoolYear = input.value;
+                                        var finalAY = document.createElement('div');
+                                        finalAY.className = "school-year";
+                                        finalAY.innerHTML = input.value + "-" + (parseInt(input.value) + 1);
+
+                                        input.parentElement.appendChild(finalAY);
+                                        input.type = "hidden";
+                                        document.getElementById("add-sy").disabled = false;
+                                        console.log("Enter pressed");
+
+                                        fetch('/addAY', {
+                                            method: 'POST',
+                                            body: JSON.stringify({schoolYear}),
+                                            headers: {'Content-Type': 'application/json'}
+                                        }).then(response => response.text())
+                                        .then(schoolYear => console.log(schoolYear))
+                                        .catch(err => console.log(err))
+                                    }
+                                })
+                            </script>
+                        </div>
+                        <div class="term-header">
+                            <div class="term">Term 1</div>
+                            <div class="term">Term 2</div>
+                            <div class="term">Term 3</div>
                         </div>
                     </div>
-                </div>
-                 <!-- Modals -->
-                <div class="modal fade" id="addCourse" tabindex="-1" role="dialog" aria-labelledby="addCourseLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel"><b>Add Course</b></h4>            
+                    <div id="ay-adder">
+                        <button id="add-sy" onclick="addSY()">+</button>
+                        <script>
+                            function addSY(){
+                                console.log("Adding SY");
+
+                                const flowchartTable = document.getElementById("flowchart-table");
+                                const mainCanvas = document.getElementById('canvas')
+
+                                //MAIN PARENT
+                                var newSY = document.createElement('div');
+                                newSY.className = 'ay'
+
+                                //MAIN CHILD: SY
+                                var inputSY = document.createElement('div')
+                                inputSY.className = 'col-sm-8'
+
+                                //MAIN CHILDREN: term headers
+                                var termHeader = document.createElement('div')
+                                termHeader.className ='term-header'
+
+                                var finalAY = document.createElement('div')
+                                finalAY.className = "school-year"
+                                finalAY.innerHTML = "AY"
+
+                                //CHILD OF TERM HEADERS
+                                var term1 = document.createElement('div')
+                                term1.className='term'
+                                term1.innerHTML='Term 1'
+                                var term2 = document.createElement('div')
+                                term2.className='term'
+                                term2.innerHTML='Term 2'
+                                var term3 = document.createElement('div')
+                                term3.className='term'
+                                term3.innerHTML='Term 3'
+
+                                //INSERT ALL INTO HTML
+                                flowchartTable.insertBefore(newSY, document.getElementById('ay-adder'))
+                                newSY.appendChild(inputSY)
+                                newSY.appendChild(termHeader)
+                                inputSY.appendChild(finalAY)
+                                termHeader.appendChild(term1)
+                                termHeader.appendChild(term2)
+                                termHeader.appendChild(term3)
+
+                                mainCanvas.style.width = parseInt(mainCanvas.style.width) + 330 + "px";
+                            }
+                        </script>
                     </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group row">
-                                <label for="courseCode" class="col-sm-3 col-form-label"><b>Course Code</b></label>
-                                <div class="col-sm-7">
-                                <input class="form-control form-control-sm" type="text" placeholder="Course Code here">
+                    <div id="canvas" style="width: 330px;">
+                        <!-- Please add the subjects here. -->
+                        <% courses.forEach(function(course){ %>
+                            <!-- PLEASE READ!!!!! DISREGARD SQUIGLY ERROR-->
+                            <div class="subject" style='background: <%= course.style %>; left: <%= course.leftPosition %>px; top: <%= course.topPosition %>px'><%= course.code %></div>
+                        <% }); %>
+                        <svg id="svg-canvas">
+                            <!-- Leave this blank -->
+                        </svg>
+                    </div>
+                    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+                    <script>
+                        $(".subject").draggable({
+                            containment: $("#canvas"),
+                            cursor: "grabbing",
+                            grid: [110, 60],
+                            stop: function(e, ui){
+                                var leftSize = Math.round(parseInt(this.style.left, 10) / 10) * 10 ;
+                                var topSize = Math.round(parseInt(this.style.top, 10) / 10) * 10 ;
+                                var targetSubject = this.innerHTML;
+
+                                var params = {
+                                    left: leftSize,
+                                    top: topSize,
+                                    code: targetSubject
+                                };
+
+                                console.log(params);
+
+                                this.style.left = leftSize + "px";
+                                this.style.top = topSize + "px";
+                                
+                                //TODO: SAVE POSITION TO DB
+                                fetch('/savePosition', {
+                                    method: 'POST',
+                                    body: JSON.stringify({params}),
+                                    headers: {'Content-Type': 'application/json'}
+                                }).then(response => response.text())
+                                .then(params => console.log(params))
+                                .catch(err => console.log(err))
+                            }
+                        })
+                    </script>
+                </div>
+            </div>
+            <!-- Modals -->
+            <!-- ADD COURSE MODAL -->
+            <div class="modal fade" id="addCourse" tabindex="-1" role="dialog" aria-labelledby="addCourseLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel"><b>Add Course</b></h4>            
+                        </div>
+                        <form action="/addCourse" method="post">
+                            <div class="modal-body">
+                                <div class="form-group row">
+                                    <label for="courseCode" class="col-sm-3 col-form-label"><b>Course Code</b></label>
+                                    <div class="col-sm-7">
+                                        <input id="new-course-id" class="form-control form-control-sm" type="text" placeholder="Course Code here" name="code">
+                                    </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label for="profCode" class="col-sm-3 col-form-label"><b>Professor</b></label>
+                                    <div class="col-sm-7">
+                                        <input id="new-prof-id" class="form-control form-control-sm" type="text" placeholder="Name of Professor" name="prof">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="unitCode" class="col-sm-3 col-form-label"><b>Units</b></label>
+                                    <div class="col-sm-7">
+                                        <input id="new-unit-id" class="form-control form-control-sm" type="number" placeholder="Units" name="units" min="0" max="3">                          
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="statusCode" class="col-sm-3 col-form-label"><b>Status</b></label>
+                                    <div class="col-sm-7">
+                                    <select class="form-select form-select-sm" aria-label="Status selection" name="status">
+                                            <option selected>Indicate course progress...</option>
+                                            <option value="1">Not Yet Taken</option>
+                                            <option value="2">Currently Taking</option>
+                                            <option value="3">Passed</option>
+                                            <option value="4">Failed</option>
+                                            <option value="5">Dropped</option>
+                                    </select>                                
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Add course</button>
                             </div>
                         </form>
                     </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Add courses</button>
+                </div>
+            </div>
+
+            <!-- EDIT COURSE MODAL -->
+            <div class="modal fade" id="editCourse" tabindex="-1" role="dialog" aria-labelledby="editCourseLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">Edit Course</h4>
+                        </div>
+                        <div class="modal-body">
+                            <table style="width:100%">
+                            <% courses.forEach(function(course){ %>   
+                                <tr>
+                                <td><label class="form-check-label"><%= course.code %></label></td>
+                                </tr><tr style="border-bottom: 1px solid rgb(176, 176, 176);">
+                                <td><small class="text-muted">Professor: <%= course.professor %></small></td>
+                                <td><small class="text-muted">Units: <%= course.units %></small></td>
+                                <td><small class="text-muted">Status: <%= course.status %></small></td>
+                                <td style="padding-bottom:1em"><a href="editCourse/<%= course.id %>" class="btn btn-success btn-sm" data-toggle="#updateChosen"> Edit </a></td>
+                                </tr> 
+                            <% }); %> 
+                            </table>                
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
                     </div>
                 </div>
-                </div>
-                </div>
+            </div>
 
-                <div class="modal fade" id="deleteCourse" tabindex="-1" role="dialog" aria-labelledby="deleteCourseLabel" aria-hidden="true">
+            <% courses.forEach(function(course){ %>             
+            <div class="modal fade" id="updateChosen" tabindex="-1" role="dialog" aria-labelledby="updateChosenLabel" aria-hidden="true">
                 <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Delete Course</h4>
+                        <h4 class="modal-title" id="myModalLabel"><b>Editing <%= course.code %></b></h4>  
                     </div>
-                    <div class="modal-body">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                            <label class="form-check-label" for="defaultCheck1">
-                              Course Codes listed here
-                            </label>
-                        </div>                    
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Delete courses</button>
-                    </div>
+                    <form action="/updateChosen" method="post">
+                        <input type="hidden" value="<%= course.id %>" name="id">
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label for="courseCode" class="col-sm-3 col-form-label"><b>Course Code</b></label>
+                                <div class="col-sm-7">
+                                    <input id="new-course-id" class="form-control form-control-sm" type="text" name="code" value="<%= course.code %>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="profCode" class="col-sm-3 col-form-label"><b>Professor</b></label>
+                                <div class="col-sm-7">
+                                    <input id="new-prof-id" class="form-control form-control-sm" type="text" name="prof" value="<%= course.professor %>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="unitCode" class="col-sm-3 col-form-label"><b>Units</b></label>
+                                <div class="col-sm-7">
+                                    <input id="new-unit-id" class="form-control form-control-sm" type="number" name="units" min="0" max="3" value="<%= course.units %>">                          
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="statusCode" class="col-sm-3 col-form-label"><b>Status</b></label>
+                                <div class="col-sm-7">
+                                    <select class="form-select form-select-sm" aria-label="Status selection">
+                                        <option selected>Indicate course progress...</option>
+                                        <option value="1">Not Yet Taken</option>
+                                        <option value="2">Currently Taking</option>
+                                        <option value="3">Passed</option>
+                                        <option value="4">Failed</option>
+                                        <option value="5">Dropped</option>
+                                    </select>                                
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
                 </div>
                 </div>
-                </div>
+            </div>
+            <% }); %> 
 
+            <!-- DELETE COURSE MODAL -->
+            <div class="modal fade" id="deleteCourse" tabindex="-1" role="dialog" aria-labelledby="deleteCourseLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Delete Course</h4>
+                </div>
+                <div class="modal-body">
+                    <table style="width:100%">
+                    <% courses.forEach(function(course){ %>   
+                        <tr>
+                        <td><label class="form-check-label"><%= course.code %></label></td>
+                        </tr><tr style="border-bottom: 1px solid rgb(176, 176, 176);">
+                        <td><small class="text-muted">Professor: <%= course.professor %></small></td>
+                        <td><small class="text-muted">Units: <%= course.units %></small></td>
+                        <td><small class="text-muted">Status: <%= course.status %></small></td>
+                        <td style="padding-bottom:1em"><a href="deleteCourse/<%= course.id %>" class="btn btn-danger btn-sm"> Delete </a></td>
+                        </tr> 
+                    <% }); %> 
+                    </table>                
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+            </div>
         </main>
         <%- include('partials/footer'); -%>
     </body>

@@ -2,11 +2,12 @@ const mongoose = require("mongoose");
 // include AY
 
 const flowchartSchema = mongoose.Schema({
-    flowChartOwnerUsername: String,
-    flowChartId: String,
+    accountId: String,
     title: String,
     department: String,
-    ayId: String
+    ayId: String,
+    startingYear: Number,
+    numberOfAY: Number
 },{ versionKey: false });
 
 module.exports = mongoose.model('Flowchart', flowchartSchema);
