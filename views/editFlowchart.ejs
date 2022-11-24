@@ -38,38 +38,12 @@
                     <div id="flowchart-table">
                         <div class="ay">
                             <div class="col-sm-8">
-                                <div class="school-year"></div>
-                                <!-- <h5><%= flowchart.startingYear %></h5> -->
                                 <script>
-                                    const flowchartBG = document.getElementById("flowchart-table");
-                                    var startingYear = <%= flowchart.statingYear %>;
-
-                                    flowchartBG.getElementsByClassName("school-year")[0].innerHTML = startingYear + "-" + (parseInt(startingYear) + 1);
-
-                                    // var input = document.getElementById("ay-input")
-                                    
-                                    // input.addEventListener("keypress", function(event){
-                                    //     if(event.key === "Enter"){
-                                    //         event.preventDefault();
-                                    //         var schoolYear = input.value;
-                                    //         var finalAY = document.createElement('div');
-                                    //         finalAY.className = "school-year";
-                                    //         finalAY.innerHTML = input.value + "-" + (parseInt(input.value) + 1);
-
-                                    //         input.parentElement.appendChild(finalAY);
-                                    //         input.type = "hidden";
-                                    //         document.getElementById("add-sy").disabled = false;
-                                    //         console.log("Enter pressed");
-
-                                    //         fetch('/addAY', {
-                                    //             method: 'POST',
-                                    //             body: JSON.stringify({schoolYear}),
-                                    //             headers: {'Content-Type': 'application/json'}
-                                    //         }).then(response => response.text())
-                                    //         .then(schoolYear => console.log(schoolYear))
-                                    //         .catch(err => console.log(err))
-                                    //     }
-                                    // })
+                                    var schoolYear = <%= flowchart.startingYear %>;
+                                    var finalAY = document.createElement('div');
+                                    finalAY.className = "school-year";
+                                    finalAY.innerHTML = schoolYear + "-" + (parseInt(schoolYear) + 1);
+                                    document.getElementById("flowchart-table").getElementsByClassName("ay")[0].getElementsByClassName("col-sm-8")[0].appendChild(finalAY);
                             </script>
                         </div>
                         <div class="term-header">
@@ -101,7 +75,10 @@
 
                                 var finalAY = document.createElement('div')
                                 finalAY.className = "school-year"
-                                finalAY.innerHTML = "AY"
+                                var newAY = flowchartTable.getElementsByClassName('ay')
+                                
+                                newAY = newAY[newAY.length - 1].getElementsByClassName("school-year")[0].innerHTML.split("-")[0]
+                                finalAY.innerHTML = (parseInt(newAY) + 1) + "-" + (parseInt(newAY) + 2)
 
                                 //CHILD OF TERM HEADERS
                                 var term1 = document.createElement('div')
