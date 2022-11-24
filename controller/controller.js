@@ -143,13 +143,14 @@ const controller = {
         });
     },
 
-    saveSettings: function(req,res){
+        saveSettings: function(req,res){
         const lastName = req.body.lastName;
         const firstName = req.body.firstName;
         const bio = req.body.bio;
         const username = req.body.username;
         const email = req.body.email;
         const password = req.body.password;
+        const image= req.file.filename
 
         Account.findByIdAndUpdate(req.session.userObjectId, 
             { 
@@ -157,6 +158,7 @@ const controller = {
                     lastName: lastName,
                     firstName: firstName,
                 }, 
+                image:image,
                 biography: bio,
                 userName: username,
                 email: email,
@@ -172,7 +174,6 @@ const controller = {
         });
         res.redirect('/myprofile');
     },
-
 // Flowchart Functions
     viewFlowcharts: function(req,res){
         Flowchart.find({
