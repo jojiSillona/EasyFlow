@@ -5,6 +5,19 @@ const path = require("path");
 const controller = require(path.join(__dirname, "..", "controller", "controller.js"));
 const app = express();
 
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+    destination:function(req,file,cb){
+       cb(null,path.join(__dirname, '../public/images'));
+    },
+    filename:function(req,file,cb){
+       const name = Date.now()+'-'+file.originalname;
+       cb(null,name);
+    }
+});
+const upload = multer({storage:storage});
+
 // Registration and Login
 app.get("/", controller.getIndex);
 app.get("/login", controller.getLogin);
@@ -16,7 +29,7 @@ app.get("/home", controller.getHome);
 // Account Features
 app.get("/myprofile", controller.getMyProfile);
 app.get("/mysettings", controller.getSettings);
-app.post("/saveSettings", controller.saveSettings);
+app.post("/saveSettings",upload.single('image'), controller.saveSettings);
 
 // Flowchart Features
 app.get("/viewflowcharts", controller.viewFlowcharts);

@@ -8,6 +8,7 @@ const nameSchema = mongoose.Schema({
 
 const accountSchema = mongoose.Schema({
     fullName: nameSchema,
+    image:String,
     userName: String,
     email: String,
     password: String,
