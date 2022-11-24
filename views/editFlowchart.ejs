@@ -38,34 +38,38 @@
                     <div id="flowchart-table">
                         <div class="ay">
                             <div class="col-sm-8">
-                                <h5><%= flowchart.startingYear %></h5>
+                                <div class="school-year"></div>
+                                <!-- <h5><%= flowchart.startingYear %></h5> -->
                                 <script>
-                                    var input = document.getElementById("ay-input")
+                                    const flowchartBG = document.getElementById("flowchart-table");
+                                    var startingYear = <%= flowchart.statingYear %>;
+
+                                    flowchartBG.getElementsByClassName("school-year")[0].innerHTML = startingYear + "-" + (parseInt(startingYear) + 1);
+
+                                    // var input = document.getElementById("ay-input")
                                     
+                                    // input.addEventListener("keypress", function(event){
+                                    //     if(event.key === "Enter"){
+                                    //         event.preventDefault();
+                                    //         var schoolYear = input.value;
+                                    //         var finalAY = document.createElement('div');
+                                    //         finalAY.className = "school-year";
+                                    //         finalAY.innerHTML = input.value + "-" + (parseInt(input.value) + 1);
 
+                                    //         input.parentElement.appendChild(finalAY);
+                                    //         input.type = "hidden";
+                                    //         document.getElementById("add-sy").disabled = false;
+                                    //         console.log("Enter pressed");
 
-                                input.addEventListener("keypress", function(event){
-                                    if(event.key === "Enter"){
-                                        event.preventDefault();
-                                        var schoolYear = input.value;
-                                        var finalAY = document.createElement('div');
-                                        finalAY.className = "school-year";
-                                        finalAY.innerHTML = input.value + "-" + (parseInt(input.value) + 1);
-
-                                        input.parentElement.appendChild(finalAY);
-                                        input.type = "hidden";
-                                        document.getElementById("add-sy").disabled = false;
-                                        console.log("Enter pressed");
-
-                                        fetch('/addAY', {
-                                            method: 'POST',
-                                            body: JSON.stringify({schoolYear}),
-                                            headers: {'Content-Type': 'application/json'}
-                                        }).then(response => response.text())
-                                        .then(schoolYear => console.log(schoolYear))
-                                        .catch(err => console.log(err))
-                                    }
-                                })
+                                    //         fetch('/addAY', {
+                                    //             method: 'POST',
+                                    //             body: JSON.stringify({schoolYear}),
+                                    //             headers: {'Content-Type': 'application/json'}
+                                    //         }).then(response => response.text())
+                                    //         .then(schoolYear => console.log(schoolYear))
+                                    //         .catch(err => console.log(err))
+                                    //     }
+                                    // })
                             </script>
                         </div>
                         <div class="term-header">
