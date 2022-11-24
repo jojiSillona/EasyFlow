@@ -17,7 +17,7 @@
                 <div class="panel">
                     <div class="user-heading round">
                         <a href="#">
-                            <img style="object-fit:cover;" src="images/<%=accounts.image%>" alt="<%=accounts.image%>" >
+                            <img id="image" style="object-fit:cover;" src="images/<%=accounts.image%>" alt="display picture" onerror="standby()">
                         </a>
                         <form action="/saveSettings" method="POST" enctype="multipart/form-data">
                          <button class="btn btn" type="button" style="background:#3551a3; font-size:11px;">
@@ -90,6 +90,11 @@
         <br>
         </div>
     </div>
+    <script>
+        function standby() {
+        document.getElementById('image').src ="images/user.png"
+        }
+    </script>
     </main>
     <%- include('partials/footer'); -%>
 </body>
