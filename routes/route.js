@@ -37,6 +37,7 @@ app.get("/viewflowcharts", controller.viewFlowcharts);
 app.get("/createflowchart", controller.editFlowchart); // shows actual
 app.post("/createflowchart", controller.createFlowchart); // modal
 app.post("/saveflowchart",controller.saveFlowchart); // associates courses with flowchart id
+app.post("/addAY/:id", controller.addAY);
 app.get('/delete/:id', controller.deleteFlowchart);
 
 // Course Features

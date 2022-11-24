@@ -196,7 +196,8 @@ const controller = {
             accountId: req.session.userObjectId,
             title: req.body.flowchartName,
             department: req.body.deptName,
-            startingYear: req.body.startAY
+            startingYear: req.body.startAY,
+            numberOfAY: 1
         });
 
         flow.save(function(err){
@@ -287,6 +288,19 @@ const controller = {
             }
         });
            
+    },
+
+    addAY: function(req, res){
+        Flowchart.findByIdAndUpdate(req.params.id,
+            {$inc: {numberOfAY: 1}},
+            function(err){
+                if(err){
+                    console.log(err);
+                } else {
+                    console.log("AY CREATED")
+                }
+            }
+        );
     },
 
 // Course Functions

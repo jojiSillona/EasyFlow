@@ -39,6 +39,7 @@
                         <div class="ay">
                             <div class="col-sm-8">
                                 <script>
+                                    // PLEASE READ!!!!! DISREGARD SQUIGLY ERROR
                                     var schoolYear = <%= flowchart.startingYear %>;
                                     var finalAY = document.createElement('div');
                                     finalAY.className = "school-year";
@@ -52,57 +53,75 @@
                             <div class="term">Term 3</div>
                         </div>
                     </div>
+                    <!--THIS IS WHERE WE WILL ADD EXISTING ACAD YEARS-->
+                    
+                    <script>
+
+                        for(let i = 1; i < <%= flowchart.numberOfAY%>; i++){
+                            createAY();
+                        }
+
+                        function createAY(){
+                            console.log("Adding SY");
+
+                            const flowchartTable = document.getElementById("flowchart-table");
+                            const mainCanvas = document.getElementById('canvas')
+
+                            //MAIN PARENT
+                            var newSY = document.createElement('div');
+                            newSY.className = 'ay'
+
+                            //MAIN CHILD: SY
+                            var inputSY = document.createElement('div')
+                            inputSY.className = 'col-sm-8'
+
+                            //MAIN CHILDREN: term headers
+                            var termHeader = document.createElement('div')
+                            termHeader.className ='term-header'
+
+                            var finalAY = document.createElement('div')
+                            finalAY.className = "school-year"
+                            var newAY = flowchartTable.getElementsByClassName('ay')
+                            
+                            newAY = newAY[newAY.length - 1].getElementsByClassName("school-year")[0].innerHTML.split("-")[0]
+                            finalAY.innerHTML = (parseInt(newAY) + 1) + "-" + (parseInt(newAY) + 2)
+
+                            //CHILD OF TERM HEADERS
+                            var term1 = document.createElement('div')
+                            term1.className='term'
+                            term1.innerHTML='Term 1'
+                            var term2 = document.createElement('div')
+                            term2.className='term'
+                            term2.innerHTML='Term 2'
+                            var term3 = document.createElement('div')
+                            term3.className='term'
+                            term3.innerHTML='Term 3'
+
+                            //INSERT ALL INTO HTML
+                            flowchartTable.insertBefore(newSY, document.getElementById('ay-adder'))
+                            newSY.appendChild(inputSY)
+                            newSY.appendChild(termHeader)
+                            inputSY.appendChild(finalAY)
+                            termHeader.appendChild(term1)
+                            termHeader.appendChild(term2)
+                            termHeader.appendChild(term3)
+                        }
+                        function addSY(){
+                            fetch("/addAY/<%=flowchart.id %>",{
+                                method: 'POST',
+                                headers: {'Content-Type': 'application/json'}
+                            })
+                            .then(response => response.text())
+                            .catch(err => console.log(err))
+                            
+                            createAY();
+
+                            // PLEASE READ!!!!! DISREGARD SQUIGLY ERROR
+                            mainCanvas.style.width = (330 * <%= flowchart.numberOfAY %>) + "px";
+                        }
+                    </script>
                     <div id="ay-adder">
                         <button id="add-sy" onclick="addSY()">+</button>
-                        <script>
-                            function addSY(){
-                                console.log("Adding SY");
-
-                                const flowchartTable = document.getElementById("flowchart-table");
-                                const mainCanvas = document.getElementById('canvas')
-
-                                //MAIN PARENT
-                                var newSY = document.createElement('div');
-                                newSY.className = 'ay'
-
-                                //MAIN CHILD: SY
-                                var inputSY = document.createElement('div')
-                                inputSY.className = 'col-sm-8'
-
-                                //MAIN CHILDREN: term headers
-                                var termHeader = document.createElement('div')
-                                termHeader.className ='term-header'
-
-                                var finalAY = document.createElement('div')
-                                finalAY.className = "school-year"
-                                var newAY = flowchartTable.getElementsByClassName('ay')
-                                
-                                newAY = newAY[newAY.length - 1].getElementsByClassName("school-year")[0].innerHTML.split("-")[0]
-                                finalAY.innerHTML = (parseInt(newAY) + 1) + "-" + (parseInt(newAY) + 2)
-
-                                //CHILD OF TERM HEADERS
-                                var term1 = document.createElement('div')
-                                term1.className='term'
-                                term1.innerHTML='Term 1'
-                                var term2 = document.createElement('div')
-                                term2.className='term'
-                                term2.innerHTML='Term 2'
-                                var term3 = document.createElement('div')
-                                term3.className='term'
-                                term3.innerHTML='Term 3'
-
-                                //INSERT ALL INTO HTML
-                                flowchartTable.insertBefore(newSY, document.getElementById('ay-adder'))
-                                newSY.appendChild(inputSY)
-                                newSY.appendChild(termHeader)
-                                inputSY.appendChild(finalAY)
-                                termHeader.appendChild(term1)
-                                termHeader.appendChild(term2)
-                                termHeader.appendChild(term3)
-
-                                mainCanvas.style.width = parseInt(mainCanvas.style.width) + 330 + "px";
-                            }
-                        </script>
                     </div>
                     <div id="canvas" style="width: 330px;">
                         <!-- Please add the subjects here. -->
