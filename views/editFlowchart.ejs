@@ -32,8 +32,6 @@
                             </div>
                         </div>
                     </div>
-              
-                    <!-- <form action="/saveflowchart" method="post"></form>   -->
                     <div class="flowchart-info">
                         <h1><%= flowchart.title %></h1>
                         <h4><%= flowchart.department %></h4>
@@ -159,7 +157,6 @@
                                 this.style.left = leftSize + "px";
                                 this.style.top = topSize + "px";
                                 
-                                //TODO: SAVE POSITION TO DB
                                 fetch('/savePosition', {
                                     method: 'POST',
                                     body: JSON.stringify({params}),
