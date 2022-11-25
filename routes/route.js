@@ -32,18 +32,17 @@ app.get("/mysettings", controller.getSettings);
 app.post("/saveSettings", controller.saveSettings);
 app.post("/save",upload.single('image'), controller.saveProfile);
 
-
 // Flowchart Features
+app.get("/viewflowchart/:flowchartId", controller.viewFlowchart);
 app.get("/viewflowcharts", controller.viewFlowcharts);
 app.post("/editflowchart", controller.editFlowchart);
 app.get("/editFlowchart/:flowchartId", controller.editFlowchart);
-app.post("/saveflowchart",controller.saveFlowchart); // associates courses with flowchart id
+app.post("/saveflowchart",controller.saveFlowchart);
 app.post("/addAY/:id", controller.addAY);
 app.get('/deleteFlowchart/:flowchartId', controller.deleteFlowchart);
 
 // Course Features
 app.post("/addCourse", controller.addCourse);
-
 app.post("/editCourse/:courseId", controller.editCourse);
 app.get("/editCourse/:courseId", controller.editCourse);
 app.post("/updateChosen", controller.updateChosen);

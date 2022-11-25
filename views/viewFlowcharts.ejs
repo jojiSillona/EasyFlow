@@ -21,7 +21,9 @@
                     <div class="card">
                         <img src="images/flowchart.png" alt="flowchart pic" class="box-img" style=" width: 135px;
                         height: 150px; border-radius: 25px;">
-                        <h5 ><%= flow.title %></h5>
+                        <a href ="/viewFlowchart/<%=flow.id%>" data-toggle="tooltip" title="View flowchart">
+                            <h5><%= flow.title %></h5>
+                        </a>
                         <a href ="/editFlowchart/<%=flow.id%>" data-toggle="tooltip" title="Edit flowchart">
                             <i class="far fa-edit fa-xl" style="margin-left:85px;"></i>
                         </a>

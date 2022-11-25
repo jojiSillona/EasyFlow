@@ -182,6 +182,26 @@ const controller = {
     },
     
 // Flowchart Functions
+    viewFlowchart: function(req,res){
+        Flowchart.findOne({_id: req.params.flowchartId}, function(err,query){
+            if(err){
+                console.log(err);
+            } else {
+                Course.find({flowchartId: query.id}, function(err,rows){
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        res.render(('viewFlowchart'), {
+                            courses: rows,
+                            flowchart: query
+                        });
+                    }
+                });
+            }
+        });
+    },
+
     viewFlowcharts: function(req,res){
         Flowchart.find({accountId: req.session.userObjectId}, function(err,query){
             if(err){
