@@ -17,10 +17,7 @@
             </div>
             
             <div class="control-width row">
-            <!-- Sample 1 -->
-           
                 <% flow.forEach(function(flow){ %>
-                <!--< href="Usersflowchart1.html">-->
                     <div class="card">
                         <img src="images/flowchart.png" alt="flowchart pic" class="box-img" style=" width: 135px;
                         height: 150px; border-radius: 25px;">
@@ -32,14 +29,8 @@
                             <i class="far fa-trash-alt fa-xl" style="margin-left:5px;"></i>
                         </a>
                     </div>
-                
-               <!--</a>--> 
                <% }); %>
-            
-
             <div class="column">
-                
-
                <!-- Create Flowchart -->
                <a type="button" data-toggle="modal" data-target="#createFlowchart">
                 <div class="card">
@@ -88,7 +79,6 @@
             </a>
             </div>
         </div>
-    </div>
         </main>
     </body>
     <%- include('partials/footer'); -%>

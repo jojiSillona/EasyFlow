@@ -70,15 +70,22 @@
       Activity
     </div>
     <div class="control-width">
-      <!-- UPDATE TO CONNECT TO DB LATER -->
-      <!-- Sample 1 -->
-      <a href="#">
+      <% flow.forEach(function(flow){ %>
+        <a href ="/viewOtherFlowchart/<%= flow.id %>" data-toggle="tooltip" title="View flowchart">
+        <div class="card" style="margin-left:110px">
+            <img src="/images/flowchart.png" alt="flowchart pic" class="box-img" style=" width: 135px;
+            height: 150px; border-radius: 25px;">
+            <h5 ><%= flow.title %></h5>
+            </a>    
+        </div>
+      <% }); %>
+      <!-- <a href="#">
         <div class="card" style="margin-left:110px">
           <img src="/images/flowchart.png" alt="flowchart pic" class="box-img" style=" width: 135px;
           height: 150px; border-radius: 25px;">
           <h5>Term 1 Flow Chart</h5>
         </div>
-      </a>
+      </a> -->
     </div>
   </div>
 

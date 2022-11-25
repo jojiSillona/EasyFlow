@@ -37,14 +37,8 @@ app.post("/save",upload.single('image'), controller.saveProfile);
 app.get("/viewflowcharts", controller.viewFlowcharts);
 // view one specific flowchart 
 app.post("/editflowchart", controller.editFlowchart);
-
-
-// MODIFY EXISTING FLOWCHART
 app.get("/editFlowchart/:flowchartId", controller.editFlowchart);
-// app.get("/createflowchart", controller.editFlowchart); // shows actual
 
-// CREATING NEW FLOWCHART
-// app.get("/getflowchart", controller.editFlowchart);
 app.post("/createflowchart", controller.createFlowchart); // modal
 app.post("/saveflowchart",controller.viewFlowcharts); // associates courses with flowchart id
 app.post("/addAY/:id", controller.addAY);
@@ -62,6 +56,7 @@ app.post("/savePosition", controller.savePosition);
 // Other Profile Features
 app.get("/otherprofile/:accountId", controller.getOtherProfile);
 app.get("/viewUsers", controller.viewUsers);
+app.get("/viewOtherFlowchart/:flowchartId", controller.viewOtherFlowchart);
 app.post("/searchresults", controller.searchResults);
 app.get("/logout", controller.logout);
 module.exports = app;

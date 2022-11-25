@@ -16,7 +16,7 @@
         <ul class="list-group list-group-flush">
             <% accounts.forEach(function(account){ %>
             <a  href="otherprofile/<%= account.id %>" style="text-decoration: none;">
-            <li class="list-group-item content">
+            <li class="list-group-item content friends">
                 <div >
                     <img src="images/user-circle.png" class="friend-icon" alt="FriendResult1">
                 </div>
@@ -24,7 +24,6 @@
                     <div class="friend-subtxt"><%= account.userName %></div>
                     <input type="hidden" name="accountId" value="<%= account.id %>"></input>
                 </div>
-                <div class="friend-button"> <button type="button" class="btn btn-primary btn-sm">Send Request</button></div>
             </li>
             </a>
             <% }); %>

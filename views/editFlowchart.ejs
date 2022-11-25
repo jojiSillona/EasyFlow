@@ -16,7 +16,6 @@
                     <div class="editing-flag">
                         You are currently editing a flowchart.
                         <div class="dropdown">
-                            <form action="/saveflowchart" method="post">
                             <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Actions
                             </button>
@@ -25,10 +24,10 @@
                                 <button class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#editCourse" >Edit Course</button>
                                 <button class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#deleteCourse" >Delete Course</button>
                                 <div class="dropdown-divider"></div>
-                                
+                                <form action="/saveflowchart" method="post">
                                 <input type="submit" class="btn btn-primary dropdown-item" value="Save Changes">
+                                </form>
                             </div>
-                            </form>
                         </div>
                     </div>
               

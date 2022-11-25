@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head'); -%>
+    <link rel="stylesheet" type="text/css" href="/css/flowchart.css">
+    <title>Create Flowchart</title>
+</head>
+    <body>
+        <header>
+            <%- include('partials/sidebar'); -%>
+        </header>
+            <main>
+                <div class="main-window">
+                    <%- include('partials/searchbar'); -%>
+                    <div class="flowchart-info">
+                        <h1><%= flowchart.title %></h1>
+                        <h4><%= flowchart.department %></h4>
+                    </div>
+                    <div id="flowchart-table">
+                        <div class="ay">
+                            <div class="col-sm-8">
+                                <script>
+                                    // PLEASE READ!!!!! DISREGARD SQUIGLY ERROR
+                                    var schoolYear = <%= flowchart.startingYear %>;
+                                    var finalAY = document.createElement('div');
+                                    finalAY.className = "school-year";
+                                    finalAY.innerHTML = schoolYear + "-" + (parseInt(schoolYear) + 1);
+                                    document.getElementById("flowchart-table").getElementsByClassName("ay")[0].getElementsByClassName("col-sm-8")[0].appendChild(finalAY);
+                            </script>
+                        </div>
+                        <div class="term-header">
+                            <div class="term">Term 1</div>
+                            <div class="term">Term 2</div>
+                            <div class="term">Term 3</div>
+                        </div>
+                    </div>
+                    <div id="canvas" style="width: 330px;">
+                        <!-- Please add the subjects here. -->
+                        <% courses.forEach(function(course){ %>
+                            <!-- PLEASE READ!!!!! DISREGARD SQUIGLY ERROR-->
+                            <div class="subject" style='background: <%= course.style %>; left: <%= course.leftPosition %>px; top: <%= course.topPosition %>px'><%= course.code %></div>
+                        <% }); %>
+                        <svg id="svg-canvas">
+                            <!-- Leave this blank -->
+                        </svg>
+                    </div>
+                </div>
+                </div>
+            </main>
+        <%- include('partials/footer'); -%>
+    </body>
+</html>

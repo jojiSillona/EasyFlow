@@ -141,6 +141,7 @@ const controller = {
           }
         });
     },
+
     saveProfile:function(req,res){
         const image= req.file.filename
         Account.findByIdAndUpdate(req.session.userObjectId, 
@@ -161,7 +162,7 @@ const controller = {
 
     },
 
-        saveSettings: function(req,res){
+    saveSettings: function(req,res){
         const lastName = req.body.lastName;
         const firstName = req.body.firstName;
         const bio = req.body.bio;
@@ -195,10 +196,6 @@ const controller = {
 // Flowchart Functions
     viewFlowcharts: function(req,res){
         Flowchart.find({accountId: req.session.userObjectId}, function(err,query){
-        // Flowchart.find({
-        //     $or: [{'title' : {$regex: new RegExp(req.body.query, 'i')}}]
-        //   }, function(err,query)
-        //   {
             if(err){
                 console.log(err);
             } else {
@@ -553,13 +550,20 @@ const controller = {
         const accountId = req.params.accountId;
         Account.find({_id: accountId},function(err,result)
         {
-        if(err){
-            console.log(err);
-        } else {
-            res.render('otherProfile',{
-                account : result[0]
-            });
-        }
+            if(err){
+                console.log(err);
+            } else {
+                Flowchart.find({accountId: req.session.userObjectId}, function(err,query){
+                    if(err){
+                        console.log(err);
+                    } else {
+                    res.render('otherProfile',{
+                        account : result[0],
+                        flow: query
+                        });
+                    }
+                });
+            }
         });
     },
 
@@ -574,6 +578,28 @@ const controller = {
                 });
             }
           });
+    },
+    
+
+    viewOtherFlowchart: function(req,res){
+        Flowchart.findOne({_id: req.params.flowchartId}, function(err,query){
+            if(err){
+                console.log(err);
+            } else {
+                Course.find({flowchartId: query.id}, function(err,rows){
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        res.render(('viewOtherFlowchart'), {
+                            courses: rows,
+                            flowchart: query
+                        });
+                    }
+                });
+            }
+            });
+        
     },
 
     searchResults: function(req,res){

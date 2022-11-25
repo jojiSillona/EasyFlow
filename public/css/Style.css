@@ -215,6 +215,11 @@ main{
   color:white;
 }
 
+.friends:hover{
+  border:#3551a3 2px solid;
+  background-color:#e7ebee;
+}
+
 /* .list-group-item:hover{
   background-color:#b8b8b8;
   color:white;
