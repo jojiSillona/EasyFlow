@@ -205,18 +205,37 @@ const controller = {
                 console.log(err);
             }
             else{ //acc and flowchart id
-                Course.find({ accountId: {$in: req.session.userObjectId}}, function(err,rows){
+                Flowchart.findOne({_id:  flow.id, accountId: req.session.userObjectId}, function(err,flow){
                     if(err){
                         console.log(err);
                     }
                     else{
-                        res.render(('editFlowchart'), {
-                            courses: rows,
-                            flowchart: flow,
-                            
+                        console.log("ETO YUNG FLOW GAGIIIIIIIIIII" +flow.id)
+                        Course.find({flowchartId: flow.id}, function(err,rows){
+                            if(err){
+                                console.log(err);
+                            }
+                            else{
+                                res.render(('createFlowchart'), {
+                                    courses: rows,
+                                    flowchart: flow
+                                });
+                            }
                         });
                     }
-                });
+                })
+                // Course.find({ accountId: {$in: req.session.userObjectId}}, function(err,rows){
+                //     if(err){
+                //         console.log(err);
+                //     }
+                //     else{
+                //         res.render(('createFlowchart'), {
+                //             courses: rows,
+                //             flowchart: flow,
+                            
+                //         });
+                //     }
+                // });
         
                 console.log("Flowchart created.");
             }
@@ -225,45 +244,57 @@ const controller = {
        
     },
 
+    // createFlowchart: function(req,res){
+    //     console.log("ETO YUNG FLOWCHARTID GAGIIIIIIIIIII" + req.body.flowchartId)
+    //     console.log("ETO YUNG USEROBJECTID GAGIIIIIIIIIII" + req.session.userObjectId)
+
+    //     Flowchart.findOne({_id: flowchartId, accountId: req.session.userObjectId}, function(err,flow){
+    //         if(err){
+    //             console.log(err);
+    //         }
+    //         else{
+    //             console.log("ETO YUNG FLOW GAGIIIIIIIIIII" +flow)
+    //             Course.find({flowchartId: flow.id}, function(err,rows){
+    //                 if(err){
+    //                     console.log(err);
+    //                 }
+    //                 else{
+    //                     res.render(('editFlowchart'), {
+    //                         courses: rows,
+    //                         flowchart: flow
+    //                     });
+    //                 }
+    //             });
+    //         }
+    //     })
+    // },
+
     editFlowchart: function(req,res){
-    //     Flowchart.find({ accountId: req.session.userObjectId })
-    // .then(data => {
-    //     console.log("Database Courses:")
-    //     console.log(data);
+        console.log("ETO YUNG FLOWCHARTID GAGIIIIIIIIIII" + req.params.flowchartId)
+        console.log("ETO YUNG USEROBJECTID GAGIIIIIIIIIII" + req.session.userObjectId)
 
-    
-    // Course.find({accountId: req.session.userObjectId })
-    //     .then(data => {
-    //         console.log("Students in Database Courses:")
-    //         console.log(data);
-    //         res.render('createflowchart', (
-    //             courses: rows,
-    //             flowchart:flow
-    //         ))
-    //     })
-    //     .catch(error => {
-    //         console.log(error);
-    //     })
-    //     })
-    //     .catch(error => {
-    //         console.log(error);
-    //     })
-
-    Course.find({}, function(err,rows){
-        if(err){
-            console.log(err);
-        }
-        else{
-            res.render(('createFlowchart'), {
-                courses: rows
-            });
-        }
-    });
+        Flowchart.findOne({_id:  req.params.flowchartId, accountId: req.session.userObjectId}, function(err,flow){
+            if(err){
+                console.log(err);
+            }
+            else{
+                console.log("ETO YUNG FLOW GAGIIIIIIIIIII" +flow)
+                Course.find({flowchartId: flow.id}, function(err,rows){
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        res.render(('editFlowchart'), {
+                            courses: rows,
+                            flowchart: flow
+                        });
+                    }
+                });
+            }
+        })
     },
     
     saveFlowchart:function(req,res){
-       
-
         flow.save(function(err){
             if(err){
                 console.log(err);
@@ -277,14 +308,16 @@ const controller = {
     },
 
     deleteFlowchart: function(req,res){
-        flowchartData= Flowchart.findByIdAndDelete(req.params.id);
-        flowchartData.exec(function(err){
-          if (err){
-            console.log(err);
-          }
-          else{
-               res.redirect('/viewflowcharts')
-               console.log ("record was deleted");
+        var id = req.params.flowchartId;
+        console.log("YUNG ID AYYYYYYYYYYYYYYY: " + id);
+        Flowchart.findByIdAndDelete(id, function (err, docs) {
+            if (err){
+                console.log(err)
+            }
+            else{
+                res.redirect("/viewflowcharts");
+                console.log("flowchartid : ", id);
+                console.log("Deleted : ", docs);
             }
         });
            
@@ -305,6 +338,7 @@ const controller = {
 
 // Course Functions
     addCourse: function(req,res){
+        var flowchartState = req.body.state;
         var statusString;
         var statusStyle;
         let statusId = Number(req.body.status);
@@ -335,6 +369,7 @@ const controller = {
         }
         const course = new Course({
             accountId: req.session.userObjectId,
+            flowchartId: req.body.flowchartId,
             code: req.body.code,
             professor: req.body.prof,
             units: req.body.units,
@@ -349,8 +384,34 @@ const controller = {
                 console.log(err);
             }
             else{
-                // res.redirect("/createflowchart"); //redirect to flowchart id
-                res.redirect("/createflowchart"); 
+                Flowchart .findOne({_id: req.body.flowchartId, accountId: req.session.userObjectId}, function(err,flow){
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        Course.find({flowchartId: flow.id}, function(err,rows){
+                            if(err){
+                                console.log(err);
+                            }
+                            else{//create/edit
+                                if(flowchartState == 1) // from createFlowchart
+                                {
+                                    res.render(('createFlowchart'), {
+                                        courses: rows,
+                                        flowchart: flow
+                                    });
+
+                                }else if(flowchartState == 2) // from editFlowchart
+                                {
+                                    res.render(('editFlowchart'), {
+                                        courses: rows,
+                                        flowchart: flow
+                                    });
+                                }
+                            }
+                        });
+                    }
+                })
                 console.log("Course added.");
             }
         });
@@ -373,16 +434,16 @@ const controller = {
         }
         });
 
-        Course.find({}, function(err,rows){
-            if(err){
-                console.log(err);
-            }
-            else{
-                res.render(('createFlowchart'), {
-                    courses: rows
-                });
-            }
-        });
+        // Course.find({}, function(err,rows){
+        //     if(err){
+        //         console.log(err);
+        //     }
+        //     else{
+        //         res.render(('editFlowchart'), {
+        //             courses: rows
+        //         });
+        //     }
+        // });
     },
 
     savePosition: function(req, res){
@@ -404,6 +465,7 @@ const controller = {
     },
 
     updateChosen: function(req,res){
+        // var flowchartState = req.body.state;
         const courseId = req.body.codeId;
         const query = {_id : courseId};
         const code = req.body.code;
@@ -433,7 +495,26 @@ const controller = {
                 console.log(err);
             }
             else{
-                res.redirect("/createflowchart"); //will change later into current view flowchart id
+                // if(flowchartState == 1) // from createFlowchart
+                // {
+                //     res.render(('createFlowchart'), {
+                //         courses: rows,
+                //         flowchart: flow
+                //     });
+
+                // }else if(flowchartState == 2) // from editFlowchart
+                // {
+                //     res.render(('editFlowchart'), {
+                //         courses: rows,
+                //         flowchart: flow
+                //     });
+                // }
+
+                res.render(('createFlowchart'), {
+                            courses: rows,
+                            flowchart: flow
+                });
+                // res.render("/createflowchart"); //will change later into current view flowchart id
                 console.log("Course modified.");
             }
             });
@@ -445,7 +526,7 @@ const controller = {
             if(err){
                 console.log(err);
             }else{
-                res.redirect('/createflowchart'); 
+                res.redirect('/getflowchart'); 
                 console.log("Course deleted.");
             }
         })

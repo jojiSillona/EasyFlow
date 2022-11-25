@@ -25,10 +25,10 @@
                         <img src="images/flowchart.png" alt="flowchart pic" class="box-img" style=" width: 135px;
                         height: 150px; border-radius: 25px;">
                         <h5 ><%= flow.title %></h5>
-                        <a href ="/editflowchart" data-toggle="tooltip" title="Edit flowchart">
+                        <a href ="/editFlowchart/<%=flow.id%>" data-toggle="tooltip" title="Edit flowchart">
                             <i class="far fa-edit fa-xl" style="margin-left:85px;"></i>
                         </a>
-                        <a href ="/delete/<%=flow.id%>" data-toggle="tooltip" title="Delete flowchart">
+                        <a href ="/deleteFlowchart/<%=flow.id%>" data-toggle="tooltip" title="Delete flowchart">
                             <i class="far fa-trash-alt fa-xl" style="margin-left:5px;"></i>
                         </a>
                     </div>

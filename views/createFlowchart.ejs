@@ -13,8 +13,8 @@
             <main>
                 <div class="main-window">
                     <%- include('partials/searchbar'); -%>
-                    <div class="editing-flag">
-                        You are currently editing a flowchart.
+                    <div class="creating-flag">
+                        You are creating a flowchart.
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Actions
@@ -213,7 +213,7 @@
                             </div>
                             <div class="modal-footer">
                                 <input type="hidden" name="flowchartId" value="<%= flowchart.id %>">
-                                <input type="hidden" name="state" value="2">
+                                <input type="hidden" name="state" value="1">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">Add course</button>
                             </div>
@@ -238,14 +238,14 @@
                                 <td><small class="text-muted">Professor: <%= course.professor %></small></td>
                                 <td><small class="text-muted">Units: <%= course.units %></small></td>
                                 <td><small class="text-muted">Status: <%= course.status %></small></td>
-                                <td style="padding-bottom:1em"><a href="editCourse/<%= course.id %>" class="btn btn-success btn-sm" data-toggle="#updateChosen"> Edit </a></td>
+                                <td style="padding-bottom:1em"><a href="editCourse/<%= course.id %>/<%= flowchart.id %>" class="btn btn-success btn-sm" data-toggle="#updateChosen"> Edit </a></td>
                                 </tr> 
                             <% }); %> 
                             </table>                
                         </div>
                         <div class="modal-footer">
                             <input type="hidden" name="flowchartId" value="<%= flowchart.id %>">
-                            <input type="hidden" name="state" value="2">
+                            <input type="hidden" name="state" value="1">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
                     </div>
@@ -296,7 +296,7 @@
                         </div>
                         <div class="modal-footer">
                             <input type="hidden" name="flowchartId" value="<%= flowchart.id %>">
-                            <input type="hidden" name="state" value="2">
+                            <input type="hidden" name="state" value="1">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
@@ -322,13 +322,14 @@
                         <td><small class="text-muted">Professor: <%= course.professor %></small></td>
                         <td><small class="text-muted">Units: <%= course.units %></small></td>
                         <td><small class="text-muted">Status: <%= course.status %></small></td>
-                        <td style="padding-bottom:1em"><a href="deleteCourse/<%= course.id %>" class="btn btn-danger btn-sm"> Delete </a></td>
+                        <td style="padding-bottom:1em"><a href="deleteCourse/<%= course.id %>/<%= flowchart.id %>" class="btn btn-danger btn-sm"> Delete </a></td>
                         </tr> 
                     <% }); %> 
                     </table>                
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" name="state" value="2">
+                    <input type="hidden" name="flowchartId" value="<%= flowchart.id %>">
+                    <input type="hidden" name="state" value="1">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
