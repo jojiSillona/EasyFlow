@@ -1,13 +1,16 @@
 const Account = require("../models/accountModel.js");
 const Flowchart = require("../models/flowchartModel.js");
 const Course = require("../models/courseModel.js");
+const { isObjectIdOrHexString } = require("mongoose");
 
 //-------------- SAMPLE DATA ------------
 //-------------- SAMPLE DATA FOR ACCOUNT ------------------
 
 //<<< SAMPLE DATA 1 >>>
 const sampleData= (req,res)=>{
-    Account.insertMany([{ fullName:{
+    Account.insertMany([{
+    _id:"6380fcb161723801ff3b9170",
+    fullName:{
     firstName:"Ruby",
     lastName:"Richards"
 },
@@ -20,7 +23,9 @@ biography: "Welcome to my page"
 
 
 //<<< SAMPLE DATA 2 >>>
-{ fullName:{
+{ 
+    _id:"6380fcb161723801ff3b9171",
+    fullName:{
     firstName:"Tia",
     lastName:"Burmen"
 },
@@ -33,7 +38,9 @@ biography: "“Happiness depends upon ourselves.” – Madelyn Teppner"
 
 
 //<<< SAMPLE DATA 3 >>>
-{ fullName:{
+
+{ _id:"6380fcb161723801ff3b9172",
+    fullName:{
     firstName:"George",
     lastName:"Dwell"
 },
@@ -47,7 +54,8 @@ biography: "“Be who you are and say what you feel, because those who mind don�
 
 
 //<<< SAMPLE DATA 4 >>>
-{ fullName:{
+{ _id:"6380fcb161723801ff3b9173",
+    fullName:{
     firstName:"Dave",
     lastName:"Duken"
 },
@@ -60,7 +68,8 @@ biography: "“In the end, it’s not the years in your life that count. It’s 
 
 
 //<<< SAMPLE DATA 5 >>>
-{ fullName:{
+{ _id:"6380fcb161723801ff3b9174",
+    fullName:{
     firstName:"Camilla",
     lastName:"Smith"
 },
@@ -74,79 +83,122 @@ biography: "“Just because you fail once, does not mean that you’re gonna fai
 
 //-------------- SAMPLE DATA FOR COURSE ------------------
 //<<< SAMPLE DATA 1 >>>
-Course.insertMany([{ 
-    code: "CCAPDEV",
-     professor: "Mar Christian Herrera",
-     units: "3",
-    status: "Currently Taking",
-},
+Course.insertMany([
+    {
+        accountId: "6380fcb161723801ff3b9170",
+        flowchartId: "6380f69ee38cdd8d5a233a7a",
+        code: "CCAPDEV",
+        professor: "Mar Christian Herrera",
+        units: 3,
+        status: "Currently Taking",
+        style: "#83BBE5",
+        leftPosition: 120,
+        topPosition: 0
+      },
 
 //<<< SAMPLE DATA 2 >>>
-   { code: "GERIZAL",
-    professor: "Angelo Arriola",
-     units: "3",
-    status: "Currently Taking",
+   { 
+    accountId: "6380fcb161723801ff3b9170",
+    flowchartId: '6380f69ee38cdd8d5a233a7a',
+    code:"GERIZAL",
+    professor:"Angelo Arriola",
+    units:3,
+    status:"Currently Taking",
+    style:  "#83BBE5",
+    leftPosition:120,
+    topPosition:120,
 },
 
 //<<< SAMPLE DATA 3 >>>
  { 
-     code: "GEDANCE",
+    accountId: "6380fcb161723801ff3b9170",
+    flowchartId: '6380f69ee38cdd8d5a233a7a',
+    code: "GEDANCE",
     professor: "Jun Alave",
-     units: "3",
+    units: 3,
     status: "Passed",
+    style: "#A3D977",
+    leftPosition: 0,
+    topPosition: 0
  },
 
 //<<< SAMPLE DATA 4 >>>
-{ 
-    code: "GEDANCE",
-     professor: "Alain Encarnacion",
-     units: "3",
-     status: "Not Yet Taken",
+{
+    accountId: "6380fcb161723801ff3b9170",
+    flowchartId: '6380f69ee38cdd8d5a233a7a',
+    code: "ITISDEV",
+    professor: "Alain Encarnacion",
+    units: 3,
+    status: "Not Yet Taken",
+    style: "#FFFFFF",
+    leftPosition: 240,
+    topPosition: 0
  },
 
 //<<< SAMPLE DATA 5 >>>
 { 
+    accountId: "6380fcb161723801ff3b9170",
+    flowchartId: '6380f69ee38cdd8d5a233a7a',
     code: "CCPROG2",
     professor: "Shirley Chu",
-     units: "3",
+    units: 3,
     status: "Failed",
+    style: "#FF6565",
+    leftPosition: 0,
+    topPosition: 120
  }]);
 
 //-------------- SAMPLE DATA FOR FLOWCHART ------------------
 //<<< SAMPLE DATA 1 >>>
-Flowchart.insertMany([{ 
+Flowchart.insertMany([{
+    _id: "6380f69ee38cdd8d5a233a7a",
+    accountId: "6380fcb161723801ff3b9170",
     title: "Term 1 Flowchart",
     department: "Department of Engineering",
-    acadYears: []
-},
+    startingYear: 2019,
+    numberOfAY: 2
+  },
 
 //<<< SAMPLE DATA 2 >>>
 { 
+    _id: "6380f69ee38cdd8d5a233a7b",
+    accountId: "6380fcb161723801ff3b9170",
     title: "BSFin Flowchart",
     department: "Department of Financial Management",
-    acadYears: []
+    startingYear: 2020,
+    numberOfAY: 1
 },
 
 
 //<<< SAMPLE DATA 3 >>>
 { 
+    _id: "6380f69ee38cdd8d5a233a7c",
+    accountId: "6380fcb161723801ff3b9170",
     title: "BSINSYS Flowchart",
     department: "Information Technology Department",
-    acadYears: []
+    startingYear: 2021,
+    numberOfAY: 1
 },
 
 //<<< SAMPLE DATA 4 >>>
 { 
+    _id: "6380f69ee38cdd8d5a233a7d",
+    accountId: "6380fcb161723801ff3b9170",
     title: "BSCS Flowchart",
     department: "Software Technology Department",
-    acadYears:"2019-2020"
+    startingYear: 2020,
+    numberOfAY: 1
 },
 
 //<<< SAMPLE DATA 5 >>>
 { 
+    _id: "6380f69ee38cdd8d5a233a7e",
+    accountId: "6380fcb161723801ff3b9170",
     title: "BSIT Flowchart",
     department: "Information Technology Department",
-    acadYears: []
+    startingYear: 2020,
+    numberOfAY: 1
+
 }]);
 }
 module.exports =  {sampleData};
