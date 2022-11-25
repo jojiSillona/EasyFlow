@@ -29,7 +29,9 @@ app.get("/home", controller.getHome);
 // Account Features
 app.get("/myprofile", controller.getMyProfile);
 app.get("/mysettings", controller.getSettings);
-app.post("/saveSettings",upload.single('image'), controller.saveSettings);
+app.post("/saveSettings", controller.saveSettings);
+app.post("/save",upload.single('image'), controller.saveProfile);
+
 
 // Flowchart Features
 app.get("/viewflowcharts", controller.viewFlowcharts);
