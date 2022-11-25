@@ -141,6 +141,25 @@ const controller = {
           }
         });
     },
+    saveProfile:function(req,res){
+        const image= req.file.filename
+        Account.findByIdAndUpdate(req.session.userObjectId, 
+            { 
+            
+                image:image,
+            
+            },                
+            function (err, docs) {
+                if (err){
+                    console.log(err)
+                }
+                else{
+                    console.log("Updated User : ", docs);
+                }
+        });
+        res.redirect('/myprofile');
+
+    },
 
         saveSettings: function(req,res){
         const lastName = req.body.lastName;
@@ -149,7 +168,6 @@ const controller = {
         const username = req.body.username;
         const email = req.body.email;
         const password = req.body.password;
-        const image= req.file.filename
 
         Account.findByIdAndUpdate(req.session.userObjectId, 
             { 
@@ -157,7 +175,7 @@ const controller = {
                     lastName: lastName,
                     firstName: firstName,
                 }, 
-                image:image,
+
                 biography: bio,
                 userName: username,
                 email: email,
@@ -173,6 +191,7 @@ const controller = {
         });
         res.redirect('/myprofile');
     },
+    
 // Flowchart Functions
     viewFlowcharts: function(req,res){
         Flowchart.find({accountId: req.session.userObjectId}, function(err,query){
