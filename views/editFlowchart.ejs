@@ -25,6 +25,8 @@
                                 <button class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#deleteCourse" >Delete Course</button>
                                 <div class="dropdown-divider"></div>
                                 <form action="/saveflowchart" method="post">
+                                <input type="hidden" name="ownerId" value="<%= flowchart.accountId %>">
+                                <input type="hidden" name="flowchartId" value="<%= flowchart.id %>">
                                 <input type="submit" class="btn btn-primary dropdown-item" value="Save Changes">
                                 </form>
                             </div>
@@ -63,7 +65,6 @@
                         }
 
                         function createAY(){
-                            console.log("Adding SY");
 
                             const flowchartTable = document.getElementById("flowchart-table");
                             const mainCanvas = document.getElementById('canvas')
@@ -151,7 +152,6 @@
                                     code: targetSubject
                                 };
 
-                                console.log(params);
 
                                 this.style.left = leftSize + "px";
                                 this.style.top = topSize + "px";

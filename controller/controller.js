@@ -8,7 +8,7 @@ const { render } = require("ejs");
 const { reset } = require("nodemon");
 const addSamples = require("./sampleData.js")
 
-//addSamples.sampleData();
+// addSamples.sampleData();
 
 const controller = {
 // Registration and Login
@@ -17,25 +17,21 @@ const controller = {
     },
 
     getLogin: function(req,res){
-        console.log("getLogin");
         res.render('login', {
             loginError: ""
         });
     },
 
     verifyLogin: function(req,res){
-        console.log("verifyLogin");
         Account.findOne({userName: req.body.username, password: req.body.password }, function (err, search) {
             if (err){
                 console.log(err)
             }
             else if (search == null){
                 res.render('login', {loginError: "Wrong username/password"})
-                console.log("No Result");
             } 
             else{
                 req.session.isAuth = true;
-                console.log("homepage");
                 req.session.userObjectId = search.id;
                 req.session.userName = search.userName;
                 req.session.email = search.email;
@@ -71,7 +67,6 @@ const controller = {
                         res.render('register', {
                             registerError: "Username/email already exists in database."
                         });
-                        console.log("Same user/email.");
                     }else {
                         const acc = new Account({
                             fullName: {
@@ -88,7 +83,6 @@ const controller = {
                             }
                             else{
                                 res.redirect('/home');
-                                console.log("Account added.");
                             }
                         });
                     }
@@ -105,7 +99,6 @@ const controller = {
                     console.log(err)
                 }
                 else{
-                    console.log("homepage");
                     res.render('homepage', {profile:search});
                 }
             });
@@ -153,9 +146,6 @@ const controller = {
             function (err, docs) {
                 if (err){
                     console.log(err)
-                }
-                else{
-                    console.log("Updated User : ", docs);
                 }
         });
         res.redirect('/myprofile');
@@ -265,6 +255,17 @@ const controller = {
     },
     
     saveFlowchart:function(req,res){
+
+        Account.updateOne({_id: req.body.ownerId},
+            { $push: { flowcharts: {flowchartId: req.body.flowchartId}}},
+            function(err){
+                if(err){
+                    console.log(err);
+                    
+                }
+            }
+        );
+        
         res.redirect("/viewflowcharts");
     },
 
@@ -494,7 +495,8 @@ const controller = {
             if(err){
                 console.log(err);
             } else {
-                Flowchart.find({accountId: req.session.userObjectId}, function(err,query){
+                //
+                Flowchart.find({accountId: accountId}, function(err,query){
                     if(err){
                         console.log(err);
                     } else {

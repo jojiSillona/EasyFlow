@@ -12,7 +12,7 @@ const accountSchema = mongoose.Schema({
     userName: String,
     email: String,
     password: String,
-    flowcharts: [{flowchartId: Number}],
+    flowcharts: [{flowchartId: String}],
     biography: {
         type: String,
         default: "This user hasn't set a biography yet."

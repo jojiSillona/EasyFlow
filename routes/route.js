@@ -37,7 +37,7 @@ app.post("/save",upload.single('image'), controller.saveProfile);
 app.get("/viewflowcharts", controller.viewFlowcharts);
 app.post("/editflowchart", controller.editFlowchart);
 app.get("/editFlowchart/:flowchartId", controller.editFlowchart);
-app.post("/saveflowchart",controller.viewFlowcharts); // associates courses with flowchart id
+app.post("/saveflowchart",controller.saveFlowchart); // associates courses with flowchart id
 app.post("/addAY/:id", controller.addAY);
 app.get('/deleteFlowchart/:flowchartId', controller.deleteFlowchart);
 
