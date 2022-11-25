@@ -11,29 +11,34 @@
     <main>
         <%- include('partials/searchbar'); -%>
     <div>
-    <div class="container bootstrap snippets bootdey">
+    <div style="margin-left:200px">
+    <div class="container bootstrap snippets bootdey ">
         <div class="row">
-            <div class="profile-nav col-md-3">
-                <div class="panel">
-                    <div class="user-heading round">
+            <div class="profile-nav col-md-9" >
+                <div class="panel" style="text-align:center;">
+                    <div class="user-heading round" style="text-align:center;">
                         <a href="#">
                             <img id="image" style="object-fit:cover;" src="images/<%=accounts.image%>" alt="display picture" onerror="standby()">
                         </a>
-                        <form action="/saveSettings" method="POST" enctype="multipart/form-data">
+                        <br>
                          <button class="btn btn" type="button" style="background:#3551a3; font-size:11px;">
+                            <form action="/save" method="POST" enctype="multipart/form-data">
                                <i class="fa fa-fw fa-camera" style="color:white;"></i>
                                 <input type="file" name="image" id="actual-btn" hidden/>
                                 <label for="actual-btn" style="color: white;">Change Photo</label>
                                 <input type="submit" value="Save">
+                            </form>
                             </button>
+                       
 
                         <h1 class="pt-sm-2 pb-1 mb-0 text-nowrap"> <%= accounts.fullName.firstName %> <%= accounts.fullName.lastName %></h1>
-
                     </div>
                 </div>
             </div>
-
-                <div class="profile-info col-md-9">
+      
+            
+            <form action="/saveSettings" method="POST">
+                <div class="profile-info col-md-9" >
                     <div class="panel">
                         <div class="bio-graph-heading">
                                 Profile Setting
@@ -43,23 +48,23 @@
                                     <div class="bio-row" style="margin-left:10px;">
                                         <br>
                                         <label>Last Name</label>
-                                        <input class="form-control" type="text" name="lastName" placeholder="Last Name" value= <%= accounts.fullName.lastName %>>
+                                        <input style="width:710px" class="form-control" type="text" name="lastName" placeholder="Last Name" value= <%= accounts.fullName.lastName %>>
                                     </div>
                                     <div class="bio-row" style="margin-left:10px;">
                                         <label>First Name</label>
-                                        <input class="form-control" type="text" name="firstName" placeholder="First Name" value= <%= accounts.fullName.firstName %>>
+                                        <input style="width:710px" class="form-control" type="text" name="firstName" placeholder="First Name" value= <%= accounts.fullName.firstName %>>
                                     </div>
                                     <div class="bio-row" style="margin-left:10px;">
                                         <div class="form-group">
                                             <label>My Bio</label>
-                                                <textarea name="bio" class="form-control" rows="5"><%= accounts.biography %></textarea>
+                                                <textarea style="width:710px" name="bio" class="form-control" rows="5"><%= accounts.biography %></textarea>
                                         </div>
                                     </div>
 
                                     <div class="bio-row" style="margin-left:10px;">
                                         <br>
                                         <label>Username</label>
-                                        <input name="username" class="form-control" type="text" placeholder="username" value=<%= accounts.userName %>>
+                                        <input style="width:710px" name="username" class="form-control" type="text" placeholder="username" value=<%= accounts.userName %>>
                                     </div>
                                     <div class="bio-row form-group small text-muted" style="margin-left:10px;">
                                         After changing your username, your old username becomes available for anyone else to claim.
@@ -67,12 +72,12 @@
         
                                     <div class="bio-row" style="margin-left:10px;">
                                     <label>Email</label>
-                                    <input name="email" class="form-control" type="text" placeholder="user@example.com" value=<%= accounts.email %>>
+                                    <input style="width:710px" name="email" class="form-control" type="text" placeholder="user@example.com" value=<%= accounts.email %>>
                                     </div>
         
                                     <div class="bio-row" style="margin-left:10px;">
                                         <label>New Password</label>
-                                        <input name="password" class="form-control" type="password" placeholder="••••••" value=<%= accounts.password %>>
+                                        <input style="width:710px" name="password" class="form-control" type="password" placeholder="••••••" value=<%= accounts.password %>>
                                     </div>
         
                                     <div class="bio-row" style="margin-left:10px;">
@@ -82,13 +87,16 @@
                                     </div>
                                 
                             </div>
-                    </div>
+                        </div>
+                    
 
                     </div>
                 </div>
             </div>
         <br>
         </div>
+    </div>
+    
     </div>
     <script>
         function standby() {
