@@ -65,7 +65,7 @@
                             console.log("Adding SY");
 
                             const flowchartTable = document.getElementById("flowchart-table");
-                            const mainCanvas = document.getElementById('canvas')
+                            const mainCanvas = document.getElementById('canvas');
 
                             //MAIN PARENT
                             var newSY = document.createElement('div');
@@ -107,6 +107,7 @@
                             termHeader.appendChild(term3)
                         }
                         function addSY(){
+                            const mainCanvas = document.getElementById('canvas');
                             fetch("/addAY/<%=flowchart.id %>",{
                                 method: 'POST',
                                 headers: {'Content-Type': 'application/json'}
@@ -117,13 +118,16 @@
                             createAY();
 
                             // PLEASE READ!!!!! DISREGARD SQUIGLY ERROR
-                            mainCanvas.style.width = (330 * <%= flowchart.numberOfAY %>) + "px";
+                            
                         }
                     </script>
                     <div id="ay-adder">
                         <button id="add-sy" onclick="addSY()">+</button>
                     </div>
-                    <div id="canvas" style="width: 330px;">
+                    <div id="canvas">
+                        <script>
+                            document.getElementById('canvas').style.width = 330 * <%= flowchart.numberOfAY%> + "px";
+                        </script>
                         <!-- Please add the subjects here. -->
                         <% courses.forEach(function(course){ %>
                             <!-- PLEASE READ!!!!! DISREGARD SQUIGLY ERROR-->
@@ -339,3 +343,4 @@
         <%- include('partials/footer'); -%>
     </body>
 </html>
+
