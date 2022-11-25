@@ -13,8 +13,8 @@
             <main>
                 <div class="main-window">
                     <%- include('partials/searchbar'); -%>
-                    <div class="editing-flag">
-                        You are currently editing a flowchart.
+                    <div class="creating-flag">
+                        You are creating a new flowchart.
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Actions
@@ -107,6 +107,7 @@
                             termHeader.appendChild(term3)
                         }
                         function addSY(){
+                            const mainCanvas = document.getElementById('canvas');
                             fetch("/addAY/<%=flowchart.id %>",{
                                 method: 'POST',
                                 headers: {'Content-Type': 'application/json'}
@@ -115,15 +116,15 @@
                             .catch(err => console.log(err))
                             
                             createAY();
-
-                            // PLEASE READ!!!!! DISREGARD SQUIGLY ERROR
-                            mainCanvas.style.width = (330 * <%= flowchart.numberOfAY %>) + "px";
                         }
                     </script>
                     <div id="ay-adder">
                         <button id="add-sy" onclick="addSY()">+</button>
                     </div>
-                    <div id="canvas" style="width: 330px;">
+                    <div id="canvas">
+                        <script>
+                            document.getElementById('canvas').style.width = 330 * <%= flowchart.numberOfAY%> + "px";
+                        </script>
                         <!-- Please add the subjects here. -->
                         <% courses.forEach(function(course){ %>
                             <!-- PLEASE READ!!!!! DISREGARD SQUIGLY ERROR-->
@@ -168,7 +169,6 @@
                     </script>
                 </div>
             </div>
-            <input type="hidden" name="flowchartId" value="<%= flowchart.id %>">
             <!-- Modals -->
             <!-- ADD COURSE MODAL -->
             <div class="modal fade" id="addCourse" tabindex="-1" role="dialog" aria-labelledby="addCourseLabel" aria-hidden="true">
@@ -212,8 +212,6 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <input type="hidden" name="flowchartId" value="<%= flowchart.id %>">
-                                <input type="hidden" name="state" value="2">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">Add course</button>
                             </div>
@@ -244,8 +242,6 @@
                             </table>                
                         </div>
                         <div class="modal-footer">
-                            <input type="hidden" name="flowchartId" value="<%= flowchart.id %>">
-                            <input type="hidden" name="state" value="2">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
                     </div>
@@ -295,10 +291,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <input type="hidden" name="flowchartId" value="<%= flowchart.id %>">
-                            <input type="hidden" name="state" value="2">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
                     </form>
                 </div>
@@ -328,7 +322,6 @@
                     </table>                
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" name="state" value="2">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
