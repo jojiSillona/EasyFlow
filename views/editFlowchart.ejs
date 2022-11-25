@@ -118,7 +118,7 @@
                             createAY();
 
                             // PLEASE READ!!!!! DISREGARD SQUIGLY ERROR
-                            mainCanvas.style.width = (330 * <%= flowchart.numberOfAY %>) + "px";
+                            document.getElementById('canvas').style.width = (parseInt(document.getElementById('canvas').style.width) + 330) + "px";
                         }
                     </script>
                     <div id="ay-adder">
