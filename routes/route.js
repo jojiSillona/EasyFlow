@@ -35,11 +35,8 @@ app.post("/save",upload.single('image'), controller.saveProfile);
 
 // Flowchart Features
 app.get("/viewflowcharts", controller.viewFlowcharts);
-// view one specific flowchart 
 app.post("/editflowchart", controller.editFlowchart);
 app.get("/editFlowchart/:flowchartId", controller.editFlowchart);
-
-app.post("/createflowchart", controller.createFlowchart); // modal
 app.post("/saveflowchart",controller.viewFlowcharts); // associates courses with flowchart id
 app.post("/addAY/:id", controller.addAY);
 app.get('/deleteFlowchart/:flowchartId', controller.deleteFlowchart);

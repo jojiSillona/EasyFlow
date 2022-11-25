@@ -26,16 +26,13 @@ const controller = {
             if (err){
                 console.log(err)
             }
-            else if (search == null){// no result = wrong login 
+            else if (search == null){
                 res.render('login', {loginError: "Wrong username/password"})
                 console.log("No Result");
             } 
             else{
                 req.session.isAuth = true;
                 console.log("homepage");
-                // set account deets here oki ?
-                // req.session.anyVarName = whatever u want
-                //ex. 
                 req.session.userObjectId = search.id;
                 req.session.userName = search.userName;
                 req.session.email = search.email;
@@ -58,13 +55,13 @@ const controller = {
         var password = req.body.password;
         var password2 = req.body.password2;
 
-        //Validation for password add later
+        // Validation for password will be added in MCO3.
         if(password != password2){
             res.render('register', {
                 registerError: "Passwords do not match."
             });
         } else{
-            //Check if username and email is already taken
+            // Validation if username and email is already taken
             Account.findOne({ userName: {"$regex": "^" + userName + "\\b", "$options": "i"}}, function (err, user) {
                 Account.findOne({ email: {"$regex": "^" + email + "\\b", "$options": "i"}}, function (err, mail) {
                     if (user || mail) {
@@ -98,6 +95,7 @@ const controller = {
     },
 
     getHome: function(req,res){
+        // req.session.isAuth verifies if user is authorized to access the homepage.
         if (req.session.isAuth) {
             Account.findOne({_id: req.session.userObjectId, userName : req.session.userName }, function (err, search) {
                 if (err){
@@ -108,7 +106,6 @@ const controller = {
                     res.render('homepage', {profile:search});
                 }
             });
-            
         }
         else {
             res.render('login', {loginError: "Please Login First"});
@@ -159,7 +156,6 @@ const controller = {
                 }
         });
         res.redirect('/myprofile');
-
     },
 
     saveSettings: function(req,res){
@@ -187,10 +183,9 @@ const controller = {
                     console.log(err)
                 }
                 else{
-                    console.log("Updated User : ", docs);
+                    res.redirect('/myprofile');
                 }
         });
-        res.redirect('/myprofile');
     },
     
 // Flowchart Functions
@@ -206,57 +201,14 @@ const controller = {
           });
     },
 
-    createFlowchart: function(req,res){
-        const flow = new Flowchart({
-            accountId: req.session.userObjectId,
-            title: req.body.flowchartName,
-            department: req.body.deptName,
-            startingYear: req.body.startAY,
-            numberOfAY: 1
-        });
-
-        flow.save(function(err){
-            if(err){
-                console.log(err);
-            }
-            else{ 
-                Flowchart.findOne({_id:  flow.id, accountId: req.session.userObjectId}, function(err,flow){
-                    if(err){
-                        console.log(err);
-                    }
-                    else{
-                        console.log("ETO YUNG FLOW GAGIIIIIIIIIII" +flow.id)
-                        Course.find({flowchartId: flow.id}, function(err,rows){
-                            if(err){
-                                console.log(err);
-                            }
-                            else{
-                                res.render(('createFlowchart'), {
-                                    courses: rows,
-                                    flowchart: flow
-                                });
-                            }
-                        });
-                    }
-                })
-                console.log("Flowchart created.");
-            }
-        });
-
-       
-    },
-
     editFlowchart: function(req,res){
-       // editing flowchart
+       // If user selects an already existing flowchart to edit
         if(req.params.flowchartId != undefined){
-            console.log("Editing flowchart: req.params.flowchartId:" + req.params.flowchartId)
-            console.log("Editing flowchart: req.params.userObjectId:" + req.session.userObjectId)
             Flowchart.findOne({_id:  req.params.flowchartId, accountId: req.session.userObjectId}, function(err,flow){
                 if(err){
                     console.log(err);
                 }
                 else{
-                    console.log("ETO YUNG FLOW GAGIIIIIIIIIII" +flow)
                     Course.find({flowchartId: flow.id}, function(err,rows){
                         if(err){
                             console.log(err);
@@ -271,9 +223,8 @@ const controller = {
                 }
             })
         }
-        // creating flowchart
+        // If user selects to create a new flowchart
         else{ 
-
             const flow = new Flowchart({
                 accountId: req.session.userObjectId,
                 title: req.body.flowchartName,
@@ -287,38 +238,31 @@ const controller = {
                     console.log(err);
                 }
                 else{ 
-
-            console.log("Creating flowchart: flow.id = " + flow.id)
-            console.log("Creating flowchart: accountId = " + flow.accountId)
-        
-            Flowchart.findOne({_id: flow.id, accountId: flow.accountId}, function(err,flow){
-                if(err){
-                    console.log(err);
-                }
-                else{
-                    console.log("Newly created flowchart information:" + flow)
-                    Course.find({flowchartId: flow.id}, function(err,rows){
+                    Flowchart.findOne({_id: flow.id, accountId: flow.accountId}, function(err,flow){
                         if(err){
                             console.log(err);
                         }
                         else{
-                            res.render(('editFlowchart'), {
-                                courses: rows,
-                                flowchart: flow
+                            Course.find({flowchartId: flow.id}, function(err,rows){
+                                if(err){
+                                    console.log(err);
+                                }
+                                else{
+                                    res.render(('editFlowchart'), {
+                                        courses: rows,
+                                        flowchart: flow
+                                    });
+                                }
                             });
                         }
                     });
                 }
             });
         }
-    });
-        }
-    
     },
     
     saveFlowchart:function(req,res){
         res.redirect("/viewflowcharts");
-        console.log("Flowchart added.");
     },
 
     deleteFlowchart: function(req,res){
@@ -329,8 +273,6 @@ const controller = {
             }
             else{
                 res.redirect("/viewflowcharts");
-                console.log("flowchartid : ", id);
-                console.log("Deleted : ", docs);
             }
         });
     },
@@ -341,8 +283,6 @@ const controller = {
             function(err){
                 if(err){
                     console.log(err);
-                } else {
-                    console.log("AY CREATED")
                 }
             }
         );
@@ -378,6 +318,8 @@ const controller = {
                 statusString = "Not Yet Taken";
                 statusStyle = "#fff"
         }
+
+        // Create new course
         const course = new Course({
             accountId: req.session.userObjectId,
             flowchartId: req.body.flowchartId,
@@ -395,7 +337,7 @@ const controller = {
                 console.log(err);
             }
             else{
-                Flowchart .findOne({_id: req.body.flowchartId, accountId: req.session.userObjectId}, function(err,flow){
+                Flowchart.findOne({_id: req.body.flowchartId, accountId: req.session.userObjectId}, function(err,flow){
                     if(err){
                         console.log(err);
                     }
@@ -413,7 +355,6 @@ const controller = {
                         });
                     }
                 })
-                console.log("Course added.");
             }
         });
     },
@@ -437,15 +378,14 @@ const controller = {
         const left = params.left;
         const top = params.top;
         const code = params.code;
+
         Course.findOneAndUpdate(
             {"code": code},
             {$set: {"leftPosition": left, "topPosition": top}},
             function(err){
                 if(err){
                     console.log(err);
-                } else {
-                    console.log("Position Saved! LEFT:" + left + ", TOP: " + top + ", CODE:"+ code)
-                }
+                } 
             }
         )
     },
@@ -498,19 +438,17 @@ const controller = {
                             console.log(err);
                     }
                     else{
-                            console.log("ETO YUNG FLOW GAGIIIIIIIIIII" +flow.id)
-                            Course.find({flowchartId: flow.id}, function(err,rows){
-                                if(err){
-                                    console.log(err);
-                                }
-                                else{
-                                        res.render(('editFlowchart'), {
-                                            courses: rows,
-                                            flowchart: flow
-                                        });
-                                        console.log("Course modified: " + result);
-                                }
-                            });
+                        Course.find({flowchartId: flow.id}, function(err,rows){
+                            if(err){
+                                console.log(err);
+                            }
+                            else{
+                                res.render(('editFlowchart'), {
+                                    courses: rows,
+                                    flowchart: flow
+                                });
+                            }
+                        });
                     }
                 });
             }
@@ -524,25 +462,25 @@ const controller = {
                 console.log(err);
             }else{
                 Flowchart.findOne({_id: course.flowchartId, accountId: req.session.userObjectId}, function(err,flow){
-                        if(err){
-                            console.log(err);
-                        }
-                        else{
-                            Course.find({flowchartId: flow.id}, function(err,rows){
-                                if(err){
-                                    console.log(err);
-                                }
-                                else{
-                                        res.render(('editFlowchart'), {
-                                            courses: rows,
-                                            flowchart: flow
-                                        });
-                                    }
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        Course.find({flowchartId: flow.id}, function(err,rows){
+                            if(err){
+                                console.log(err);
+                            }
+                            else{
+                                res.render(('editFlowchart'), {
+                                    courses: rows,
+                                    flowchart: flow
                                 });
-                        }
-                    });
+                            }
+                        });
+                    }
+                });
             }
-        })
+        });
     },
 
 // Other Profile Functions
@@ -557,9 +495,9 @@ const controller = {
                     if(err){
                         console.log(err);
                     } else {
-                    res.render('otherProfile',{
-                        account : result[0],
-                        flow: query
+                        res.render('otherProfile',{
+                            account : result[0],
+                            flow: query
                         });
                     }
                 });
@@ -598,16 +536,14 @@ const controller = {
                     }
                 });
             }
-            });
-        
+        });
     },
 
     searchResults: function(req,res){
         Account.find({
             $or: [{'fullName.firstName' : {$regex: new RegExp(req.body.query, 'i')}},
                   {'fullName.lastName' : {$regex: new RegExp(req.body.query, 'i')}}]
-          }, function(err,query)
-          {
+          }, function(err,query){
             if(err){
                 console.log(err);
             } else {
