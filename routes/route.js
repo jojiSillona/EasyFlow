@@ -36,7 +36,7 @@ app.post("/save",upload.single('image'), controller.saveProfile);
 // Flowchart Features
 app.get("/viewflowcharts", controller.viewFlowcharts);
 // view one specific flowchart 
-app.get("/editflowchart", controller.editFlowchart);
+app.post("/editflowchart", controller.editFlowchart);
 
 
 // MODIFY EXISTING FLOWCHART
@@ -44,17 +44,19 @@ app.get("/editFlowchart/:flowchartId", controller.editFlowchart);
 // app.get("/createflowchart", controller.editFlowchart); // shows actual
 
 // CREATING NEW FLOWCHART
-app.get("/getflowchart", controller.editFlowchart);
+// app.get("/getflowchart", controller.editFlowchart);
 app.post("/createflowchart", controller.createFlowchart); // modal
-app.post("/saveflowchart",controller.saveFlowchart); // associates courses with flowchart id
+app.post("/saveflowchart",controller.viewFlowcharts); // associates courses with flowchart id
 app.post("/addAY/:id", controller.addAY);
 app.get('/deleteFlowchart/:flowchartId', controller.deleteFlowchart);
 
 // Course Features
 app.post("/addCourse", controller.addCourse);
+
+app.post("/editCourse/:courseId", controller.editCourse);
 app.get("/editCourse/:courseId", controller.editCourse);
 app.post("/updateChosen", controller.updateChosen);
-app.get("/deleteCourse/:courseId/:flowchartId", controller.deleteCourse);
+app.get("/deleteCourse/:courseId", controller.deleteCourse);
 app.post("/savePosition", controller.savePosition);
 
 // Other Profile Features
