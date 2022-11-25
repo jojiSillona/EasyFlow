@@ -199,6 +199,16 @@ Flowchart.insertMany([{
     startingYear: 2020,
     numberOfAY: 1
 
+},
+//<<< SAMPLE DATA 6 >>>
+{ 
+    _id: "6380f69ee38cdd8d5a233a7f",
+    accountId: "6380fcb161723801ff3b9171",
+    title: "My Flowchart",
+    department: "Information Technology Department",
+    startingYear: 2022,
+    numberOfAY: 1
+
 }]);
 }
 module.exports =  {sampleData};
