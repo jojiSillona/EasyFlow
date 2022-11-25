@@ -119,13 +119,16 @@
                             createAY();
 
                             // PLEASE READ!!!!! DISREGARD SQUIGLY ERROR
-                            mainCanvas.style.width = (330 * <%= flowchart.numberOfAY %>) + "px";
+                            document.getElementById('canvas').style.width = (parseInt(document.getElementById('canvas').style.width) + 330) + "px";
                         }
                     </script>
                     <div id="ay-adder">
                         <button id="add-sy" onclick="addSY()">+</button>
                     </div>
                     <div id="canvas" style="width: 330px;">
+                        <script>
+                            document.getElementById('canvas').style.width = 330 * <%= flowchart.numberOfAY %> + "px";
+                        </script>
                         <!-- Please add the subjects here. -->
                         <% courses.forEach(function(course){ %>
                             <!-- PLEASE READ!!!!! DISREGARD SQUIGLY ERROR-->
