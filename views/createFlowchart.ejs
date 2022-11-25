@@ -14,19 +14,18 @@
                 <div class="main-window">
                     <%- include('partials/searchbar'); -%>
                     <div class="creating-flag">
-                        You are creating a new flowchart.
+                        You are creating a flowchart.
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Actions
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
-                                <button class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#addCourse" >Add Course</button>
-                                <button class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#editCourse" >Edit Course</button>
-                                <button class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#deleteCourse" >Delete Course</button>
+                                <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#addCourse" >Add Course</button>
+                                <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#editCourse" >Edit Course</button>
+                                <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#deleteCourse" >Delete Course</button>
                                 <div class="dropdown-divider"></div>
-                                <form action="/saveflowchart" method="post">
-                                <input type="submit" class="btn btn-primary dropdown-item" value="Save Changes">
-                                </form>
+                                
+                                <button type="submit" class="btn btn-primary dropdown-item">Save Changes</button>
                             </div>
                         </div>
                     </div>
@@ -66,7 +65,7 @@
                             console.log("Adding SY");
 
                             const flowchartTable = document.getElementById("flowchart-table");
-                            const mainCanvas = document.getElementById('canvas')
+                            const mainCanvas = document.getElementById('canvas');
 
                             //MAIN PARENT
                             var newSY = document.createElement('div');
@@ -117,6 +116,9 @@
                             .catch(err => console.log(err))
                             
                             createAY();
+
+                            // PLEASE READ!!!!! DISREGARD SQUIGLY ERROR
+                            
                         }
                     </script>
                     <div id="ay-adder">
@@ -170,6 +172,7 @@
                     </script>
                 </div>
             </div>
+            <input type="hidden" name="flowchartId" value="<%= flowchart.id %>">
             <!-- Modals -->
             <!-- ADD COURSE MODAL -->
             <div class="modal fade" id="addCourse" tabindex="-1" role="dialog" aria-labelledby="addCourseLabel" aria-hidden="true">
@@ -213,6 +216,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
+                                <input type="hidden" name="flowchartId" value="<%= flowchart.id %>">
+                                <input type="hidden" name="state" value="1">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">Add course</button>
                             </div>
@@ -228,7 +233,6 @@
                         <div class="modal-header">
                             <h4 class="modal-title" id="myModalLabel">Edit Course</h4>
                         </div>
-                        <!-- <form action="/addCourse" method="post"> -->
                         <div class="modal-body">
                             <table style="width:100%">
                             <% courses.forEach(function(course){ %>   
@@ -238,17 +242,16 @@
                                 <td><small class="text-muted">Professor: <%= course.professor %></small></td>
                                 <td><small class="text-muted">Units: <%= course.units %></small></td>
                                 <td><small class="text-muted">Status: <%= course.status %></small></td>
-                                <!-- <button type="submit" class="btn btn-success btn-sm" data-toggle="#updateChosen">Add course</button> -->
-
-                                <td style="padding-bottom:1em"><a href="/editCourse/<%= course.id %>" class="btn btn-success btn-sm" data-toggle="#updateChosen"> Edit </a></td>
+                                <td style="padding-bottom:1em"><a href="editCourse/<%= course.id %>/<%= flowchart.id %>" class="btn btn-success btn-sm" data-toggle="#updateChosen"> Edit </a></td>
                                 </tr> 
                             <% }); %> 
                             </table>                
                         </div>
                         <div class="modal-footer">
+                            <input type="hidden" name="flowchartId" value="<%= flowchart.id %>">
+                            <input type="hidden" name="state" value="1">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
-                        <!-- </form> -->
                     </div>
                 </div>
             </div>
@@ -296,8 +299,10 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                            <input type="hidden" name="flowchartId" value="<%= flowchart.id %>">
+                            <input type="hidden" name="state" value="1">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
                     </form>
                 </div>
@@ -321,12 +326,14 @@
                         <td><small class="text-muted">Professor: <%= course.professor %></small></td>
                         <td><small class="text-muted">Units: <%= course.units %></small></td>
                         <td><small class="text-muted">Status: <%= course.status %></small></td>
-                        <td style="padding-bottom:1em"><a href="/deleteCourse/<%= course.id %>" class="btn btn-danger btn-sm"> Delete </a></td>
+                        <td style="padding-bottom:1em"><a href="deleteCourse/<%= course.id %>/<%= flowchart.id %>" class="btn btn-danger btn-sm"> Delete </a></td>
                         </tr> 
                     <% }); %> 
                     </table>                
                 </div>
                 <div class="modal-footer">
+                    <input type="hidden" name="flowchartId" value="<%= flowchart.id %>">
+                    <input type="hidden" name="state" value="1">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -336,3 +343,4 @@
         <%- include('partials/footer'); -%>
     </body>
 </html>
+
