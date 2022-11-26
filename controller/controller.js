@@ -33,8 +33,6 @@ const controller = {
             else{
                 req.session.isAuth = true;
                 req.session.userObjectId = search.id;
-                req.session.userName = search.userName;
-                req.session.email = search.email;
                 res.redirect("/home");
             }
         });
@@ -94,7 +92,7 @@ const controller = {
     getHome: function(req,res){
         // req.session.isAuth verifies if user is authorized to access the homepage.
         if (req.session.isAuth) {
-            Account.findOne({_id: req.session.userObjectId, userName : req.session.userName }, function (err, search) {
+            Account.findOne({_id: req.session.userObjectId}, function (err, search) {
                 if (err){
                     console.log(err)
                 }
