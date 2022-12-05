@@ -60,6 +60,23 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <div class="input-text"><label for="prerequisite">Prerequisite</label></div>
+                                        <select name="prerequisite" aria-label="Prerequisite selection" class="form-select form-select-sm">
+                                            <option disabled selected value> Select a course </option>
+                                            <% 
+                                                var flowchartCourses = coursesInFlowchart;
+                                                for(var i = 0; i < flowchartCourses.length; i++)
+                                                {
+                                                    %><option value="<%= flowchartCourses[i]._id %>"><%= flowchartCourses[i].code %></option><%
+                                                }
+                                            %> 
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <hr/>
                             <input type="hidden" class="form-control" value="<%= course.flowchartId %>" aria-required="true" name="flowchartId">
                             <input type="hidden" name="state" value="2">

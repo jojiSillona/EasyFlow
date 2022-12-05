@@ -383,14 +383,25 @@ const controller = {
 
     editCourse: function(req,res){
         const courseId = req.params.courseId;
-        Course.find({_id: courseId},function(err,result)
+
+        Course.findOne({_id: courseId},function(err,result)
         {
             if(err){
                 console.log(err);
             } else {
-                res.render('editCourse',{
-                    course : result[0]
-                });
+                var courseTarget = result;
+                console.log(courseTarget);
+                Course.find({flowchartId: courseTarget.flowchartId, code: {$nin: courseTarget.code}}, function(err,result)
+                {
+                    if(err){
+                        console.log(err);
+                    } else {
+                        res.render(('editCourse'), {
+                            course: courseTarget,
+                            coursesInFlowchart: result
+                        })
+                    }
+                })
             }
         });
     },
@@ -419,6 +430,7 @@ const controller = {
         const code = req.body.code;
         const prof = req.body.prof;
         const units = req.body.units;
+        const prereq = req.body.prerequisite;
 
         var statusString;
         var statusStyle;
@@ -449,7 +461,7 @@ const controller = {
                 statusStyle = "#fff"
         }
 
-        Course.updateOne(query, { code:code, professor:prof, units:units, status:statusString, style:statusStyle},
+        Course.updateOne(query, {code:code, professor:prof, units:units, status:statusString, style:statusStyle, prereqId: prereq},
             function(err,result){
             if(err){
                 console.log(err);
