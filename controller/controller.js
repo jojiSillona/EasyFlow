@@ -66,14 +66,11 @@ const controller = {
         var password = bcrypt.hashSync(req.body.password, salt);
         var password2 = bcrypt.hashSync(req.body.password2, salt);
 
-        
         var firstName = req.body.firstName;
         var lastName = req.body.lastName;
         var userName = req.body.userName;
         var email= req.body.email;
 
-
-        // Validation for password will be added in MCO3.
         if(password != password2){
             res.render('register', {
                 registerError: "Passwords do not match."
