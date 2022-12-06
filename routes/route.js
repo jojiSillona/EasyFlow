@@ -55,4 +55,7 @@ app.get("/viewUsers", controller.viewUsers);
 app.get("/viewOtherFlowchart/:flowchartId", controller.viewOtherFlowchart);
 app.post("/searchresults", controller.searchResults);
 app.get("/logout", controller.logout);
+
+app.get("/about", controller.getAbout);
+
 module.exports = app;
