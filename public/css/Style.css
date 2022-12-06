@@ -9,6 +9,29 @@ body {
   -moz-font-smoothing: antialiased;
 }
 
+.about-section {
+  padding: 50px;
+  text-align: center;
+  background-color: #3551a3;
+  color: white;
+  font-family: 'Montserrat';
+}
+
+.card2 {
+  background-color: #fff;
+  width: 1000px;
+  text-align: center;
+  border-radius: 33px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 2rem !important;
+  display:center;
+  margin-left:auto;
+  margin-right:auto;
+  font-family:'Montserrat';
+  margin-bottom:50px;
+}
+
+
 main{
   /*width: calc(100vw - 214.31px);*/
   margin-left: auto;
