@@ -1,1 +1,1 @@
-npm i connect-mongodb-session ejs express express-session express-validator mongoose nodemon multer jquery-ui-dist
+npm i connect-mongodb-session ejs express express-session express-validator mongoose nodemon multer jquery-ui-dist bcrypt
