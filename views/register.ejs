@@ -25,13 +25,13 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <div class="input-text"><label for="fName">First Name</label></div>
-                                <input type="text" class="form-control" placeholder="First Name" aria-required="true" name="firstName">
+                                <input type="text" required="true" class="form-control" placeholder="First Name" aria-required="true" name="firstName">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <div class="input-text"><label for="lName">Last Name</label></div>
-                                <input type="text" class="form-control" placeholder="Last Name" aria-required="true" name="lastName">
+                                <input type="text" required="true" class="form-control" placeholder="Last Name" aria-required="true" name="lastName">
                             </div>
                         </div>
                     </div>
@@ -39,14 +39,14 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <div class="input-text" id="uName"><label for="uName">Username</label></div>
-                                <input type="text" class="form-control" placeholder="Username" aria-required="true" name="userName">
+                                <input type="text" required="true" class="form-control" placeholder="Username" aria-required="true" name="userName">
                                 <small id="userHelp" class="form-text text-muted">Must be unique; This is how people will find you.</small>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <div class="input-text"><label for="emailAddress" aria-required="true">Email address</label></div>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email">
+                                <input type="email" required="true" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email">
                                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>
                         </div>
@@ -54,14 +54,14 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="input-text"><label for="inputPassword" aria-required="true">Password</label></div>
-                            <input type="password" id="inputPassword" class="form-control" aria-describedby="passwordHelpBlock" name="password">
+                            <input type="password" required="true" minlength="8" maxlength="20" id="inputPassword" class="form-control" aria-describedby="passwordHelpBlock" name="password">
                             <small id="passwordHelpBlock" class="form-text text-muted">
                             Must be 8-20 characters long.
                             </small>
                         </div>
                         <div class="col-6">
                             <div class="input-text"><label for="inputPassword" aria-required="true">Confirm Password</label></div>
-                            <input type="password" id="inputPassword" class="form-control" aria-describedby="passwordHelpBlock" name="password2">    
+                            <input type="password" required="true" minlength="8" maxlength="20" id="inputPassword" class="form-control" aria-describedby="passwordHelpBlock" name="password2">    
                         </div>
                     </div>
                     <div class="row">

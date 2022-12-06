@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -15,12 +16,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 const store = new mongoDBSession({
-    uri: "mongodb://127.0.0.1:27017/easyFlow",
-    collection: "SESSIONS-IN_USE"
+    uri: "mongodb://"+process.env.URI+"/"+process.env.DB_NAME,
+    collection: process.env.DB_COLLECTION
 })
 
 app.use(session({
-    secret: "MCO2CCAPDEV",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
     store: store,
