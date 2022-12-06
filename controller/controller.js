@@ -469,6 +469,8 @@ const controller = {
         var statusStyle;
         let statusId = Number(req.body.status);
         switch(statusId){
+            case 0:
+                break;
             case 1:  
                 statusString = "Not Yet Taken";
                 statusStyle = "#FFFFFF"
