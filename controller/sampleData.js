@@ -2,12 +2,15 @@ const Account = require("../models/accountModel.js");
 const Flowchart = require("../models/flowchartModel.js");
 const Course = require("../models/courseModel.js");
 const { isObjectIdOrHexString } = require("mongoose");
+const bcrypt=require('bcrypt');
 
 //-------------- SAMPLE DATA ------------
 //-------------- SAMPLE DATA FOR ACCOUNT ------------------
 
 //<<< SAMPLE DATA 1 >>>
 const sampleData= (req,res)=>{
+    var salt = bcrypt.genSaltSync(10)
+
     Account.insertMany([{
     _id:"6380fcb161723801ff3b9170",
     fullName:{
@@ -16,7 +19,7 @@ const sampleData= (req,res)=>{
 },
 userName:"RichardsR9",
 email:"rubyrichards@gmail.com",
-password:"12345678",
+password: bcrypt.hashSync("12345678", salt),
 flowcharts:[],
 biography: "Welcome to my page"
 },
@@ -31,7 +34,7 @@ biography: "Welcome to my page"
 },
 userName:"Tia55",
 email:"tiaburmen@gmail.com",
-password:"burmen098",
+password:bcrypt.hashSync("burmen098", salt),
 flowcharts:[],
 biography: "“Happiness depends upon ourselves.” – Madelyn Teppner"
 },
@@ -46,7 +49,7 @@ biography: "“Happiness depends upon ourselves.” – Madelyn Teppner"
 },
 userName:"GD246",
 email:"georgedwell@gmail.com",
-password:"george2468",
+password:bcrypt.hashSync("george2468", salt),
 flowcharts:[],
 biography: "“Be who you are and say what you feel, because those who mind don’t matter, and those who matter don’t mind.” ― Bernard M. Baruch"
 
@@ -61,7 +64,7 @@ biography: "“Be who you are and say what you feel, because those who mind don�
 },
 userName:"Daveduken100",
 email:"daveduken@gmail.com",
-password:"daveduken77",
+password:bcrypt.hashSync("daveduken77", salt),
 flowcharts:[],
 biography: "“In the end, it’s not the years in your life that count. It’s the life in your years.” – Abraham Lincoln"
 },
@@ -75,7 +78,7 @@ biography: "“In the end, it’s not the years in your life that count. It’s 
 },
 userName:"camillaS45",
 email:"camillasmith@gmail.com",
-password:"camilla99",
+password:bcrypt.hashSync("camilla99", salt),
 flowcharts:[],
 biography: "“Just because you fail once, does not mean that you’re gonna fail at everything. Keep trying, hold on, and always, always, always believe in yourself because if you don’t, then who will?” – Marilyn Monroe"
 }]);
