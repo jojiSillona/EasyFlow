@@ -168,12 +168,13 @@ const controller = {
     },
 
     saveSettings: function(req,res){
+        var salt = bcrypt.genSaltSync(10)
         const lastName = req.body.lastName;
         const firstName = req.body.firstName;
         const bio = req.body.bio;
         const username = req.body.username;
         const email = req.body.email;
-        const password = req.body.password;
+        const password = bcrypt.hashSync(req.body.password,salt);
 
         Account.findByIdAndUpdate(req.session.userObjectId, 
             { 
@@ -185,7 +186,7 @@ const controller = {
                 biography: bio,
                 userName: username,
                 email: email,
-                password: password 
+                password: password
             },                
             function (err, docs) {
                 if (err){
@@ -468,6 +469,8 @@ const controller = {
         var statusStyle;
         let statusId = Number(req.body.status);
         switch(statusId){
+            case 0:
+                break;
             case 1:  
                 statusString = "Not Yet Taken";
                 statusStyle = "#FFFFFF"
