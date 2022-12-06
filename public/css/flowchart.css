@@ -60,7 +60,7 @@ body{
 }
 
 #svg-canvas{
-    width: 330px;
+    height: 100%;
 }
 
 .subject{

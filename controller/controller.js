@@ -298,7 +298,7 @@ const controller = {
                 if(err){
                     console.log(err);
                 } else {
-                    console.log(targetCourse + targCoursePreq);
+                    console.log(targetCourse + " " + targCoursePreq);
                 }
             })
         })

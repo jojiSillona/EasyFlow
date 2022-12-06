@@ -124,17 +124,16 @@
                         <button id="add-sy" onclick="addSY()">+</button>
                     </div>
                     <div id="canvas" style="width: 330px;">
-                        <script>
-                            document.getElementById('canvas').style.width = 330 * <%= flowchart.numberOfAY %> + "px";
-                        </script>
+                        
                         <!-- Please add the subjects here. -->
                         <% courses.forEach(function(course){ %>
-                            <!-- PLEASE READ!!!!! DISREGARD SQUIGLY ERROR-->
                             <div class="subject" style='background: <%= course.style %>; left: <%= course.leftPosition %>px; top: <%= course.topPosition %>px'><%= course.code %></div>
                         <% }); %>
-                        <svg id="svg-canvas">
-                            
-                            <!-- Leave this blank -->
+                        <svg id="svg-canvas" style="width: 330px;">
+                            <script>
+                                document.getElementById('canvas').style.width = 330 * <%= flowchart.numberOfAY %> + "px";
+                                document.getElementById('svg-canvas').style.width = 330 * <%= flowchart.numberOfAY %> + "px";
+                            </script>
                         </svg>
                     </div>
                     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
@@ -155,11 +154,11 @@
                             for(var i = 0; i < target.length; i++){
                                 if(target[i].textContent === prerequisite){
                                     sender = target[i];
-                                    target[i].setAttribute("data-path", `${prerequisite}-${requisite}`);
+                                    target[i].setAttribute("data-nextCourse", `${requisite}`);
                                 }
                                 if(target[i].textContent === requisite){
                                     receiver = target[i];
-                                    target[i].setAttribute("data-path", `${prerequisite}-${requisite}`);
+                                    target[i].setAttribute("data-prerequisite", `${prerequisite}`);
                                 }
                             }
 
@@ -176,21 +175,36 @@
 
                             var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
                             path.setAttribute("id", `${prerequisite}-${requisite}`);
+                            path.setAttribute("data-sender", `${prerequisite}`);
+                            path.setAttribute("data-receiver", `${requisite}`);
 
-                            path.setAttribute("d", `M ${senderX + 110}, ${senderY + 40},
-                                                    C ${bezierControlX}, ${senderY + 40}
-                                                    ${bezierControlX}, ${receiverY + 40}
-                                                    ${receiverX + 20}, ${receiverY + 40}`);
+                            path.setAttribute("d", `M ${senderX + 100}, ${senderY + 30},
+                                                    C ${bezierControlX}, ${senderY + 30}
+                                                    ${bezierControlX}, ${receiverY + 30}
+                                                    ${receiverX + 10}, ${receiverY + 30}`);
                             path.setAttribute("stroke", "black");
                             path.setAttribute("fill", "transparent");
 
                             svgCanvas.appendChild(path);
                         }
 
-                        // strokeLine("FDNECON", "FDNECON2");
-                        // strokeLine("FDNACCT", "FDNACCT2");
-                        // strokeLine("FDNACCT2", "FDNACCT3");
-                        // strokeLine("GESPORTS", "GETEAMS");
+                        <% 
+                            var coursesInFlowchart = courses;
+
+                            var targetCourse, targetCoursePrereq;
+                            for(var i = 0; i < coursesInFlowchart.length; i++){
+                                if(coursesInFlowchart[i].prereqId != null){
+                                    targetCourse = coursesInFlowchart[i]
+                                    for(var j = 0; i < coursesInFlowchart.length; j++){
+                                        if(coursesInFlowchart[j]._id == targetCourse.prereqId){
+                                            targetCoursePrereq = coursesInFlowchart[j];
+                                            %> strokeLine("<%= targetCoursePrereq.code %>", "<%= targetCourse. code%>"); <%
+                                            break;
+                                        }
+                                    }
+                                }
+                            } 
+                        %>
 
                         function contains(selector, text) {
                             var elements = document.querySelectorAll(selector);
@@ -203,26 +217,54 @@
                             cursor: "grabbing",
                             grid: [110, 60],
                             drag: function(event, ui){
-                                var target = this.dataset.path;
+                                var prereqLineSender = this.dataset.prerequisite;
+                                var nextCourseLineReceiver = this.dataset.nextcourse;
+                                
+                                var prereqPath = document.querySelector(`[data-sender='${prereqLineSender}']`);
+                                var nextCoursePath = document.querySelector(`[data-receiver='${nextCourseLineReceiver}']`);
 
-                                let children = target.split("-");
-                                console.log(children[0], children[1]);
+                                if(prereqPath != null){
+                                    let children = prereqPath.id.split("-");
+                                    console.log(children[0], children[1]);
 
-                                var path = document.querySelector(`[id^='${target}']`);
-                                let sender = contains('div', children[0]);
-                                let receiver = contains('div', children[1]);
+                                    let sender = contains('div', children[0]);
+                                    let receiver = contains('div', children[1]);
 
-                                var senderX = parseInt(simplifyCoordinates(window.getComputedStyle(sender[2]).left));
-                                var senderY = parseInt(simplifyCoordinates(window.getComputedStyle(sender[2]).top));
-                                var receiverX = parseInt(simplifyCoordinates(window.getComputedStyle(receiver[2]).left));
-                                var receiverY = parseInt(simplifyCoordinates(window.getComputedStyle(receiver[2]).top));
+                                    var senderX = parseInt(simplifyCoordinates(window.getComputedStyle(sender[3]).left));
+                                    var senderY = parseInt(simplifyCoordinates(window.getComputedStyle(sender[3]).top));
+                                    var receiverX = parseInt(simplifyCoordinates(window.getComputedStyle(receiver[3]).left));
+                                    var receiverY = parseInt(simplifyCoordinates(window.getComputedStyle(receiver[3]).top));
 
-                                let bezierControlX = (senderX + 110 + receiverX)/ 2;
+                                    console.log(senderX + " " + senderY + " " + receiverX + " " + receiverY);
 
-                                path.setAttribute("d", `M ${senderX + 110}, ${senderY + 40},
-                                                        C ${bezierControlX}, ${senderY + 40}
-                                                        ${bezierControlX}, ${receiverY + 40}
-                                                        ${receiverX + 20}, ${receiverY + 40}`);
+                                    let bezierControlX = (senderX + 110 + receiverX)/ 2;
+
+                                    prereqPath.setAttribute("d", `M ${senderX + 100}, ${senderY + 30},
+                                                            C ${bezierControlX}, ${senderY + 30}
+                                                            ${bezierControlX}, ${receiverY + 30}
+                                                            ${receiverX + 10}, ${receiverY + 30}`);
+                                }
+                                if(nextCoursePath != null){
+                                    let children = nextCoursePath.id.split("-");
+                                    console.log(children[0], children[1]);
+
+                                    let sender = contains('div', children[0]);
+                                    let receiver = contains('div', children[1]);
+
+                                    var senderX = parseInt(simplifyCoordinates(window.getComputedStyle(sender[3]).left));
+                                    var senderY = parseInt(simplifyCoordinates(window.getComputedStyle(sender[3]).top));
+                                    var receiverX = parseInt(simplifyCoordinates(window.getComputedStyle(receiver[3]).left));
+                                    var receiverY = parseInt(simplifyCoordinates(window.getComputedStyle(receiver[3]).top));
+
+                                    console.log(senderX + " " + senderY + " " + receiverX + " " + receiverY);
+
+                                    let bezierControlX = (senderX + 110 + receiverX)/ 2;
+
+                                    nextCoursePath.setAttribute("d", `M ${senderX + 100}, ${senderY + 30},
+                                                            C ${bezierControlX}, ${senderY + 30}
+                                                            ${bezierControlX}, ${receiverY + 30}
+                                                            ${receiverX + 10}, ${receiverY + 30}`);
+                                }                   
                             },
                             stop: function(e, ui){
                                 var leftSize = Math.round(parseInt(this.style.left, 10) / 10) * 10 ;
@@ -238,6 +280,7 @@
 
                                 this.style.left = leftSize + "px";
                                 this.style.top = topSize + "px";
+                                
                                 
                                 fetch('/savePosition', {
                                     method: 'POST',
