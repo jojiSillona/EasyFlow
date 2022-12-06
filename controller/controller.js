@@ -290,6 +290,20 @@ const controller = {
         }
     },
     
+    renderLine: function(req, res){
+        const flowchartId = req.body.flowchartId;
+        Course.find({flowchartId: flowchartId, prereqId: {$exists: true}})
+        .forEach(function(targetCourse){
+            Course.find({_id: targetCourse.prereqId}, function(err, targCoursePreq){
+                if(err){
+                    console.log(err);
+                } else {
+                    console.log(targetCourse + targCoursePreq);
+                }
+            })
+        })
+    },
+
     saveFlowchart:function(req,res){
 
         Account.updateOne({_id: req.body.ownerId},
