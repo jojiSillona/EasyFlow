@@ -7,6 +7,7 @@ const { db } = require("../models/accountModel.js");
 const { render } = require("ejs");
 const { reset } = require("nodemon");
 const addSamples = require("./sampleData.js")
+const bcrypt = require('bcrypt');
 
 // addSamples.sampleData();
 
@@ -22,8 +23,9 @@ const controller = {
         });
     },
 
-    verifyLogin: function(req,res){
-        Account.findOne({userName: req.body.username, password: req.body.password }, function (err, search) {
+      verifyLogin: function(req,res){
+
+          Account.findOne({userName: req.body.username}, function (err, search) {
             if (err){
                 console.log(err)
             }
@@ -31,10 +33,25 @@ const controller = {
                 res.render('login', {loginError: "Wrong username/password"})
             } 
             else{
-                req.session.isAuth = true;
-                req.session.userObjectId = search.id;
-                res.redirect("/home");
-            }
+                bcrypt.compare(req.body.password, search.password, function (err, results) { 
+                if(err){
+                    console.log(err)
+                }
+                else if(results==true){
+                    console.log(results); 
+                    console.log("success");
+                    req.session.isAuth = true;
+                    req.session.userObjectId = search.id;
+                    res.redirect("/home");
+
+                }
+
+                else{
+                    res.render('login', {loginError: "Wrong username/password"})
+                }
+                
+            });
+        }
         });
     },
 
@@ -44,13 +61,17 @@ const controller = {
         });
     },
 
-    saveRegistration: function(req,res){
+   saveRegistration: function(req,res){
+        var salt = bcrypt.genSaltSync(10)
+        var password = bcrypt.hashSync(req.body.password, salt);
+        var password2 = bcrypt.hashSync(req.body.password2, salt);
+
+        
         var firstName = req.body.firstName;
         var lastName = req.body.lastName;
         var userName = req.body.userName;
         var email= req.body.email;
-        var password = req.body.password;
-        var password2 = req.body.password2;
+
 
         // Validation for password will be added in MCO3.
         if(password != password2){
@@ -588,6 +609,9 @@ const controller = {
             }
           });
     }, 
+     getAbout: function(req,res){
+        res.render('about');
+    },
 
     logout: function(req,res){
         req.session.destroy();
