@@ -2,7 +2,7 @@ const Account = require("../models/accountModel.js");
 const Flowchart = require("../models/flowchartModel.js");
 const Course = require("../models/courseModel.js");
 const { isObjectIdOrHexString } = require("mongoose");
-const bcrypt=require('bcrypt');
+const bcrypt=require('bcryptjs');
 
 //-------------- SAMPLE DATA ------------
 //-------------- SAMPLE DATA FOR ACCOUNT ------------------

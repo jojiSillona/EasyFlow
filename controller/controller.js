@@ -7,7 +7,7 @@ const { db } = require("../models/accountModel.js");
 const { render } = require("ejs");
 const { reset } = require("nodemon");
 const addSamples = require("./sampleData.js")
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 // addSamples.sampleData();
 
