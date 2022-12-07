@@ -7,7 +7,9 @@ const app = express();
 const session = require('express-session');
 const mongoDBSession = require('connect-mongodb-session')(session); 
 
-mongoose.connect("mongodb://127.0.0.1:27017/easyFlow",{useNewUrlParser:true});
+const atlas = "mongodb+srv://easyflowAdmin:"+process.env.ATLAS_PASSWORD+"@cluster0.1brbfs7.mongodb.net/easyFlow"
+mongoose.set('strictQuery',true);
+mongoose.connect(atlas);
 
 app.set("view engine","ejs");
 app.use(express.static(path.join(__dirname, ".", "public")));
@@ -16,7 +18,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 const store = new mongoDBSession({
-    uri: "mongodb://"+process.env.URI+"/"+process.env.DB_NAME,
+    uri: atlas,
     collection: process.env.DB_COLLECTION
 })
 
@@ -36,6 +38,6 @@ next();
 const route = require("./routes/route.js");
 app.use('/', route);
 
-app.listen(3000, function(){
+app.listen(process.env.PORT || 3000, function(){
     console.log("Server started on port 3000");
 })
