@@ -18,7 +18,7 @@
             <a  href="otherprofile/<%= account.id %>" style="text-decoration: none;">
             <li class="list-group-item content friends">
                 <div >
-                    <img src="images/user-circle.png" class="friend-icon" alt="FriendResult1">
+                   <img id="image"  src="images/<%=account.image%>"  class="friend-icon" alt="display picture" >
                 </div>
                 <div class="friend-txt"><%= account.fullName.firstName %> <%= account.fullName.lastName %>
                     <div class="friend-subtxt"><%= account.userName %></div>
