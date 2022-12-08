@@ -18,7 +18,7 @@
                 <div class="panel" style="text-align:center;">
                     <div class="user-heading round" style="text-align:center;">
                         <a href="#">
-                            <img id="image" style="object-fit:cover;" src="images/<%=accounts.image%>" alt="display picture" onerror="standby()">
+                            <img id="image" style="object-fit:cover;" src="images/<%=accounts.image%>" alt="display picture">
                         </a>
                         <br>
                          <button class="btn btn" type="button" style="background:#3551a3; font-size:11px;">
@@ -98,11 +98,7 @@
     </div>
     
     </div>
-    <script>
-        function standby() {
-        document.getElementById('image').src ="images/user.png"
-        }
-    </script>
+   
     </main>
     <%- include('partials/footer'); -%>
 </body>
