@@ -16,7 +16,7 @@
     <div class="friend-list">
         <ul class="list-group list-group-flush">
             <% accounts.forEach(function(account){ %>
-            <a  href="otherprofile/<%= account.id %>" style="text-decoration: none;">
+             <img id="image" class="friend-icon" src="/images/<%=account.image%>" alt="display picture">
             <li class="list-group-item content">
                 <div >
                     <img src="images/user-circle.png" class="friend-icon" alt="FriendResult1">
