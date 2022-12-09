@@ -98,6 +98,8 @@ const controller = {
                                 console.log(err);
                             }
                             else{
+                                req.session.isAuth = true;
+                                req.session.userObjectId = acc.id;
                                 res.redirect('/home');
                             }
                         });
