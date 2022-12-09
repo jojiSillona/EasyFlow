@@ -386,7 +386,8 @@ const controller = {
             status: statusString,
             style: statusStyle,
             leftPosition: 0,
-            topPosition: 0
+            topPosition: 0,
+            prereqId: req.body.prerequisite
         });
     
         course.save(function(err){
