@@ -34,17 +34,137 @@
                             <div class="term">Term 2</div>
                             <div class="term">Term 3</div>
                         </div>
+                        <script>
+
+                            for(let i = 1; i < <%= flowchart.numberOfAY%>; i++){
+                                createAY();
+                            }
+    
+                            function createAY(){
+    
+                                const flowchartTable = document.getElementById("flowchart-table");
+                                const mainCanvas = document.getElementById('canvas')
+    
+                                //MAIN PARENT
+                                var newSY = document.createElement('div');
+                                newSY.className = 'ay'
+    
+                                //MAIN CHILD: SY
+                                var inputSY = document.createElement('div')
+                                inputSY.className = 'col-sm-8'
+    
+                                //MAIN CHILDREN: term headers
+                                var termHeader = document.createElement('div')
+                                termHeader.className ='term-header'
+    
+                                var finalAY = document.createElement('div')
+                                finalAY.className = "school-year"
+                                var newAY = flowchartTable.getElementsByClassName('ay')
+                                
+                                newAY = newAY[newAY.length - 1].getElementsByClassName("school-year")[0].innerHTML.split("-")[0]
+                                finalAY.innerHTML = (parseInt(newAY) + 1) + "-" + (parseInt(newAY) + 2)
+    
+                                //CHILD OF TERM HEADERS
+                                var term1 = document.createElement('div')
+                                term1.className='term'
+                                term1.innerHTML='Term 1'
+                                var term2 = document.createElement('div')
+                                term2.className='term'
+                                term2.innerHTML='Term 2'
+                                var term3 = document.createElement('div')
+                                term3.className='term'
+                                term3.innerHTML='Term 3'
+    
+                                //INSERT ALL INTO HTML
+                                flowchartTable.insertBefore(newSY, document.getElementById('ay-adder'))
+                                newSY.appendChild(inputSY)
+                                newSY.appendChild(termHeader)
+                                inputSY.appendChild(finalAY)
+                                termHeader.appendChild(term1)
+                                termHeader.appendChild(term2)
+                                termHeader.appendChild(term3)
+                            }
+                        </script>
                     </div>
-                    <div id="canvas" style="width: 330px;">
+                    <div id="canvas" style="top: 270px; width: calc(330px * <%= flowchart.numberOfAY%>);">
                         <!-- Please add the subjects here. -->
                         <% courses.forEach(function(course){ %>
                             <!-- PLEASE READ!!!!! DISREGARD SQUIGLY ERROR-->
                             <div class="subject" style='background: <%= course.style %>; left: <%= course.leftPosition %>px; top: <%= course.topPosition %>px'><%= course.code %></div>
                         <% }); %>
-                        <svg id="svg-canvas">
+                        <svg id="svg-canvas" style="width: calc(330px * <%= flowchart.numberOfAY%>);">
                             <!-- Leave this blank -->
                         </svg>
                     </div>
+                    <script>
+                        const svgCanvas = document.getElementById("svg-canvas");
+                        let target = document.querySelectorAll('.subject');
+
+                        function simplifyCoordinates(targetStyle){
+                            if(targetStyle === "auto"){
+                                return 0;
+                            } else {
+                                return targetStyle.replace('px', '');
+                            }
+                        }
+
+                        function strokeLine(prerequisite, requisite){
+                            var sender, receiver;
+                            for(var i = 0; i < target.length; i++){
+                                if(target[i].textContent === prerequisite){
+                                    sender = target[i];
+                                    target[i].setAttribute("data-nextCourse", `${requisite}`);
+                                }
+                                if(target[i].textContent === requisite){
+                                    receiver = target[i];
+                                    target[i].setAttribute("data-prerequisite", `${prerequisite}`);
+                                }
+                            }
+
+                            var senderX, senderY, receiverX, receiverY;
+
+                            senderX = parseInt(simplifyCoordinates(window.getComputedStyle(sender).left));
+                            senderY = parseInt(simplifyCoordinates(window.getComputedStyle(sender).top));
+                            receiverX = parseInt(simplifyCoordinates(window.getComputedStyle(receiver).left));
+                            receiverY = parseInt(simplifyCoordinates(window.getComputedStyle(receiver).top));
+
+                            let bezierControlX = (senderX + 110 + receiverX)/ 2;
+
+                            console.log(prerequisite + " TO " + requisite + " SENDER: "+ senderX + ", " + senderY + " RECEIVER: " + receiverX + ", " + receiverY + " BEZIER: " + bezierControlX);
+
+                            var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                            path.setAttribute("id", `${prerequisite}-${requisite}`);
+                            path.setAttribute("data-sender", `${prerequisite}`);
+                            path.setAttribute("data-receiver", `${requisite}`);
+
+                            path.setAttribute("d", `M ${senderX + 100}, ${senderY + 30},
+                                                    C ${bezierControlX}, ${senderY + 30}
+                                                    ${bezierControlX}, ${receiverY + 30}
+                                                    ${receiverX + 10}, ${receiverY + 30}`);
+                            path.setAttribute("stroke", "black");
+                            path.setAttribute("fill", "transparent");
+
+                            svgCanvas.appendChild(path);
+                        }
+
+                        <% 
+                            var coursesInFlowchart = courses;
+
+                            var targetCourse, targetCoursePrereq;
+                            for(var i = 0; i < coursesInFlowchart.length; i++){
+                                if(coursesInFlowchart[i].prereqId != null){
+                                    targetCourse = coursesInFlowchart[i]
+                                    for(var j = 0; i < coursesInFlowchart.length; j++){
+                                        if(coursesInFlowchart[j]._id == targetCourse.prereqId){
+                                            targetCoursePrereq = coursesInFlowchart[j];
+                                            %> strokeLine("<%= targetCoursePrereq.code %>", "<%= targetCourse. code%>"); <%
+                                            break;
+                                        }
+                                    }
+                                }
+                            } 
+                        %>
+                    </script>
                 </div>
                 </div>
             </main>
