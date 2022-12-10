@@ -248,7 +248,8 @@ const controller = {
                         else{
                             res.render(('editFlowchart'), {
                                 courses: rows,
-                                flowchart: flow
+                                flowchart: flow,
+                                addError: ""
                             });
                         }
                     });
@@ -282,7 +283,8 @@ const controller = {
                                 else{
                                     res.render(('editFlowchart'), {
                                         courses: rows,
-                                        flowchart: flow
+                                        flowchart: flow,
+                                        addError: ""
                                     });
                                 }
                             });
@@ -389,17 +391,19 @@ const controller = {
             topPosition: 0,
             prereqId: req.body.prerequisite
         });
-    
-        course.save(function(err){
+
+        //look through flowchart if existing course
+       
+        Flowchart.findOne({_id: req.body.flowchartId, accountId: req.session.userObjectId}, function(err,flow){
             if(err){
                 console.log(err);
             }
             else{
-                Flowchart.findOne({_id: req.body.flowchartId, accountId: req.session.userObjectId}, function(err,flow){
+                Course.findOne({flowchartId: flow.id, code: req.body.code}, function(err,result){
                     if(err){
                         console.log(err);
                     }
-                    else{
+                    else if(result != null){ // duplicate course found
                         Course.find({flowchartId: flow.id}, function(err,rows){
                             if(err){
                                 console.log(err);
@@ -407,14 +411,37 @@ const controller = {
                             else{
                                 res.render(('editFlowchart'), {
                                     courses: rows,
-                                    flowchart: flow
+                                    flowchart: flow,
+                                    addError: "Course alreading existing in flowchart. Try again."
                                 });
                             }
                         });
                     }
-                })
+                    else{ // safe to add course
+                        course.save(function(err){
+                            if(err){
+                                console.log(err);
+                            }
+                            else{
+                                Course.find({flowchartId: flow.id}, function(err,rows){
+                                    if(err){
+                                        console.log(err);
+                                    }
+                                    else{
+                                        res.render(('editFlowchart'), {
+                                            courses: rows,
+                                            flowchart: flow,
+                                            addError: ""
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
             }
-        });
+        })
+        
     },
 
     editCourse: function(req,res){
@@ -447,9 +474,15 @@ const controller = {
         const left = params.left;
         const top = params.top;
         const code = params.code;
+        const ownerId = params.ownerId;
+        const flowchartId = params.flowchartId;
 
         Course.findOneAndUpdate(
-            {"code": code},
+            {$and: [
+                { accountId: ownerId },
+                { flowchartId: flowchartId},
+                {"code": code}
+             ]},
             {$set: {"leftPosition": left, "topPosition": top}},
             function(err){
                 if(err){
@@ -517,7 +550,8 @@ const controller = {
                             else{
                                 res.render(('editFlowchart'), {
                                     courses: rows,
-                                    flowchart: flow
+                                    flowchart: flow,
+                                    addError: ""
                                 });
                             }
                         });
@@ -545,7 +579,8 @@ const controller = {
                             else{
                                 res.render(('editFlowchart'), {
                                     courses: rows,
-                                    flowchart: flow
+                                    flowchart: flow,
+                                    addError: ""
                                 });
                             }
                         });

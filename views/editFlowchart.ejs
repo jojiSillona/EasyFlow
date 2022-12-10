@@ -4,7 +4,7 @@
 <head>
     <%- include('partials/head'); -%>
     <link rel="stylesheet" type="text/css" href="/css/flowchart.css">
-    <title>Create Flowchart</title>
+    <title>Edit Flowchart</title>
 </head>
     <body>
         <header>
@@ -15,6 +15,7 @@
                     <%- include('partials/searchbar'); -%>
                     <div class="editing-flag">
                         You are currently editing a flowchart.
+                        <%=addError%>
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Actions
@@ -270,13 +271,15 @@
                                 var leftSize = Math.round(parseInt(this.style.left, 10) / 10) * 10 ;
                                 var topSize = Math.round(parseInt(this.style.top, 10) / 10) * 10 ;
                                 var targetSubject = this.innerHTML;
-
+                               
                                 var params = {
                                     left: leftSize,
                                     top: topSize,
-                                    code: targetSubject
+                                    code: targetSubject, 
+                                    ownerId: <%- JSON.stringify(flowchart.accountId) %>, 
+                                    flowchartId: <%- JSON.stringify(flowchart.id) %>
                                 };
-
+                                
 
                                 this.style.left = leftSize + "px";
                                 this.style.top = topSize + "px";
@@ -308,25 +311,25 @@
                                 <div class="form-group row">
                                     <label for="courseCode" class="col-sm-3 col-form-label"><b>Course Code</b></label>
                                     <div class="col-sm-7">
-                                        <input id="new-course-id" class="form-control form-control-sm" type="text" placeholder="Course Code here" name="code">
+                                        <input id="new-course-id" required="true" class="form-control form-control-sm" type="text" placeholder="Course Code here" name="code">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="profCode" class="col-sm-3 col-form-label"><b>Professor</b></label>
                                     <div class="col-sm-7">
-                                        <input id="new-prof-id" class="form-control form-control-sm" type="text" placeholder="Name of Professor" name="prof">
+                                        <input id="new-prof-id" required="true" class="form-control form-control-sm" type="text" placeholder="Name of Professor" name="prof">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="unitCode" class="col-sm-3 col-form-label"><b>Units</b></label>
                                     <div class="col-sm-7">
-                                        <input id="new-unit-id" class="form-control form-control-sm" type="number" placeholder="Units" name="units" min="0" max="3">                          
+                                        <input id="new-unit-id" required="true" class="form-control form-control-sm" type="number" placeholder="Units" name="units" min="0" max="3">                          
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="statusCode" class="col-sm-3 col-form-label"><b>Status</b></label>
                                     <div class="col-sm-7">
-                                    <select class="form-select form-select-sm" aria-label="Status selection" name="status">
+                                    <select class="form-select form-select-sm" required="true" aria-label="Status selection" name="status">
                                             <option selected>Indicate course progress...</option>
                                             <option value="1">Not Yet Taken</option>
                                             <option value="2">Currently Taking</option>
