@@ -10,7 +10,8 @@ const courseSchema = mongoose.Schema({
     style: String,
     leftPosition: Number,
     topPosition: Number,
-    prereqId: String
+    prereqId: String,
+    prereqType: String
 },{ versionKey: false });
 
 module.exports = mongoose.model('Course', courseSchema);

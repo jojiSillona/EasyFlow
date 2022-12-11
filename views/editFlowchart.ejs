@@ -150,7 +150,7 @@
                             }
                         }
 
-                        function strokeLine(prerequisite, requisite){
+                        function strokeLine(prerequisite, requisite, prereqType){
                             var sender, receiver;
                             for(var i = 0; i < target.length; i++){
                                 if(target[i].textContent === prerequisite){
@@ -184,6 +184,9 @@
                                                     ${bezierControlX}, ${receiverY + 30}
                                                     ${receiverX + 10}, ${receiverY + 30}`);
                             path.setAttribute("stroke", "black");
+                            if(prereqType == "2"){
+                                path.setAttribute("stroke-dasharray", "5, 5");
+                            }
                             path.setAttribute("fill", "transparent");
 
                             svgCanvas.appendChild(path);
@@ -199,7 +202,7 @@
                                     for(var j = 0; i < coursesInFlowchart.length; j++){
                                         if(coursesInFlowchart[j]._id == targetCourse.prereqId){
                                             targetCoursePrereq = coursesInFlowchart[j];
-                                            %> strokeLine("<%= targetCoursePrereq.code %>", "<%= targetCourse. code%>"); <%
+                                            %> strokeLine("<%= targetCoursePrereq.code %>", "<%= targetCourse. code%>", "<%= targetCourse.prereqType %>"); <%
                                             break;
                                         }
                                     }

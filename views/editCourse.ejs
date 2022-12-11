@@ -64,8 +64,19 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <div class="input-text"><label for="prerequisite">Prerequisite</label></div>
-                                        <select name="prerequisite" aria-label="Prerequisite selection" class="form-select form-select-sm">
-                                            <option disabled selected value> Select a course </option>
+                                        <select id="prerequisiteId" name="prerequisite" aria-label="Prerequisite selection" class="form-select form-select-sm">
+                                            <% if(course.prereqId == undefined){
+                                                %><option disabled selected> Select a course </option><%
+                                            } else {
+                                                var flowchartCourses = coursesInFlowchart;
+                                                for(var j = 0; j < flowchartCourses.length; j++){
+                                                    if(flowchartCourses[j]._id == course.prereqId){
+                                                        %><option selected value="<%= flowchartCourses[j]._id %>"><%= flowchartCourses[j].code %></option>><%
+                                                        break;
+                                                    }
+                                                }    
+                                            } %>
+                                            
                                             <% 
                                                 var flowchartCourses = coursesInFlowchart;
                                                 for(var i = 0; i < flowchartCourses.length; i++)
@@ -76,6 +87,27 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label for="prereqType" class="input-text">Pre-requisite Type</label>
+                                    <div class="col-6">
+                                    <select id="prereqTypeId" class="form-select form-select-sm" aria-label="Line selection" name="lineType">
+                                            <option selected>Indicate pre-requisite type...</option>
+                                            <option value="1">Hard pre-requisite</option>
+                                            <option value="2">Soft pre-requisite</option>
+                                    </select>                                
+                                    </div>
+                                </div>
+                                <script>
+                                    // var prereqSelect = document.getElementById("prerequisiteId");
+                                    // var lineSelect = document.getElementById("prereqTypeId");
+                                    // window.onload = function(){
+                                    //     lineSelect.disabled = true;
+                                    // }
+                        
+                                    // if(prereqSelect.value != "Select a course"){
+                                    //     lineSelect.disabled = false;
+                                    // }
+                                </script>
                             </div>
                             <hr/>
                             <input type="hidden" class="form-control" value="<%= course.flowchartId %>" aria-required="true" name="flowchartId">

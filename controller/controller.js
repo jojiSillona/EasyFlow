@@ -500,6 +500,7 @@ const controller = {
         const prof = req.body.prof;
         const units = req.body.units;
         const prereq = req.body.prerequisite;
+        const type = req.body.lineType;
 
         var statusString;
         var statusStyle;
@@ -532,7 +533,7 @@ const controller = {
                 statusStyle = "#fff"
         }
 
-        Course.updateOne(query, {code:code, professor:prof, units:units, status:statusString, style:statusStyle, prereqId: prereq},
+        Course.updateOne(query, {code:code, professor:prof, units:units, status:statusString, style:statusStyle, prereqId: prereq, prereqType: type},
             function(err,result){
             if(err){
                 console.log(err);
