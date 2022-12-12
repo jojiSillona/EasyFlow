@@ -3,7 +3,7 @@
 EasyFlow is an interactive College Schedule Planner that allows you to plan your next term with ease.
 
 ## Instructions
-
+The application can be viewed by either going through the Render link: https://easyflow.onrender.com or downloading the files locally. The instructions below are for the latter option.
 1. Clone the repository or download the zipped folder.
 2. Open the command prompt.
 3. Navigate to the project folder.
