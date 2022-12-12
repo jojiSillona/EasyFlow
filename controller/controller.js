@@ -389,7 +389,8 @@ const controller = {
             style: statusStyle,
             leftPosition: 0,
             topPosition: 0,
-            prereqId: req.body.prerequisite
+            prereqId: req.body.prerequisite,
+            prereqType: req.body.lineType
         });
 
         //look through flowchart if existing course
