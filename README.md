@@ -1,3 +1,4 @@
+![image](https://drive.google.com/uc?export=view&id=1k2cXEq_GKrpkx61DkVS3F-oXZ4q--uiF)
 # EasyFlow
 
 EasyFlow is an interactive College Schedule Planner that allows you to plan your next term with ease.
