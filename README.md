@@ -2,17 +2,24 @@
 
 ### Having a hard time planning for your next term? Let me help you with that!
 
-EasyFlow is a college project for the course CCAPDEV (*a.k.a Web Application Development*)@
+EasyFlow is a college project for the course CCAPDEV (*a.k.a Web Application Development*) created to help students plan for their upcoming term by using an Interactive Flowchart Planner.
 
 ## Features
 
-We have thought of many features to include in this project
-* An interactive drag-and-drop college flowchart
-* User account system
-* Sharing of flowcharts
-* Customizable schedules from premade flowcharts provided by either EasyFlow or other users
+### Visualize your entire stay using Flowcharts!
 
-And many more to be added!
+The College of Computer Studies use a visual flowchart to show which subjects to take on each term. However, making changes to the flowchart mean making a separate text/visual document to create changes. EasyFlow removes the need for that!
+
+<!-- INSERT IMAGE/GIF OF EASYFLOW MAIN FLOWCHART CREATOR -->
+
+EasyFlow lets you move subjects that you intent to take in another time.
+
+### Sharing is Caring!
+
+Sharing is always fun! That's why users can view other people's flowchart!
+
+<!-- INSERT IMAGE/GIF OF VIEWING USERS -->
+
 
 ## Instructions
 The application can be viewed by either going through the Render link: https://easyflow.onrender.com or downloading the files locally. The instructions below are for the latter option.
@@ -31,26 +38,16 @@ npm i connect-mongodb-session ejs express express-session express-validator mong
 7. To run the application, execute <pre>nodemon server.js</pre>
 8. Go to the browser and enter <pre>localhost:3000</pre> in the URL to access the web application.
 
-### INITIAL DEVELOPMENT (09/26/2022)
-
-<pre>
-We have just started working with the project!
-
-Mainly we have worked with the following pages:
-</pre>
-* Landing Page - Where first-time users get directed when opening the site
-* Register Page
-* Homepage - Where concurrent users get directed when opening the site
-* View/Make a Flowchart
-* My Profile
-* User Settings
-* Search Friends
-
-
-## Collaborators
-
+## Creators
+<!-- REPLACE PRE WITH AN IMAGE -->
 <pre>
 shkayee
 jojiSillona
 czeska120
 </pre>
+
+## DISCLAIMER
+
+This repository is not being updated anymore since an Alpha version of EasyFlow is being planned. Updates of the project will be available soon.
+
+Version PROTOTYPE
